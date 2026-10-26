@@ -1,0 +1,17 @@
+{
+  "comando": "inventory",
+  "parametros": {},
+  "run_id": "20261026T105334Z-f14b3e",
+  "commit": "0e3a7e187a907dd0a9327b3a4d518f073177ed29",
+  "inicio": "2026-10-26T10:53:34+00:00",
+  "fim": "2026-10-26T10:53:37+00:00",
+  "duracao_s": 2.94,
+  "status": "concluido",
+  "volumes": {
+    "recursos_catalogo": 94
+  },
+  "insumos": [],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "e7a95249bbf5dd5b"
+}

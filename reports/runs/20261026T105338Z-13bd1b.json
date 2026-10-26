@@ -1,0 +1,38 @@
+{
+  "comando": "ingest",
+  "parametros": {
+    "year": 2026,
+    "uf": "MG"
+  },
+  "run_id": "20261026T105338Z-13bd1b",
+  "commit": "0e3a7e187a907dd0a9327b3a4d518f073177ed29-dirty",
+  "inicio": "2026-10-26T10:53:38+00:00",
+  "fim": "2026-10-26T10:54:26+00:00",
+  "duracao_s": 48.706,
+  "status": "concluido_com_pendencias",
+  "volumes": {
+    "votacao_secao:votacao_secao_2026_MG.csv": 5923656,
+    "detalhe_votacao_secao:detalhe_votacao_secao_2026_MG.csv": 208248
+  },
+  "insumos": [
+    {
+      "recurso": "votacao_secao",
+      "uf": "MG",
+      "sha256": "56826e143f4fb2628a6f82f9697a3e4ad87094ed89782ad8ab51d06c7c30877a",
+      "status": "parcial"
+    },
+    {
+      "recurso": "detalhe_votacao_secao",
+      "uf": "MG",
+      "sha256": "11a62c3a604e8b73fc328617b7688d2c635de1c76df02ba63b8f77879512f573",
+      "status": "parcial"
+    }
+  ],
+  "pendencias": [
+    "Turnos presentes ['1']; esperado [1, 2].",
+    "Extraídos apenas os CSVs do escopo MG: ['detalhe_votacao_secao_2026_MG.csv']",
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ],
+  "config_version": "0.1.0",
+  "config_hash": "e7a95249bbf5dd5b"
+}
