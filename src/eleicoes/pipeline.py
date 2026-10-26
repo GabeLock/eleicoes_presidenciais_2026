@@ -458,9 +458,10 @@ def complementares(
                           WHERE tipo_votavel = 'candidato' GROUP BY ALL),
                     z AS (SELECT turno, uf, cd_municipio_tse, zona, nr_candidato AS nr,
                                  sum(qt_votos_nominais) v FROM silver_candidato_munzona GROUP BY ALL)
-               SELECT count(*) FILTER (WHERE s.v IS DISTINCT FROM z.v), count(*),
+               SELECT count(*) FILTER (WHERE coalesce(s.v, 0) <> coalesce(z.v, 0)), count(*),
                       coalesce(sum(abs(coalesce(s.v,0) - coalesce(z.v,0))), 0)
-               FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona, nr)"""
+               FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona, nr)
+               -- o arquivo por seção omite candidatos sem voto; ausência = 0"""
         ).fetchone()
         checks.append(
             ck.Checagem(
