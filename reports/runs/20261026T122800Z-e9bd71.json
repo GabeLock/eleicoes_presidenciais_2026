@@ -1,0 +1,15 @@
+{
+  "comando": "analyze",
+  "parametros": {},
+  "run_id": "20261026T122800Z-e9bd71",
+  "commit": "07c1cea9d200b2a3795b5e95be48a2d7a785ccb6",
+  "inicio": "2026-10-26T12:28:00+00:00",
+  "fim": "2026-10-26T12:28:00+00:00",
+  "duracao_s": 0.016,
+  "status": "concluido",
+  "volumes": {},
+  "insumos": [],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "46e24db914a3da40"
+}
