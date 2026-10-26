@@ -1,0 +1,46 @@
+{
+  "comando": "ingest",
+  "parametros": {
+    "year": 2022,
+    "uf": "MG"
+  },
+  "run_id": "20261026T122209Z-0a21aa",
+  "commit": "a7f501c7a98e03c81d0f724174fe9307f2c3c538",
+  "inicio": "2026-10-26T12:22:09+00:00",
+  "fim": "2026-10-26T12:23:39+00:00",
+  "duracao_s": 89.749,
+  "status": "concluido",
+  "volumes": {
+    "votacao_secao:votacao_secao_2022_BR.csv": 5380736,
+    "detalhe_votacao_secao:detalhe_votacao_secao_2022_BR.csv": 944150
+  },
+  "insumos": [
+    {
+      "recurso": "votacao_secao",
+      "uf": "BR",
+      "sha256": "9353993de5cf03778aef44e01d4925e7ee105f5262491d344a2f0dbc956b0139",
+      "status": "disponivel"
+    },
+    {
+      "recurso": "detalhe_votacao_secao",
+      "uf": null,
+      "sha256": "ad22c50b9e6d9dfb096a2170680a190f1734895ba89d8977b95fd63ca02c03da",
+      "status": "disponivel"
+    },
+    {
+      "recurso": "detalhe_votacao_munzona",
+      "uf": null,
+      "sha256": "dbf41c5e95c2efedc72848bd0ec70a47f419b539c82e893388314749617ea2f4",
+      "status": "perfilado"
+    },
+    {
+      "recurso": "votacao_candidato_munzona",
+      "uf": null,
+      "sha256": "56265a50afc3765efeabc3d88b1e8ef35796ac38572fb1344496f3d3c8543369",
+      "status": "perfilado"
+    }
+  ],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "5546ec99f8a1cba8"
+}

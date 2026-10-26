@@ -1,0 +1,297 @@
+{
+  "run_id": "20261026T122209Z-0a21aa",
+  "recurso": "detalhe_votacao_munzona",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "resultados-2022",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2022.zip",
+  "sha256": "dbf41c5e95c2efedc72848bd0ec70a47f419b539c82e893388314749617ea2f4",
+  "bytes": 4429327,
+  "coletado_em": "2026-10-26T12:23:07+00:00",
+  "last_modified_http": "Sat, 24 Oct 2026 06:52:18 GMT",
+  "etag": "\"43960f-65e9089b62cca\"",
+  "membros_zip": [
+    {
+      "nome": "detalhe_votacao_munzona_2022_BRASIL.csv",
+      "bytes_compactado": 2306862,
+      "bytes_descompactado": 11380477,
+      "crc": 344148168
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_AC.csv",
+      "bytes_compactado": 3864,
+      "bytes_descompactado": 26897,
+      "crc": 4162742132
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_AM.csv",
+      "bytes_compactado": 16676,
+      "bytes_descompactado": 106991,
+      "crc": 66281252
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_AL.csv",
+      "bytes_compactado": 24886,
+      "bytes_descompactado": 154290,
+      "crc": 2400851487
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_BA.csv",
+      "bytes_compactado": 115823,
+      "bytes_descompactado": 639870,
+      "crc": 1155910252
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_AP.csv",
+      "bytes_compactado": 3129,
+      "bytes_descompactado": 20298,
+      "crc": 255475519
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_CE.csv",
+      "bytes_compactado": 40350,
+      "bytes_descompactado": 236063,
+      "crc": 603970842
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_DF.csv",
+      "bytes_compactado": 3547,
+      "bytes_descompactado": 24304,
+      "crc": 2871599357
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_ES.csv",
+      "bytes_compactado": 18691,
+      "bytes_descompactado": 126233,
+      "crc": 39517994
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_GO.csv",
+      "bytes_compactado": 48488,
+      "bytes_descompactado": 293463,
+      "crc": 2728636612
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_MA.csv",
+      "bytes_compactado": 44465,
+      "bytes_descompactado": 260302,
+      "crc": 3821667120
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_MS.csv",
+      "bytes_compactado": 20316,
+      "bytes_descompactado": 131659,
+      "crc": 747570272
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_MG.csv",
+      "bytes_compactado": 188097,
+      "bytes_descompactado": 1045469,
+      "crc": 537535225
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_MT.csv",
+      "bytes_compactado": 26751,
+      "bytes_descompactado": 170120,
+      "crc": 1043137340
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_PA.csv",
+      "bytes_compactado": 30334,
+      "bytes_descompactado": 183637,
+      "crc": 425583262
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_PB.csv",
+      "bytes_compactado": 55083,
+      "bytes_descompactado": 326462,
+      "crc": 3994539752
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_BR.csv",
+      "bytes_compactado": 640410,
+      "bytes_descompactado": 3451986,
+      "crc": 3406264139
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_PE.csv",
+      "bytes_compactado": 51482,
+      "bytes_descompactado": 304575,
+      "crc": 3546770088
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_PI.csv",
+      "bytes_compactado": 42357,
+      "bytes_descompactado": 262054,
+      "crc": 1764023228
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_PR.csv",
+      "bytes_compactado": 84612,
+      "bytes_descompactado": 479370,
+      "crc": 3619649895
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_RJ.csv",
+      "bytes_compactado": 39114,
+      "bytes_descompactado": 225438,
+      "crc": 1034397568
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_RO.csv",
+      "bytes_compactado": 11614,
+      "bytes_descompactado": 81851,
+      "crc": 3488304512
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_RN.csv",
+      "bytes_compactado": 32018,
+      "bytes_descompactado": 204570,
+      "crc": 248301332
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_RS.csv",
+      "bytes_compactado": 130237,
+      "bytes_descompactado": 765343,
+      "crc": 3823467998
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_RR.csv",
+      "bytes_compactado": 3744,
+      "bytes_descompactado": 23632,
+      "crc": 976874266
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_SC.csv",
+      "bytes_compactado": 76807,
+      "bytes_descompactado": 455228,
+      "crc": 2607188867
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_SE.csv",
+      "bytes_compactado": 16792,
+      "bytes_descompactado": 111190,
+      "crc": 614919158
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_SP.csv",
+      "bytes_compactado": 214348,
+      "bytes_descompactado": 1134508,
+      "crc": 1373916711
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2022_TO.csv",
+      "bytes_compactado": 22291,
+      "bytes_descompactado": 159919,
+      "crc": 1359163673
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 111779,
+      "bytes_descompactado": 125454,
+      "crc": 1524430111
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "CD_CARGO",
+      "DS_CARGO",
+      "QT_APTOS",
+      "QT_SECOES_PRINCIPAIS",
+      "QT_SECOES_AGREGADAS",
+      "QT_SECOES_NAO_INSTALADAS",
+      "QT_TOTAL_SECOES",
+      "QT_COMPARECIMENTO",
+      "QT_ELEITORES_SECOES_NAO_INSTALADAS",
+      "QT_ABSTENCOES",
+      "ST_VOTO_EM_TRANSITO",
+      "QT_VOTOS",
+      "QT_VOTOS_CONCORRENTES",
+      "QT_TOTAL_VOTOS_VALIDOS",
+      "QT_VOTOS_NOMINAIS_VALIDOS",
+      "QT_TOTAL_VOTOS_LEG_VALIDOS",
+      "QT_VOTOS_LEG_VALIDOS",
+      "QT_VOTOS_NOM_CONVR_LEG_VALIDOS",
+      "QT_TOTAL_VOTOS_ANULADOS",
+      "QT_VOTOS_NOMINAIS_ANULADOS",
+      "QT_VOTOS_LEGENDA_ANULADOS",
+      "QT_TOTAL_VOTOS_ANUL_SUBJUD",
+      "QT_VOTOS_NOMINAIS_ANUL_SUBJUD",
+      "QT_VOTOS_LEGENDA_ANUL_SUBJUD",
+      "QT_VOTOS_BRANCOS",
+      "QT_TOTAL_VOTOS_NULOS",
+      "QT_VOTOS_NULOS",
+      "QT_VOTOS_NULOS_TECNICOS",
+      "QT_VOTOS_ANULADOS_APU_SEP",
+      "HH_ULTIMA_TOTALIZACAO",
+      "DT_ULTIMA_TOTALIZACAO"
+    ],
+    "linhas_amostra": 891,
+    "sentinelas_amostra": {},
+    "alertas": [],
+    "membros_csv": [
+      "detalhe_votacao_munzona_2022_BRASIL.csv",
+      "detalhe_votacao_munzona_2022_AC.csv",
+      "detalhe_votacao_munzona_2022_AM.csv",
+      "detalhe_votacao_munzona_2022_AL.csv",
+      "detalhe_votacao_munzona_2022_BA.csv",
+      "detalhe_votacao_munzona_2022_AP.csv",
+      "detalhe_votacao_munzona_2022_CE.csv",
+      "detalhe_votacao_munzona_2022_DF.csv",
+      "detalhe_votacao_munzona_2022_ES.csv",
+      "detalhe_votacao_munzona_2022_GO.csv",
+      "detalhe_votacao_munzona_2022_MA.csv",
+      "detalhe_votacao_munzona_2022_MS.csv",
+      "detalhe_votacao_munzona_2022_MG.csv",
+      "detalhe_votacao_munzona_2022_MT.csv",
+      "detalhe_votacao_munzona_2022_PA.csv",
+      "detalhe_votacao_munzona_2022_PB.csv",
+      "detalhe_votacao_munzona_2022_BR.csv",
+      "detalhe_votacao_munzona_2022_PE.csv",
+      "detalhe_votacao_munzona_2022_PI.csv",
+      "detalhe_votacao_munzona_2022_PR.csv",
+      "detalhe_votacao_munzona_2022_RJ.csv",
+      "detalhe_votacao_munzona_2022_RO.csv",
+      "detalhe_votacao_munzona_2022_RN.csv",
+      "detalhe_votacao_munzona_2022_RS.csv",
+      "detalhe_votacao_munzona_2022_RR.csv",
+      "detalhe_votacao_munzona_2022_SC.csv",
+      "detalhe_votacao_munzona_2022_SE.csv",
+      "detalhe_votacao_munzona_2022_SP.csv",
+      "detalhe_votacao_munzona_2022_TO.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [],
+  "turnos_presentes": [],
+  "linhas": null,
+  "status": "perfilado",
+  "limitacoes": [
+    "Somente cabeçalho/membros coletados (mapeamento a confirmar)"
+  ],
+  "ano": 2022
+}

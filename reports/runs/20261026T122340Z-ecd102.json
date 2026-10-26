@@ -1,0 +1,48 @@
+{
+  "comando": "transform",
+  "parametros": {
+    "uf": "MG"
+  },
+  "run_id": "20261026T122340Z-ecd102",
+  "commit": "a7f501c7a98e03c81d0f724174fe9307f2c3c538-dirty",
+  "inicio": "2026-10-26T12:23:40+00:00",
+  "fim": "2026-10-26T12:23:54+00:00",
+  "duracao_s": 14.13,
+  "status": "concluido",
+  "volumes": {},
+  "insumos": [
+    {
+      "recurso": "votacao_secao",
+      "uf": "BR",
+      "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2022_BR.zip",
+      "sha256": "9353993de5cf03778aef44e01d4925e7ee105f5262491d344a2f0dbc956b0139",
+      "coletado_em": "2026-10-26T12:22:16+00:00",
+      "gerado_em_fonte": [
+        "01/11/2022 16:05:25"
+      ],
+      "turnos_presentes": [
+        "1",
+        "2"
+      ],
+      "status": "disponivel"
+    },
+    {
+      "recurso": "detalhe_votacao_secao",
+      "uf": null,
+      "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2022.zip",
+      "sha256": "ad22c50b9e6d9dfb096a2170680a190f1734895ba89d8977b95fd63ca02c03da",
+      "coletado_em": "2026-10-26T12:22:52+00:00",
+      "gerado_em_fonte": [
+        "15/02/2024 15:56:11"
+      ],
+      "turnos_presentes": [
+        "1",
+        "2"
+      ],
+      "status": "disponivel"
+    }
+  ],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "5546ec99f8a1cba8"
+}
