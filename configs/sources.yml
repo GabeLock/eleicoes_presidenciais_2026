@@ -6,15 +6,15 @@
 catalogo:
   api: https://dadosabertos.tse.jus.br/api/3/action/package_show
   datasets:
-    resultados: resultados-2026
-    eleitorado: eleitorado-2026
+    resultados: resultados-{ano}
+    eleitorado: eleitorado-{ano}
 
 recursos:
   votacao_secao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Votação por seção eleitoral. Arquivos por UF trazem só cargos estaduais;
       o arquivo "BR" (abrangência federal) traz Presidente para todas as UFs (leiame 2026).
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [BR, AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO]
     membro_csv_sufixo: BR
@@ -45,10 +45,10 @@ recursos:
       nulo: "96"
 
   detalhe_votacao_secao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Detalhe da apuração por seção eleitoral. ZIP único com CSVs _<UF> (cargos estaduais),
       _BR (abrangência federal = Presidente), _BRASIL e _ZZ (leiame 2026).
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_{ano}.zip
     particionado_por_uf: false
     membro_csv_sufixo: BR         # Presidente
     granularidade: eleição × turno × cargo × seção
@@ -80,25 +80,27 @@ recursos:
       st_secao_anulada: ST_SECAO_ANULADA
 
   detalhe_votacao_munzona:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Detalhe da apuração por município e zona (reconciliação intermediária)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_{ano}.zip
     particionado_por_uf: false
     granularidade: eleição × turno × cargo × município × zona
     status_layout: a_confirmar
+    somente_perfil: true          # coleta cabeçalho/membros para mapear a reconciliação seção → zona
 
   votacao_candidato_munzona:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Votação nominal por município e zona (reconciliação intermediária)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_{ano}.zip
     particionado_por_uf: false
     granularidade: eleição × turno × cargo × município × zona × candidatura
     status_layout: a_confirmar
+    somente_perfil: true
 
   perfil_eleitor_secao:
-    conjunto: eleitorado-2026
+    conjunto: eleitorado
     descricao: Perfil do eleitorado por seção eleitoral (cadastro; não descreve voto)
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitor_secao/perfil_eleitor_secao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitor_secao/perfil_eleitor_secao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO, ZZ]
     granularidade: fotografia cadastral × seção × combinação de categorias
@@ -106,17 +108,17 @@ recursos:
     fase: v2
 
   perfil_eleitorado:
-    conjunto: eleitorado-2026
+    conjunto: eleitorado
     descricao: Perfil do eleitorado (todas as UFs)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitorado/perfil_eleitorado_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitorado/perfil_eleitorado_{ano}.zip
     particionado_por_uf: false
     status_layout: a_confirmar
     fase: v2
 
   relatorio_totalizacao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Relatório de Totalização (PDF) — referência para reconciliação manual
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [BR, MG, ZZ]
     formato: pdf

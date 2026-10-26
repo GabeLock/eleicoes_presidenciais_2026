@@ -121,7 +121,7 @@ def ingerir(
         recurso=recurso,
         uf=uf,
         instituicao="TSE",
-        conjunto=rec["conjunto"],
+        conjunto=cfg.conjunto(rec["conjunto"]),
         url=url,
         sha256=res.sha256,
         bytes=res.bytes,
@@ -129,6 +129,7 @@ def ingerir(
         last_modified_http=res.last_modified,
         etag=res.etag,
         membros_zip=[asdict(m) for m in membros],
+        ano=cfg.ano,
     )
     extraido = cfg.paths["bronze"] / "_extraido" / res.sha256[:12]
     man.dicionarios = _extrair_dicionarios(res.caminho, nomes, extraido, cfg.paths["reports"])
@@ -144,6 +145,11 @@ def ingerir(
         return man
     perfil = perfilar_csv(ler_membro_parcial(res.caminho, csvs[0]))
     man.perfil_csv = asdict(perfil)
+    if rec.get("somente_perfil"):
+        man.perfil_csv["membros_csv"] = csvs
+        man.status = "perfilado"
+        man.limitacoes.append("Somente cabeçalho/membros coletados (mapeamento a confirmar)")
+        return man
     if "colunas_obrigatorias" in rec:
         man.colunas_ausentes = checar_colunas(perfil.cabecalho, rec["colunas_obrigatorias"])
     if man.colunas_ausentes:
@@ -184,7 +190,9 @@ def ultimo_manifesto(cfg: Config, recurso: str, uf: str | None) -> dict | None:
     candidatos = [
         m
         for m in carregar_manifestos(cfg.paths["manifests"])
-        if m["recurso"] == recurso and (m["uf"] or None) == (uf or None)
+        if m["recurso"] == recurso
+        and (m["uf"] or None) == (uf or None)
+        and int(m.get("ano") or 2026) == cfg.ano
     ]
     return max(candidatos, key=lambda m: m["coletado_em"]) if candidatos else None
 
@@ -220,7 +228,7 @@ def transformar(
         if m["status"] == "parcial":
             ctx.pendencias.append(f"{nome}: turnos {m['turnos_presentes']} — conclusões bloqueadas")
 
-    wh = cfg.paths["warehouse"]
+    wh = cfg.warehouse
     wh.parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(str(wh))
     sqls = []
@@ -308,9 +316,10 @@ def transformar(
         )
     )
 
-    gold = cfg.paths["gold"]
+    gold = cfg.dir_ano("gold")
+    gold.mkdir(parents=True, exist_ok=True)
     for t in ("silver_votos_secao", "silver_participacao_secao"):
-        sv.exportar_parquet(con, t, cfg.paths["silver"] / f"{t}.parquet")
+        sv.exportar_parquet(con, t, cfg.dir_ano("silver") / f"{t}.parquet")
     for t in ("gold_votos_municipio", "gold_participacao_municipio"):
         sv.exportar_parquet(con, t, gold / f"{t}.parquet")
 
@@ -350,6 +359,7 @@ def transformar(
         )
         dec.write_parquet(gold / "gold_decomposicao_municipio.parquet")
         resumo = {
+            "ano": cfg.ano,
             "finalista_a": a,
             "finalista_b": b,
             "margem_1": m1,
@@ -369,7 +379,7 @@ def relatorio_qualidade(ctx: RunContext, checks: list[ck.Checagem], escopo: str)
     linhas = [
         f"# Relatório de qualidade — run `{ctx.run_id}`",
         "",
-        f"- Escopo: **{escopo}**",
+        f"- Ano: **{ctx.config.ano}** · Escopo: **{escopo}**",
         f"- Commit: `{ctx.commit}` · Config: `{ctx.config.config_hash}`",
         f"- Status para publicação: **{'BLOQUEADO' if criticas or ctx.pendencias else 'liberado'}**",
         "",

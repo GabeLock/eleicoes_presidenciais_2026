@@ -9,7 +9,7 @@ on:
       etapa:
         description: "Etapa"
         type: choice
-        options: [inventory, ingest, pilot, national]
+        options: [verificar, inventory, ingest, pilot, national]
         default: inventory
       uf:
         description: "UF (MG | MG,SP | ALL)"
@@ -29,6 +29,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    outputs:
+      mudou: ${{ steps.etapa.outputs.mudou }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,13 +40,29 @@ jobs:
         run: pip install uv
       - name: Ambiente fixado
         run: uv sync --locked
+      - name: Estado da última verificação (cache)
+        if: inputs.etapa == 'verificar'
+        uses: actions/cache@v4
+        with:
+          path: reports/verificacao/estado_${{ inputs.year }}.json
+          key: verificar-${{ inputs.year }}-${{ github.run_id }}
+          restore-keys: verificar-${{ inputs.year }}-
       - name: Executar etapa
+        id: etapa
         env:
           ETAPA: ${{ inputs.etapa }}
           UF: ${{ inputs.uf }}
           YEAR: ${{ inputs.year }}
         run: |
+          export YEAR
           case "$ETAPA" in
+            verificar)
+              # CLI direta: `make` transformaria o código 10 (nada mudou) em 2
+              set +e; uv run eleicoes verificar --year "$YEAR"; rc=$?; set -e
+              if [ "$rc" -eq 0 ]; then
+                echo "Arquivos do TSE mudaram: rodando ingestão + piloto"
+                make inventory && make pilot UF="$UF"
+              elif [ "$rc" -ne 10 ]; then exit "$rc"; fi ;;
             inventory) make inventory ;;
             ingest)    make inventory && make ingest YEAR="$YEAR" UF="$UF" && make validate ;;
             pilot)     make inventory && make pilot UF="$UF" ;;
@@ -68,7 +86,7 @@ jobs:
   # (registro durável; dados brutos nunca são enviados). Único job com escrita.
   publicar:
     needs: run
-    if: always() && needs.run.result != 'cancelled'
+    if: always() && needs.run.result != 'cancelled' && needs.run.outputs.mudou != 'false'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

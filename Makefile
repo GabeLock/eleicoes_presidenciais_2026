@@ -3,25 +3,28 @@ YEAR ?= 2026
 UF   ?= MG
 RUN  := uv run eleicoes
 
-.PHONY: setup inventory ingest validate transform analyze dashboard test lint format pilot national
+.PHONY: setup inventory verificar ingest validate transform analyze dashboard test lint format pilot national
 
 setup:            ## instala o ambiente fixado no uv.lock (inclui dashboard e modelagem)
 	uv sync --all-extras --locked
 
 inventory:        ## catálogo CKAN do TSE + HEAD de cada arquivo
-	$(RUN) inventory
+	$(RUN) inventory --year $(YEAR)
+
+verificar:        ## HEAD nos arquivos do MVP; código 10 = nada mudou
+	$(RUN) verificar --year $(YEAR)
 
 ingest:           ## download + validação bruta + extração (UF=MG | UF=ALL)
 	$(RUN) ingest --year $(YEAR) --uf $(UF)
 
 validate:         ## status dos manifestos; falha se houver recurso incompatível
-	$(RUN) validate
+	$(RUN) validate --year $(YEAR)
 
 transform:        ## Bronze → Silver → Gold + relatório de qualidade
-	$(RUN) transform --uf $(UF)
+	$(RUN) transform --year $(YEAR) --uf $(UF)
 
 analyze:          ## quadros descritivos a partir da Gold
-	$(RUN) analyze
+	$(RUN) analyze --year $(YEAR)
 
 dashboard:        ## exploração local em Streamlit
 	uv run streamlit run dashboard/app.py

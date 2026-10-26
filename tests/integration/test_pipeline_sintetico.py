@@ -74,7 +74,7 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
         checks = pipeline.transformar(cfg, ctx, ["MG"], "BR")
     falhas = [c for c in checks if c.critica and not c.ok]
     assert not falhas, falhas
-    gold = cfg.paths["gold"]
+    gold = cfg.dir_ano("gold")
     part = pl.read_parquet(gold / "gold_participacao_municipio.parquet")
     assert part.height == 3 * 2
     resumo = json.loads((gold / "resumo_virada.json").read_text())
@@ -119,7 +119,7 @@ def test_segundo_turno_ausente_bloqueia(tmp_path, monkeypatch):
         checks = pipeline.transformar(cfg, ctx, ["MG"], "BR")
         rel = pipeline.relatorio_qualidade(ctx, checks, "MG")
     assert "BLOQUEADO" in rel.read_text()
-    assert not (cfg.paths["gold"] / "resumo_virada.json").exists()
+    assert not (cfg.dir_ano("gold") / "resumo_virada.json").exists()
 
 
 def test_colunas_divergentes_tornam_recurso_incompativel(ambiente, monkeypatch):
