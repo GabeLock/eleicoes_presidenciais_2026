@@ -91,13 +91,13 @@ def ingest(
 
     _checar_ano(year)
     cfg = load_config()
-    escopo = _ufs(uf)
+    _ufs(uf)  # valida o parâmetro; o recorte por UF é aplicado na Silver (make transform)
     with RunContext("ingest", cfg, {"year": year, "uf": uf}) as ctx:
         pasta = pipeline.pasta_manifestos(cfg, ctx.run_id)
         # votos por seção: arquivo por UF no piloto; arquivo 'BR' (Presidente) no nacional
-        alvos = [("votacao_secao", u, None) for u in (escopo or ["BR"])]
-        esc = escopo[0] if escopo and len(escopo) == 1 else None
-        alvos.append(("detalhe_votacao_secao", None, esc))
+        # Presidente: arquivo de abrangência federal ("BR"); o recorte por UF é feito na Silver
+        arq = cfg.recurso("votacao_secao").get("arquivo_presidente", "BR")
+        alvos = [("votacao_secao", arq, None), ("detalhe_votacao_secao", None, None)]
         for recurso, u, escopo_uf in alvos:
             m = pipeline.ingerir(cfg, ctx, recurso, u, escopo_uf=escopo_uf)
             m.salvar(pasta)
@@ -148,7 +148,7 @@ def transform(
 
     cfg = load_config()
     escopo = _ufs(uf)
-    uf_votos = escopo[0] if escopo and len(escopo) == 1 else "BR"
+    uf_votos = cfg.recurso("votacao_secao").get("arquivo_presidente", "BR")
     with RunContext("transform", cfg, {"uf": uf}) as ctx:
         checks = pipeline.transformar(cfg, ctx, escopo, uf_votos)
         rel = pipeline.relatorio_qualidade(ctx, checks, uf if escopo else "nacional + exterior")

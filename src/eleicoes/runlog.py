@@ -30,7 +30,7 @@ def git_commit() -> str:
             check=True,
         )
         dirty = subprocess.run(  # noqa: S603
-            ["git", "status", "--porcelain"],  # noqa: S607
+            ["git", "status", "--porcelain", "--untracked-files=no"],  # noqa: S607
             cwd=REPO_ROOT,
             capture_output=True,
             text=True,

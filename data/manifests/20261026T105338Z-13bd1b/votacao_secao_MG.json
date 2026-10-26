@@ -1,0 +1,111 @@
+{
+  "run_id": "20261026T105338Z-13bd1b",
+  "recurso": "votacao_secao",
+  "uf": "MG",
+  "instituicao": "TSE",
+  "conjunto": "resultados-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_MG.zip",
+  "sha256": "56826e143f4fb2628a6f82f9697a3e4ad87094ed89782ad8ab51d06c7c30877a",
+  "bytes": 255063843,
+  "coletado_em": "2026-10-26T10:53:42+00:00",
+  "last_modified_http": "Tue, 06 Oct 2026 19:32:09 GMT",
+  "etag": "\"f33f723-65d310dfa2ba8\"",
+  "membros_zip": [
+    {
+      "nome": "votacao_secao_2026_MG.csv",
+      "bytes_compactado": 254882968,
+      "bytes_descompactado": 1779477082,
+      "crc": 3256237864
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 180631,
+      "bytes_descompactado": 192420,
+      "crc": 2105426969
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "NR_SECAO",
+      "CD_CARGO",
+      "DS_CARGO",
+      "NR_VOTAVEL",
+      "NM_VOTAVEL",
+      "QT_VOTOS",
+      "NR_LOCAL_VOTACAO",
+      "SQ_CANDIDATO",
+      "NM_LOCAL_VOTACAO",
+      "DS_LOCAL_VOTACAO_ENDERECO"
+    ],
+    "linhas_amostra": 842,
+    "sentinelas_amostra": {
+      "-1": 91
+    },
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "3",
+        "Governador",
+        "1",
+        470472
+      ],
+      [
+        "5",
+        "Senador",
+        "1",
+        588044
+      ],
+      [
+        "6",
+        "Deputado Federal",
+        "1",
+        2227266
+      ],
+      [
+        "7",
+        "Deputado Estadual",
+        "1",
+        2637874
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/56826e143f4f/votacao_secao_2026_MG.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "06/10/2026 14:03:43"
+  ],
+  "turnos_presentes": [
+    "1"
+  ],
+  "linhas": 5923656,
+  "status": "parcial",
+  "limitacoes": [
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ]
+}

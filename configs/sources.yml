@@ -12,13 +12,16 @@ catalogo:
 recursos:
   votacao_secao:
     conjunto: resultados-2026
-    descricao: Votação por seção eleitoral (arquivo por UF; "BR" = Presidente, nacional)
+    descricao: Votação por seção eleitoral. Arquivos por UF trazem só cargos estaduais;
+      o arquivo "BR" (abrangência federal) traz Presidente para todas as UFs (leiame 2026).
     url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [BR, AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO]
+    membro_csv_sufixo: BR
+    arquivo_presidente: BR        # confirmado em 2026-10-26: MG.zip contém cargos 3, 5, 6, 7
     periodicidade_oficial: "Arquivo atualizado ao final de cada turno."
     granularidade: eleição × turno × cargo × seção × votável
-    status_layout: a_confirmar
+    status_layout: confirmado     # cabeçalho real de votacao_secao_2026_MG.csv (sha256 56826e14…)
     colunas_obrigatorias:
       ano: ANO_ELEICAO
       turno: NR_TURNO
@@ -37,17 +40,19 @@ recursos:
       hh_geracao: HH_GERACAO
       sq_candidato: SQ_CANDIDATO
       nr_local_votacao: NR_LOCAL_VOTACAO
-    votaveis_especiais:            # a confirmar no leiame 2026
+    votaveis_especiais:            # códigos 95/96 ainda a confirmar nos dados de Presidente
       branco: "95"
       nulo: "96"
 
   detalhe_votacao_secao:
     conjunto: resultados-2026
-    descricao: Detalhe da apuração por seção eleitoral (todas as UFs, arquivo único)
+    descricao: Detalhe da apuração por seção eleitoral. ZIP único com CSVs _<UF> (cargos estaduais),
+      _BR (abrangência federal = Presidente), _BRASIL e _ZZ (leiame 2026).
     url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip
     particionado_por_uf: false
+    membro_csv_sufixo: BR         # Presidente
     granularidade: eleição × turno × cargo × seção
-    status_layout: a_confirmar
+    status_layout: confirmado     # leiame 2026 + cabeçalho real (sha256 11a62c3a…)
     colunas_obrigatorias:
       ano: ANO_ELEICAO
       turno: NR_TURNO
@@ -68,8 +73,11 @@ recursos:
       dt_geracao: DT_GERACAO
       hh_geracao: HH_GERACAO
       qt_votos_legenda: QT_VOTOS_LEGENDA
-      qt_votos_anulados: QT_VOTOS_ANULADOS
+      # Leiame: votos de urna sub judice, "ainda não são votos válidos nem nulos". Nunca somar aos nulos.
       qt_votos_anulados_apu_sep: QT_VOTOS_ANULADOS_APU_SEP
+      ds_origem_voto: DS_ORIGEM_VOTO
+      st_secao_instalada: ST_SECAO_INSTALADA
+      st_secao_anulada: ST_SECAO_ANULADA
 
   detalhe_votacao_munzona:
     conjunto: resultados-2026

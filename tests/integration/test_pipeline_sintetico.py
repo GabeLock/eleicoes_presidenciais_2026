@@ -54,9 +54,9 @@ def ambiente(tmp_path, monkeypatch):
 def _ingest(cfg):
     with RunContext("ingest", cfg) as ctx:
         pasta = pipeline.pasta_manifestos(cfg, ctx.run_id)
-        mv = pipeline.ingerir(cfg, ctx, "votacao_secao", "MG")
+        mv = pipeline.ingerir(cfg, ctx, "votacao_secao", "BR")
         mv.salvar(pasta)
-        mp = pipeline.ingerir(cfg, ctx, "detalhe_votacao_secao", None, escopo_uf="MG")
+        mp = pipeline.ingerir(cfg, ctx, "detalhe_votacao_secao", None)
         mp.salvar(pasta)
     return mv, mp
 
@@ -66,10 +66,12 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
     mv, mp = _ingest(cfg)
     assert mv.status == "disponivel" and mv.turnos_presentes == ["1", "2"]
     assert mp.perfil_csv["encoding"] == "latin-1"
-    assert len(mp.perfil_csv["arquivos_csv"]) == 1  # só o CSV de MG foi extraído
+    assert [c.rsplit("/", 1)[-1] for c in mp.perfil_csv["arquivos_csv"]] == [
+        "detalhe_votacao_secao_2026_BR.csv"
+    ]  # só o membro de Presidente
 
     with RunContext("transform", cfg) as ctx:
-        checks = pipeline.transformar(cfg, ctx, ["MG"], "MG")
+        checks = pipeline.transformar(cfg, ctx, ["MG"], "BR")
     falhas = [c for c in checks if c.critica and not c.ok]
     assert not falhas, falhas
     gold = cfg.paths["gold"]
@@ -91,7 +93,7 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
     mv2, _ = _ingest(cfg)
     assert mv2.sha256 == mv.sha256
     with RunContext("transform", cfg) as ctx:
-        pipeline.transformar(cfg, ctx, ["MG"], "MG")
+        pipeline.transformar(cfg, ctx, ["MG"], "BR")
     assert h1.equals(pl.read_parquet(gold / "gold_decomposicao_municipio.parquet"))
 
 
@@ -114,7 +116,7 @@ def test_segundo_turno_ausente_bloqueia(tmp_path, monkeypatch):
     mv, _ = _ingest(cfg)
     assert mv.status == "parcial"
     with RunContext("transform", cfg) as ctx:
-        checks = pipeline.transformar(cfg, ctx, ["MG"], "MG")
+        checks = pipeline.transformar(cfg, ctx, ["MG"], "BR")
         rel = pipeline.relatorio_qualidade(ctx, checks, "MG")
     assert "BLOQUEADO" in rel.read_text()
     assert not (cfg.paths["gold"] / "resumo_virada.json").exists()
@@ -126,6 +128,6 @@ def test_colunas_divergentes_tornam_recurso_incompativel(ambiente, monkeypatch):
     rec["recursos"]["votacao_secao"]["colunas_obrigatorias"]["qt_votos"] = "QT_VOTOS_INEXISTENTE"
     cfg = replace(cfg, sources=rec)
     with RunContext("ingest", cfg) as ctx:
-        m = pipeline.ingerir(cfg, ctx, "votacao_secao", "MG")
+        m = pipeline.ingerir(cfg, ctx, "votacao_secao", "BR")
     assert m.status == "incompativel"
     assert m.colunas_ausentes == ["QT_VOTOS_INEXISTENTE"]

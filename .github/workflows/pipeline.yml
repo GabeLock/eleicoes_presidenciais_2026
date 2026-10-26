@@ -63,3 +63,39 @@ jobs:
           path: |
             data/manifests/
             reports/
+
+  # Devolve manifestos e relatórios ao repositório num branch `resultados/<run_id>`
+  # (registro durável; dados brutos nunca são enviados). Único job com escrita.
+  publicar:
+    needs: run
+    if: always() && needs.run.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: pipeline-${{ inputs.etapa }}-${{ github.run_id }}
+          path: _artefato
+      - name: Commit em branch de resultados
+        env:
+          RUN_ID: ${{ github.run_id }}
+          ETAPA: ${{ inputs.etapa }}
+          UF: ${{ inputs.uf }}
+          RESULT: ${{ needs.run.result }}
+        run: |
+          set -euo pipefail
+          git checkout -b "resultados/${RUN_ID}"
+          mkdir -p data/manifests reports
+          cp -r _artefato/data/manifests/. data/manifests/ 2>/dev/null || true
+          for d in inventory quality dicionarios runs analysis; do
+            [ -d "_artefato/reports/$d" ] && mkdir -p "reports/$d" && cp -r "_artefato/reports/$d/." "reports/$d/"
+          done
+          rm -rf _artefato
+          git add -f data/manifests reports
+          if git diff --cached --quiet; then echo "Nada a publicar"; exit 0; fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Resultados do pipeline: etapa=${ETAPA} uf=${UF} run=${RUN_ID} (${RESULT})"
+          git push origin "resultados/${RUN_ID}"

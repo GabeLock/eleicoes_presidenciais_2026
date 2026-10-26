@@ -17,7 +17,7 @@ CONTAGENS_PARTICIPACAO = [
     "qt_votos_brancos",
     "qt_votos_nulos",
     "qt_votos_legenda",
-    "qt_votos_anulados",
+    "qt_votos_anulados_apu_sep",
 ]
 ENCODING_DUCKDB = {"utf-8": "utf-8", "latin-1": "latin-1", "utf-16": "utf-16"}
 
@@ -80,8 +80,15 @@ def sql_silver_participacao(csv: Path, perfil: dict, rec: dict, cargo: str, sha:
     mapa = {**rec["colunas_obrigatorias"], **rec.get("colunas_opcionais", {})}
     cols = _projecao(mapa, perfil["cabecalho"], CONTAGENS_PARTICIPACAO)
     presentes = {c.split(" AS ")[-1] for c in cols}
-    faltantes_opc = [c for c in ("qt_votos_legenda", "qt_votos_anulados") if c not in presentes]
+    faltantes_opc = [
+        c for c in ("qt_votos_legenda", "qt_votos_anulados_apu_sep") if c not in presentes
+    ]
     extras = [f"CAST(NULL AS BIGINT) AS {c}" for c in faltantes_opc]
+    extras += [
+        f"CAST(NULL AS VARCHAR) AS {c}"
+        for c in ("st_secao_instalada", "st_secao_anulada", "ds_origem_voto")
+        if c not in presentes
+    ]
     ds = _id(rec["colunas_obrigatorias"]["ds_cargo"])
     return f"""
 CREATE OR REPLACE TABLE silver_participacao_secao AS
