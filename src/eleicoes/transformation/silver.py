@@ -40,6 +40,12 @@ def fonte_csv(caminho: Path, perfil: dict[str, Any]) -> str:
     )
 
 
+# Códigos canônicos (texto com zeros à esquerda). Os arquivos do TSE não são consistentes:
+# em 2026 um arquivo grava CD_MUNICIPIO de AC/AM/AP/MA/PA/RO/RR sem o zero inicial.
+# O valor bruto é preservado em <coluna>_original.
+LARGURA_CODIGO = {"cd_municipio_tse": 5, "zona": 4, "secao": 4}
+
+
 def _projecao(mapa: dict[str, str], cabecalho: list[str], contagens: list[str]) -> list[str]:
     cols = []
     for alvo, origem in mapa.items():
@@ -51,6 +57,10 @@ def _projecao(mapa: dict[str, str], cabecalho: list[str], contagens: list[str]) 
             cols.append(f"CAST({_id(origem)} AS BIGINT) AS {alvo}")
         elif alvo == "ds_cargo":
             cols.append(f"upper(trim({_id(origem)})) AS ds_cargo")
+        elif alvo in LARGURA_CODIGO:
+            w = LARGURA_CODIGO[alvo]
+            cols.append(f"lpad(trim({_id(origem)}), {w}, '0') AS {alvo}")
+            cols.append(f"trim({_id(origem)}) AS {alvo}_original")
         else:
             cols.append(f"trim({_id(origem)}) AS {alvo}")
     return cols
