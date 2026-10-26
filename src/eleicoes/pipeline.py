@@ -488,6 +488,24 @@ def complementares(
                 )
             )
 
+        # nível município: neutraliza reetiquetagem de zonas entre versões dos arquivos
+        km = "turno, uf, cd_municipio_tse"
+        res_m = con.execute(
+            f"""WITH s AS (SELECT {km}, {sel_s} FROM silver_participacao_secao GROUP BY {km}),
+                     z AS (SELECT {km}, {sel_z} FROM silver_detalhe_munzona GROUP BY {km})
+                SELECT count(*), {cond} FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse)"""
+        ).fetchone()
+        for j, a in enumerate(medidas):
+            n, dif = res_m[1 + 2 * j], res_m[2 + 2 * j]
+            checks.append(
+                ck.Checagem(
+                    f"secao→municipio(munzona):{a}",
+                    n == 0,
+                    False,
+                    f"{n} de {res_m[0]} município-turnos divergentes; |dif| total = {dif}",
+                )
+            )
+
     if "silver_candidato_munzona" in carregadas:
         n, tot, dif = con.execute(
             """WITH s AS (SELECT turno, uf, cd_municipio_tse, zona, nr_votavel AS nr,

@@ -41,3 +41,13 @@ def test_identificador_malicioso_recusado():
 
     with pytest.raises(ValueError):
         ck.unicidade(_con(), "f; DROP TABLE f", ["turno"])
+
+
+def test_identidade_aptos_ignora_secao_nao_instalada():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE p AS SELECT * FROM (VALUES (22, 0, 0, 'Não'), (10, 8, 2, 'Sim'))"
+        " t(qt_aptos, qt_comparecimento, qt_abstencoes, st_secao_instalada)"
+    )
+    r = ck.identidade_aptos(con, "p")
+    assert r.ok and "1 seções não instaladas" in r.detalhe

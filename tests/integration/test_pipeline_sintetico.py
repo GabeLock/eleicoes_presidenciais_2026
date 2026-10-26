@@ -77,8 +77,8 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
     falhas = [c for c in checks if c.critica and not c.ok]
     assert not falhas, falhas
     por_nome = {c.nome: c for c in checks}
-    zona = [c for n, c in por_nome.items() if n.startswith("secao→zona:")]
-    assert len(zona) == 7 and all(c.ok for c in zona), zona
+    zona = [c for n, c in por_nome.items() if n.startswith("secao→")]
+    assert len(zona) == 13 and all(c.ok for c in zona), zona
     assert por_nome["dim_candidatura:atributos_unicos"].ok
     gold = cfg.dir_ano("gold")
     part = pl.read_parquet(gold / "gold_participacao_municipio.parquet")
