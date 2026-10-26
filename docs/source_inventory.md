@@ -1,13 +1,31 @@
 # Inventário de fontes
 
-**Versão:** 0.1 · **Levantamento do catálogo:** 2026-10-26 (consulta às páginas dos conjuntos no
-Portal de Dados Abertos do TSE) · **Snapshot de dados:** nenhum coletado ainda.
+**Versão:** 0.2 · **Levantamento do catálogo:** 2026-10-26 (API CKAN; 94 recursos nos dois conjuntos) ·
+**Primeiros snapshots:** 2026-10-26 10:53–10:57 UTC (GitHub Actions; ver tabela abaixo).
 
-> Este inventário é **preliminar**: foi montado a partir dos metadados publicados no catálogo.
-> Tamanho, SHA-256, data de geração (dentro do arquivo), turnos presentes, cabeçalho real e
-> versão do dicionário só são conhecidos após o download. Esses campos serão preenchidos pela
-> execução de `make inventory` + `make ingest` no GitHub Actions e consolidados por PR
-> (arquivo gerado: `reports/inventory/<run_id>.consolidado.json`).
+> Recursos não coletados constam com os metadados do catálogo. Para os coletados, os valores vêm
+> dos manifestos em `data/manifests/` (gerados por `make ingest`); o texto do dicionário oficial
+> (leiame 2026) está em `reports/dicionarios/leiame.txt`.
+
+## Snapshots coletados
+
+| Recurso | SHA-256 | Bytes (ZIP) | Gerado na fonte (DT/HH_GERACAO) | Last-Modified (CDN) | Coletado (UTC) | Turnos | Linhas | Status |
+|---|---|---|---|---|---|---|---|---|
+| `votacao_secao_2026_BR.zip` (Presidente) | `2d42006d0f6c6e00bad83f5c23cd3d78cd3e3182dbc1ad6718222b6b132c23e1` | 161.616.519 | 06/10/2026 14:03:43 | Tue, 06 Oct 2026 19:22:49 GMT | 2026-10-26T10:57:26 | 1 | 3.800.511 | **parcial** |
+| `detalhe_votacao_secao_2026.zip` | `11a62c3a604e8b73fc328617b7688d2c635de1c76df02ba63b8f77879512f573` | 176.923.175 | 05/10/2026 14:03:30 | Wed, 07 Oct 2026 20:54:59 GMT | 2026-10-26T10:57:41 | 1 | — | **parcial** |
+| `votacao_secao_2026_MG.zip` | `56826e143f4fb2628a6f82f9697a3e4ad87094ed89782ad8ab51d06c7c30877a` | 255.063.843 | 06/10/2026 14:03:43 | Tue, 06 Oct 2026 19:32:09 GMT | 2026-10-26T10:53:42 | 1 | 5.923.656 | **incompatível com o MVP** (não contém Presidente) |
+
+Achados da primeira coleta:
+- **2º turno ausente**: nenhum arquivo traz `NR_TURNO = 2`. A base fica bloqueada até a
+  republicação ("arquivo atualizado ao final de cada turno").
+- **Presidente só nos arquivos `_BR`** (abrangência federal). Os arquivos por UF trazem os cargos
+  3 (Governador), 5 (Senador), 6 (Dep. Federal) e 7 (Dep. Estadual). No detalhe por seção, o ZIP
+  único contém membros `_<UF>`, `_BR` (Presidente, 176 MB), `_BRASIL` (900 MB) e `_ZZ` (606 bytes).
+- **Layout conferido** com o leiame 2026: latin-1, `;`, campos entre aspas; `#NULO` ↔ `-1` e `#NE` ↔ `-3`
+  em campos numéricos; `SG_UF` pode valer `BR`, `VT` (voto em trânsito) ou `ZZ` (exterior).
+- **Piloto MG, 1º turno**: todas as checagens de integridade passaram (unicidade, contagens não
+  negativas, aptos = comparecimento + abstenção, seção → município, válidos entre os dois
+  arquivos) — `reports/quality/20261026T105750Z-a590e2.md`.
 
 ## Legenda de status
 
@@ -27,9 +45,9 @@ geração disponível por arquivo"; licença Creative Commons Attribution; organ
 
 | Recurso | URL oficial | Granularidade (declarada) | Cobertura | Prioridade | Status |
 |---|---|---|---|---|---|
-| Presidente — Votação por seção eleitoral | `cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_BR.zip` | seção × votável | Nacional; inclusão do exterior (ZZ) **a confirmar** | MVP nacional | nao_coletado |
-| {UF} — Votação por seção eleitoral (27 arquivos) | `…/votacao_secao/votacao_secao_2026_{UF}.zip` | seção × votável, todos os cargos | Por UF; **sem arquivo ZZ** listado | MVP piloto (MG) | nao_coletado |
-| Detalhe da apuração por seção eleitoral | `…/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip` | seção | Todas as UFs | MVP | nao_coletado |
+| Presidente — Votação por seção eleitoral | `cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_BR.zip` | seção × votável | Nacional (Presidente); presença de ZZ/VT **a confirmar** | MVP (piloto e nacional) | parcial (só 1º turno) |
+| {UF} — Votação por seção eleitoral (27 arquivos) | `…/votacao_secao/votacao_secao_2026_{UF}.zip` | seção × votável, cargos estaduais | Por UF; sem arquivo ZZ | Fora do MVP | MG: incompatível (sem Presidente) |
+| Detalhe da apuração por seção eleitoral | `…/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip` | seção | Membro `_BR` = Presidente | MVP | parcial (só 1º turno) |
 | Detalhe da apuração por município e zona | `…/detalhe_votacao_munzona/detalhe_votacao_munzona_2026.zip` | município × zona | Todas as UFs | Reconciliação | nao_coletado |
 | Votação nominal por município e zona | `…/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip` | município × zona × candidatura | Todas as UFs | Reconciliação | nao_coletado |
 | Votação em partido por município e zona | `…/votacao_partido_munzona/votacao_partido_munzona_2026.zip` | município × zona × partido | Todas as UFs | Fora do MVP | nao_coletado |
