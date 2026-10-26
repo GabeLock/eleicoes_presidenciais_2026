@@ -1,0 +1,15 @@
+{
+  "comando": "validate",
+  "parametros": {},
+  "run_id": "20261026T105750Z-87f8c2",
+  "commit": "d088f1c95b030af334835352d0876dd200e83693-dirty",
+  "inicio": "2026-10-26T10:57:50+00:00",
+  "fim": "2026-10-26T10:57:50+00:00",
+  "duracao_s": 0.011,
+  "status": "concluido",
+  "volumes": {},
+  "insumos": [],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "56943e074a0e2d9a"
+}

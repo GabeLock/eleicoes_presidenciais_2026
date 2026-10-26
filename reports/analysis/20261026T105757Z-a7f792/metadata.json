@@ -1,0 +1,9 @@
+{
+  "run_id": "20261026T105757Z-a7f792",
+  "commit": "d088f1c95b030af334835352d0876dd200e83693-dirty",
+  "status_base": {
+    "status": "bloqueado",
+    "relatorio": "20261026T105750Z-a590e2.md"
+  },
+  "aviso": "Contagens observadas; decomposições são contábeis, não causais."
+}

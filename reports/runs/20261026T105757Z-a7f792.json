@@ -1,0 +1,17 @@
+{
+  "comando": "analyze",
+  "parametros": {},
+  "run_id": "20261026T105757Z-a7f792",
+  "commit": "d088f1c95b030af334835352d0876dd200e83693-dirty",
+  "inicio": "2026-10-26T10:57:57+00:00",
+  "fim": "2026-10-26T10:57:57+00:00",
+  "duracao_s": 0.013,
+  "status": "concluido_com_pendencias",
+  "volumes": {},
+  "insumos": [],
+  "pendencias": [
+    "Base bloqueado: quadros marcados como PRELIMINARES."
+  ],
+  "config_version": "0.1.0",
+  "config_hash": "56943e074a0e2d9a"
+}
