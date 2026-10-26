@@ -1,0 +1,53 @@
+{
+  "comando": "ingest",
+  "parametros": {
+    "year": 2026,
+    "uf": "ALL"
+  },
+  "run_id": "20261026T123521Z-eca10a",
+  "commit": "59784bde0341fe9d1c4d710775bdb7677e60f06a",
+  "inicio": "2026-10-26T12:35:21+00:00",
+  "fim": "2026-10-26T12:36:26+00:00",
+  "duracao_s": 65.004,
+  "status": "concluido_com_pendencias",
+  "volumes": {
+    "votacao_secao:votacao_secao_2026_BR.csv": 3800511,
+    "detalhe_votacao_secao:detalhe_votacao_secao_2026_BR.csv": 499248,
+    "detalhe_votacao_munzona:detalhe_votacao_munzona_2026_BR.csv": 6292,
+    "votacao_candidato_munzona:votacao_candidato_munzona_2026_BR.csv": 75504
+  },
+  "insumos": [
+    {
+      "recurso": "votacao_secao",
+      "uf": "BR",
+      "sha256": "2d42006d0f6c6e00bad83f5c23cd3d78cd3e3182dbc1ad6718222b6b132c23e1",
+      "status": "parcial"
+    },
+    {
+      "recurso": "detalhe_votacao_secao",
+      "uf": null,
+      "sha256": "11a62c3a604e8b73fc328617b7688d2c635de1c76df02ba63b8f77879512f573",
+      "status": "parcial"
+    },
+    {
+      "recurso": "detalhe_votacao_munzona",
+      "uf": null,
+      "sha256": "7f6f40a14ba805b453b1d85c18fe12eec4225cfbf2ba21989ecd7c4e15a12043",
+      "status": "parcial"
+    },
+    {
+      "recurso": "votacao_candidato_munzona",
+      "uf": null,
+      "sha256": "cef14bbf848da85cb1462657c9d3c95cd2d76d9b884c4ccd579e0384035be9a6",
+      "status": "parcial"
+    }
+  ],
+  "pendencias": [
+    "Turnos presentes ['1']; esperado [1, 2].",
+    "Turnos presentes ['1']; esperado [1, 2].",
+    "Turnos presentes ['1']; esperado [1, 2].",
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ],
+  "config_version": "0.1.0",
+  "config_hash": "46e24db914a3da40"
+}

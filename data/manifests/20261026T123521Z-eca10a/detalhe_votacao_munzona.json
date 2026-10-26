@@ -1,0 +1,281 @@
+{
+  "run_id": "20261026T123521Z-eca10a",
+  "recurso": "detalhe_votacao_munzona",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "resultados-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2026.zip",
+  "sha256": "7f6f40a14ba805b453b1d85c18fe12eec4225cfbf2ba21989ecd7c4e15a12043",
+  "bytes": 2511067,
+  "coletado_em": "2026-10-26T12:35:56+00:00",
+  "last_modified_http": "Sun, 25 Oct 2026 15:58:00 GMT",
+  "etag": "\"2650db-65eac471f9365\"",
+  "membros_zip": [
+    {
+      "nome": "detalhe_votacao_munzona_2026_AL.csv",
+      "bytes_compactado": 15155,
+      "bytes_descompactado": 124389,
+      "crc": 1713677198
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_AP.csv",
+      "bytes_compactado": 3139,
+      "bytes_descompactado": 21477,
+      "crc": 2255276339
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_CE.csv",
+      "bytes_compactado": 29950,
+      "bytes_descompactado": 236306,
+      "crc": 1470682617
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_BA.csv",
+      "bytes_compactado": 63246,
+      "bytes_descompactado": 517343,
+      "crc": 411338256
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_AM.csv",
+      "bytes_compactado": 11186,
+      "bytes_descompactado": 86560,
+      "crc": 3700154673
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_AC.csv",
+      "bytes_compactado": 4070,
+      "bytes_descompactado": 27338,
+      "crc": 3890721770
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_DF.csv",
+      "bytes_compactado": 3868,
+      "bytes_descompactado": 24496,
+      "crc": 2357849471
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_GO.csv",
+      "bytes_compactado": 35028,
+      "bytes_descompactado": 294651,
+      "crc": 70700366
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_MG.csv",
+      "bytes_compactado": 130504,
+      "bytes_descompactado": 1051335,
+      "crc": 175479773
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_MA.csv",
+      "bytes_compactado": 34503,
+      "bytes_descompactado": 262257,
+      "crc": 1622293656
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_ES.csv",
+      "bytes_compactado": 12735,
+      "bytes_descompactado": 102147,
+      "crc": 519530372
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_MS.csv",
+      "bytes_compactado": 13238,
+      "bytes_descompactado": 106077,
+      "crc": 454852050
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_MT.csv",
+      "bytes_compactado": 20563,
+      "bytes_descompactado": 171816,
+      "crc": 933151456
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_PA.csv",
+      "bytes_compactado": 25430,
+      "bytes_descompactado": 185913,
+      "crc": 1670188292
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_BR.csv",
+      "bytes_compactado": 300810,
+      "bytes_descompactado": 1737042,
+      "crc": 2193293514
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_PB.csv",
+      "bytes_compactado": 33484,
+      "bytes_descompactado": 263050,
+      "crc": 862828190
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_BRASIL.csv",
+      "bytes_compactado": 1190071,
+      "bytes_descompactado": 8846451,
+      "crc": 3597925488
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_PE.csv",
+      "bytes_compactado": 31590,
+      "bytes_descompactado": 246331,
+      "crc": 2582547186
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_PR.csv",
+      "bytes_compactado": 61923,
+      "bytes_descompactado": 483177,
+      "crc": 1545940618
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_RJ.csv",
+      "bytes_compactado": 30643,
+      "bytes_descompactado": 225963,
+      "crc": 1007479326
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_PI.csv",
+      "bytes_compactado": 35072,
+      "bytes_descompactado": 263709,
+      "crc": 4088413921
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_RN.csv",
+      "bytes_compactado": 23771,
+      "bytes_descompactado": 205438,
+      "crc": 2317316429
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_RO.csv",
+      "bytes_compactado": 9115,
+      "bytes_descompactado": 66198,
+      "crc": 3619283871
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_RS.csv",
+      "bytes_compactado": 74818,
+      "bytes_descompactado": 616921,
+      "crc": 400802132
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_RR.csv",
+      "bytes_compactado": 2845,
+      "bytes_descompactado": 19141,
+      "crc": 3317527007
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_SC.csv",
+      "bytes_compactado": 46853,
+      "bytes_descompactado": 369062,
+      "crc": 1961360278
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_SE.csv",
+      "bytes_compactado": 13566,
+      "bytes_descompactado": 90970,
+      "crc": 3140148181
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_SP.csv",
+      "bytes_compactado": 118083,
+      "bytes_descompactado": 911408,
+      "crc": 2425361875
+    },
+    {
+      "nome": "detalhe_votacao_munzona_2026_TO.csv",
+      "bytes_compactado": 19669,
+      "bytes_descompactado": 161181,
+      "crc": 137268432
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 111779,
+      "bytes_descompactado": 125454,
+      "crc": 1524430111
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2026/detalhe_votacao_munzona_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "CD_CARGO",
+      "DS_CARGO",
+      "QT_APTOS",
+      "QT_SECOES_PRINCIPAIS",
+      "QT_SECOES_AGREGADAS",
+      "QT_SECOES_NAO_INSTALADAS",
+      "QT_TOTAL_SECOES",
+      "QT_COMPARECIMENTO",
+      "QT_ELEITORES_SECOES_NAO_INSTALADAS",
+      "QT_ABSTENCOES",
+      "ST_VOTO_EM_TRANSITO",
+      "QT_VOTOS",
+      "QT_VOTOS_CONCORRENTES",
+      "QT_TOTAL_VOTOS_VALIDOS",
+      "QT_VOTOS_NOMINAIS_VALIDOS",
+      "QT_TOTAL_VOTOS_LEG_VALIDOS",
+      "QT_VOTOS_LEG_VALIDOS",
+      "QT_VOTOS_NOM_CONVR_LEG_VALIDOS",
+      "QT_TOTAL_VOTOS_ANULADOS",
+      "QT_VOTOS_NOMINAIS_ANULADOS",
+      "QT_VOTOS_LEGENDA_ANULADOS",
+      "QT_TOTAL_VOTOS_ANUL_SUBJUD",
+      "QT_VOTOS_NOMINAIS_ANUL_SUBJUD",
+      "QT_VOTOS_LEGENDA_ANUL_SUBJUD",
+      "QT_VOTOS_BRANCOS",
+      "QT_TOTAL_VOTOS_NULOS",
+      "QT_VOTOS_NULOS",
+      "QT_VOTOS_NULOS_TECNICOS",
+      "QT_VOTOS_ANULADOS_APU_SEP",
+      "HH_ULTIMA_TOTALIZACAO",
+      "DT_ULTIMA_TOTALIZACAO"
+    ],
+    "linhas_amostra": 918,
+    "sentinelas_amostra": {},
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "1",
+        "Presidente",
+        "1",
+        6292
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/7f6f40a14ba8/detalhe_votacao_munzona_2026_BR.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "25/10/2026 12:33:24"
+  ],
+  "turnos_presentes": [
+    "1"
+  ],
+  "linhas": 6292,
+  "status": "parcial",
+  "limitacoes": [
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ],
+  "ano": 2026
+}
