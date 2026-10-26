@@ -1,0 +1,65 @@
+name: Pipeline
+
+# Execução com dados reais do TSE. Manual (não roda a cada commit).
+# Artefatos do Actions são temporários: o registro durável são os manifestos,
+# que voltam ao repositório por pull request (ver docs/decisions/0002).
+on:
+  workflow_dispatch:
+    inputs:
+      etapa:
+        description: "Etapa"
+        type: choice
+        options: [inventory, ingest, pilot, national]
+        default: inventory
+      uf:
+        description: "UF (MG | MG,SP | ALL)"
+        default: MG
+      year:
+        description: "Ano"
+        default: "2026"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar uv
+        run: pip install uv
+      - name: Ambiente fixado
+        run: uv sync --locked
+      - name: Executar etapa
+        env:
+          ETAPA: ${{ inputs.etapa }}
+          UF: ${{ inputs.uf }}
+          YEAR: ${{ inputs.year }}
+        run: |
+          case "$ETAPA" in
+            inventory) make inventory ;;
+            ingest)    make inventory && make ingest YEAR="$YEAR" UF="$UF" && make validate ;;
+            pilot)     make inventory && make pilot UF="$UF" ;;
+            national)  make inventory && make national ;;
+          esac
+      - name: Espaço em disco usado
+        if: always()
+        run: du -sh data/* 2>/dev/null || true
+      - name: Publicar manifestos e relatórios (artefato temporário)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-${{ inputs.etapa }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            data/manifests/
+            reports/

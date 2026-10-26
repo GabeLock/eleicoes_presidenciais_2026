@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Se usar este código, cite o repositório e as fontes oficiais (TSE/IBGE) com a versão do snapshot."
+title: "Eleições Presidenciais 2026 — pipeline reprodutível de comparação entre turnos"
+type: software
+authors:
+  - alias: GabeLock
+    given-names: Gabriel
+license: MIT
+repository-code: "https://github.com/GabeLock/eleicoes_presidenciais_2026"
+version: 0.1.0
+date-released: 2026-10-26
+keywords: [eleições, TSE, dados abertos, DuckDB, reprodutibilidade]

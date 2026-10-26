@@ -1,0 +1,42 @@
+# Configuração do projeto — versionada; o hash deste arquivo entra em cada manifesto de execução.
+config_version: "0.1.0"
+
+eleicao:
+  ano: 2026
+  cargo_alvo: PRESIDENTE          # filtrado por DS_CARGO normalizado; código confirmado no dicionário (ver sources.yml)
+  turnos: [1, 2]
+  uf_exterior: ZZ                 # convenção do TSE para exterior; confirmar no leiame de 2026
+
+piloto:
+  ufs: [MG]
+  aviso: "Piloto MG serve apenas para testar o pipeline. Não sustenta conclusões nacionais."
+
+paths:
+  data_root: data
+  bronze: data/bronze             # arquivos originais imutáveis (fora do Git)
+  silver: data/silver             # Parquet tipado (fora do Git)
+  gold: data/gold                 # Parquet analítico (fora do Git)
+  manifests: data/manifests       # versionado
+  samples: data/samples           # versionado (pequeno)
+  reports: reports
+  warehouse: data/warehouse.duckdb
+
+download:
+  timeout_s: 120
+  max_retries: 4
+  backoff_base_s: 2.0
+  concorrencia: 2                 # conservadora: CDN público do TSE
+  max_bytes_arquivo: 8_000_000_000
+  dominios_permitidos: [cdn.tse.jus.br, dadosabertos.tse.jus.br]
+
+extracao_zip:
+  max_membros: 200
+  max_bytes_descompactados: 40_000_000_000
+  max_taxa_compressao: 200        # proteção contra zip bomb
+
+qualidade:
+  bloquear_conclusoes_se:
+    - turno_ausente
+    - falha_reconciliacao_inteira
+    - esquema_divergente
+  tolerancia_percentual_pp: 0.01  # apenas arredondamento de exibição; contagens inteiras reconciliam exatamente

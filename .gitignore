@@ -1,0 +1,26 @@
+# Dados volumosos ficam fora do Git (reconstrução: make ingest / make transform)
+data/bronze/
+data/silver/
+data/gold/
+data/*.duckdb
+data/*.duckdb.wal
+*.part
+
+# Saídas locais de execução. São versionados (pequenos, auditáveis): data/manifests/,
+# reports/inventory/, reports/quality/ e reports/dicionarios/ (texto dos leiame do TSE).
+reports/runs/
+reports/analysis/
+
+# Python / ambiente
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Segredos
+.env
+.streamlit/secrets.toml
