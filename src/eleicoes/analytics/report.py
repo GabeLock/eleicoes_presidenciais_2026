@@ -21,8 +21,12 @@ SOMAS_PART = [
 ]
 
 
-def _status_base(reports: Path) -> dict:
-    qualidade = sorted((reports / "quality").glob("*.md"))
+def _status_base(reports: Path, ano: int) -> dict:
+    qualidade = [
+        q
+        for q in sorted((reports / "quality").glob("*.md"))
+        if f"Ano: **{ano}**" in q.read_text(encoding="utf-8")
+    ]
     if not qualidade:
         return {"status": "sem_relatorio_de_qualidade", "relatorio": None}
     ultimo = qualidade[-1]
@@ -31,13 +35,13 @@ def _status_base(reports: Path) -> dict:
 
 
 def quadro_resumo(cfg: Config, ctx: RunContext) -> Path:
-    gold = cfg.paths["gold"]
+    gold = cfg.dir_ano("gold")
     part_path = gold / "gold_participacao_municipio.parquet"
     if not part_path.exists():
         raise RuntimeError("Gold ausente; rode `make transform` antes.")
     saida = cfg.paths["reports"] / "analysis" / ctx.run_id
     saida.mkdir(parents=True, exist_ok=True)
-    status = _status_base(cfg.paths["reports"])
+    status = _status_base(cfg.paths["reports"], cfg.ano)
     if status["status"] != "liberado":
         ctx.pendencias.append(f"Base {status['status']}: quadros marcados como PRELIMINARES.")
 
@@ -69,6 +73,7 @@ def quadro_resumo(cfg: Config, ctx: RunContext) -> Path:
             saida / "top_contrib_positivas.csv"
         )
     meta = {
+        "ano": cfg.ano,
         "run_id": ctx.run_id,
         "commit": ctx.commit,
         "status_base": status,

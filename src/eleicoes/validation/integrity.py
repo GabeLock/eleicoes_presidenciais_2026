@@ -42,17 +42,31 @@ def nao_negativos(con: duckdb.DuckDBPyConnection, tabela: str, colunas: list[str
     return Checagem(f"nao_negativos:{tabela}", n == 0, True, f"{n} linhas com contagem negativa")
 
 
+NAO_INSTALADA = ("N", "NÃO", "NAO")  # leiame diz S/N; dados 2026 trazem "Sim"/"Não"
+
+
 def identidade_aptos(con: duckdb.DuckDBPyConnection, tabela: str) -> Checagem:
-    n, dif = con.execute(
-        f"""SELECT count(*) FILTER (WHERE qt_aptos <> qt_comparecimento + qt_abstencoes),
-                   coalesce(sum(abs(qt_aptos - qt_comparecimento - qt_abstencoes)), 0)
+    """aptos = comparecimento + abstenção, só em seções instaladas (em seção não instalada o TSE
+    mantém os aptos e zera comparecimento e abstenção — universo diferente, não erro)."""
+    cols = {r[0] for r in con.execute(f"DESCRIBE {_q(tabela)}").fetchall()}
+    instalada = "TRUE"
+    if "st_secao_instalada" in cols:
+        lista = ", ".join(f"'{v}'" for v in NAO_INSTALADA)
+        instalada = f"coalesce(upper(st_secao_instalada), '') NOT IN ({lista})"
+    n, dif, nao_inst = con.execute(
+        f"""SELECT count(*) FILTER (WHERE {instalada}
+                                     AND qt_aptos <> qt_comparecimento + qt_abstencoes),
+                   coalesce(sum(abs(qt_aptos - qt_comparecimento - qt_abstencoes))
+                            FILTER (WHERE {instalada}), 0),
+                   count(*) FILTER (WHERE NOT ({instalada}))
             FROM {_q(tabela)}"""
     ).fetchone()
     return Checagem(
         f"aptos=comparecimento+abstencao:{tabela}",
         n == 0,
         False,
-        f"{n} unidades divergentes; |dif| total = {dif} (investigar universo/definição)",
+        f"{n} seções instaladas divergentes; |dif| total = {dif}; "
+        f"{nao_inst} seções não instaladas excluídas da identidade",
     )
 
 

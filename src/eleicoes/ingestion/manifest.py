@@ -36,6 +36,7 @@ class Manifesto:
     linhas: int | None = None
     status: str = "a_validar"  # disponivel | parcial | indisponivel | incompativel
     limitacoes: list[str] = field(default_factory=list)
+    ano: int | None = None
 
     def salvar(self, pasta: Path) -> Path:
         pasta.mkdir(parents=True, exist_ok=True)

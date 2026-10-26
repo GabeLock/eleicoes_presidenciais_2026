@@ -2,7 +2,8 @@
 config_version: "0.1.0"
 
 eleicao:
-  ano: 2026
+  ano: 2026                       # ano padrão; --year / YEAR= seleciona outro
+  anos_suportados: [2018, 2022, 2026]   # 2018/2022: expansão histórica (layout validado por manifesto)
   cargo_alvo: PRESIDENTE          # filtrado por DS_CARGO normalizado; código confirmado no dicionário (ver sources.yml)
   turnos: [1, 2]
   uf_exterior: ZZ                 # convenção do TSE para exterior; confirmar no leiame de 2026
@@ -19,7 +20,7 @@ paths:
   manifests: data/manifests       # versionado
   samples: data/samples           # versionado (pequeno)
   reports: reports
-  warehouse: data/warehouse.duckdb
+  warehouse: data/warehouse.duckdb   # vira data/warehouse_<ano>.duckdb
 
 download:
   timeout_s: 120

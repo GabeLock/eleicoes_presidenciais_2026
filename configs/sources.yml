@@ -6,15 +6,15 @@
 catalogo:
   api: https://dadosabertos.tse.jus.br/api/3/action/package_show
   datasets:
-    resultados: resultados-2026
-    eleitorado: eleitorado-2026
+    resultados: resultados-{ano}
+    eleitorado: eleitorado-{ano}
 
 recursos:
   votacao_secao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Votação por seção eleitoral. Arquivos por UF trazem só cargos estaduais;
       o arquivo "BR" (abrangência federal) traz Presidente para todas as UFs (leiame 2026).
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [BR, AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO]
     membro_csv_sufixo: BR
@@ -45,10 +45,10 @@ recursos:
       nulo: "96"
 
   detalhe_votacao_secao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Detalhe da apuração por seção eleitoral. ZIP único com CSVs _<UF> (cargos estaduais),
       _BR (abrangência federal = Presidente), _BRASIL e _ZZ (leiame 2026).
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_{ano}.zip
     particionado_por_uf: false
     membro_csv_sufixo: BR         # Presidente
     granularidade: eleição × turno × cargo × seção
@@ -80,25 +80,80 @@ recursos:
       st_secao_anulada: ST_SECAO_ANULADA
 
   detalhe_votacao_munzona:
-    conjunto: resultados-2026
-    descricao: Detalhe da apuração por município e zona (reconciliação intermediária)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2026.zip
+    conjunto: resultados
+    descricao: Detalhe da apuração por município e zona (reconciliação seção → zona)
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_{ano}.zip
     particionado_por_uf: false
-    granularidade: eleição × turno × cargo × município × zona
-    status_layout: a_confirmar
+    membro_csv_sufixo: BR
+    complementar: true            # falha/ausência não bloqueia o MVP; vira pendência
+    granularidade: eleição × turno × cargo × município × zona (× voto em trânsito)
+    status_layout: confirmado_2022  # cabeçalho real 2022; 2026 validado a cada coleta
+    colunas_obrigatorias:
+      ano: ANO_ELEICAO
+      turno: NR_TURNO
+      uf: SG_UF
+      cd_municipio_tse: CD_MUNICIPIO
+      nm_municipio: NM_MUNICIPIO
+      zona: NR_ZONA
+      cd_cargo: CD_CARGO
+      ds_cargo: DS_CARGO
+      qt_aptos: QT_APTOS
+      qt_comparecimento: QT_COMPARECIMENTO
+      qt_abstencoes: QT_ABSTENCOES
+      qt_votos_brancos: QT_VOTOS_BRANCOS
+      qt_votos_nulos: QT_VOTOS_NULOS
+      qt_votos_nominais_validos: QT_VOTOS_NOMINAIS_VALIDOS
+    colunas_opcionais:
+      dt_geracao: DT_GERACAO
+      hh_geracao: HH_GERACAO
+      st_voto_em_transito: ST_VOTO_EM_TRANSITO
+      qt_total_secoes: QT_TOTAL_SECOES
+      qt_secoes_nao_instaladas: QT_SECOES_NAO_INSTALADAS
+      qt_eleitores_secoes_nao_instaladas: QT_ELEITORES_SECOES_NAO_INSTALADAS
+      qt_total_votos_nulos: QT_TOTAL_VOTOS_NULOS
+      qt_votos_nulos_tecnicos: QT_VOTOS_NULOS_TECNICOS
+      qt_total_votos_anulados: QT_TOTAL_VOTOS_ANULADOS
+      qt_total_votos_anul_subjud: QT_TOTAL_VOTOS_ANUL_SUBJUD
+      qt_votos_anulados_apu_sep: QT_VOTOS_ANULADOS_APU_SEP
 
   votacao_candidato_munzona:
-    conjunto: resultados-2026
-    descricao: Votação nominal por município e zona (reconciliação intermediária)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip
+    conjunto: resultados
+    descricao: Votação nominal por município e zona — inclui situação jurídica da candidatura
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_{ano}.zip
     particionado_por_uf: false
-    granularidade: eleição × turno × cargo × município × zona × candidatura
-    status_layout: a_confirmar
+    membro_csv_sufixo: BR
+    complementar: true
+    granularidade: eleição × turno × cargo × município × zona × candidatura (× voto em trânsito)
+    status_layout: confirmado_2022
+    colunas_obrigatorias:
+      ano: ANO_ELEICAO
+      turno: NR_TURNO
+      uf: SG_UF
+      cd_municipio_tse: CD_MUNICIPIO
+      nm_municipio: NM_MUNICIPIO
+      zona: NR_ZONA
+      cd_cargo: CD_CARGO
+      ds_cargo: DS_CARGO
+      sq_candidato: SQ_CANDIDATO
+      nr_candidato: NR_CANDIDATO
+      nm_urna_candidato: NM_URNA_CANDIDATO
+      qt_votos_nominais: QT_VOTOS_NOMINAIS
+      qt_votos_nominais_validos: QT_VOTOS_NOMINAIS_VALIDOS
+    colunas_opcionais:
+      dt_geracao: DT_GERACAO
+      hh_geracao: HH_GERACAO
+      st_voto_em_transito: ST_VOTO_EM_TRANSITO
+      sg_partido: SG_PARTIDO
+      ds_situacao_candidatura: DS_SITUACAO_CANDIDATURA
+      ds_detalhe_situacao_cand: DS_DETALHE_SITUACAO_CAND
+      ds_situacao_julgamento: DS_SITUACAO_JULGAMENTO
+      nm_tipo_destinacao_votos: NM_TIPO_DESTINACAO_VOTOS
+      ds_sit_tot_turno: DS_SIT_TOT_TURNO
 
   perfil_eleitor_secao:
-    conjunto: eleitorado-2026
+    conjunto: eleitorado
     descricao: Perfil do eleitorado por seção eleitoral (cadastro; não descreve voto)
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitor_secao/perfil_eleitor_secao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitor_secao/perfil_eleitor_secao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO, ZZ]
     granularidade: fotografia cadastral × seção × combinação de categorias
@@ -106,17 +161,17 @@ recursos:
     fase: v2
 
   perfil_eleitorado:
-    conjunto: eleitorado-2026
+    conjunto: eleitorado
     descricao: Perfil do eleitorado (todas as UFs)
-    url: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitorado/perfil_eleitorado_2026.zip
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_eleitorado/perfil_eleitorado_{ano}.zip
     particionado_por_uf: false
     status_layout: a_confirmar
     fase: v2
 
   relatorio_totalizacao:
-    conjunto: resultados-2026
+    conjunto: resultados
     descricao: Relatório de Totalização (PDF) — referência para reconciliação manual
-    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_2026_{uf}.zip
+    url_modelo: https://cdn.tse.jus.br/estatistica/sead/odsele/relatorio_resultado_totalizacao/Relatorio_Resultado_Totalizacao_{ano}_{uf}.zip
     particionado_por_uf: true
     ufs_publicadas: [BR, MG, ZZ]
     formato: pdf

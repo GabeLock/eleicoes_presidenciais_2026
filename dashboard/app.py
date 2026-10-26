@@ -14,15 +14,22 @@ import streamlit as st
 from eleicoes.analytics.indicators import adicionar_indicadores
 from eleicoes.config import load_config
 
-cfg = load_config()
-GOLD = cfg.paths["gold"]
+st.set_page_config(page_title="Eleições presidenciais — 1º × 2º turno", layout="wide")
+cfg0 = load_config()
+with st.sidebar:
+    ano = st.selectbox("Eleição", sorted(cfg0.anos_suportados, reverse=True))
+cfg = cfg0.com_ano(ano)
+GOLD = cfg.dir_ano("gold")
 REPORTS = cfg.paths["reports"]
 COR_A, COR_B = "#1f6feb", "#d97706"  # cores fixas por finalista em todo o app
 
-st.set_page_config(page_title="Eleições 2026 — 1º × 2º turno", layout="wide")
-st.title("Eleição presidencial 2026 — comparação entre turnos")
+st.title(f"Eleição presidencial {ano} — comparação entre turnos")
 
-qualidade = sorted((REPORTS / "quality").glob("*.md"))
+qualidade = [
+    q
+    for q in sorted((REPORTS / "quality").glob("*.md"))
+    if f"Ano: **{ano}**" in q.read_text(encoding="utf-8")
+]
 status = "sem relatório de qualidade"
 if qualidade:
     status = "BLOQUEADA" if "BLOQUEADO" in qualidade[-1].read_text(encoding="utf-8") else "liberada"

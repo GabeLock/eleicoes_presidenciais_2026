@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from typing import Annotated
 
 import typer
@@ -14,9 +15,10 @@ from rich.table import Table
 from eleicoes.config import UFS_BRASIL, load_config
 from eleicoes.runlog import RunContext
 
-app = typer.Typer(add_completion=False, help="Pipeline TSE — Presidência 2026, 1º × 2º turno.")
+app = typer.Typer(add_completion=False, help="Pipeline TSE — Presidência, 1º × 2º turno.")
 console = Console()
-ANOS_SUPORTADOS = {2026}
+SEM_MUDANCA = 10  # código de saída de `verificar` quando nada mudou
+Ano = Annotated[int, typer.Option("--year", help="Ano da eleição (ver configs/project.yml)")]
 
 
 def _setup_logging(verbose: bool) -> None:
@@ -27,11 +29,11 @@ def _setup_logging(verbose: bool) -> None:
     )
 
 
-def _checar_ano(ano: int) -> None:
-    if ano not in ANOS_SUPORTADOS:
-        raise typer.BadParameter(
-            f"Ano {ano} ainda não implementado (2018/2022 entram na expansão histórica)."
-        )
+def _cfg(ano: int):
+    try:
+        return load_config().com_ano(ano)
+    except ValueError as exc:
+        raise typer.BadParameter(str(exc)) from exc
 
 
 def _ufs(uf: str) -> list[str] | None:
@@ -51,11 +53,11 @@ def main(verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False) -> N
 
 
 @app.command()
-def inventory() -> None:
+def inventory(year: Ano = 2026) -> None:
     """Consulta o catálogo CKAN do TSE e faz HEAD em cada arquivo."""
     from eleicoes.discovery import inventory as inv_mod
 
-    cfg = load_config()
+    cfg = _cfg(year)
     with RunContext("inventory", cfg) as ctx:
         inv = inv_mod.montar_inventario(cfg)
         destino = inv_mod.salvar(inv, cfg.paths["reports"] / "inventory" / f"{ctx.run_id}.json")
@@ -83,21 +85,28 @@ def inventory() -> None:
 
 @app.command()
 def ingest(
-    year: Annotated[int, typer.Option("--year")] = 2026,
+    year: Ano = 2026,
     uf: Annotated[str, typer.Option("--uf", help="MG | MG,SP | ALL")] = "MG",
+    extras: Annotated[
+        bool, typer.Option(help="Perfila também os arquivos por município/zona")
+    ] = True,
 ) -> None:
     """Baixa, valida e extrai os recursos do MVP para o escopo informado."""
     from eleicoes import pipeline
 
-    _checar_ano(year)
-    cfg = load_config()
+    cfg = _cfg(year)
     _ufs(uf)  # valida o parâmetro; o recorte por UF é aplicado na Silver (make transform)
     with RunContext("ingest", cfg, {"year": year, "uf": uf}) as ctx:
         pasta = pipeline.pasta_manifestos(cfg, ctx.run_id)
-        # votos por seção: arquivo por UF no piloto; arquivo 'BR' (Presidente) no nacional
         # Presidente: arquivo de abrangência federal ("BR"); o recorte por UF é feito na Silver
         arq = cfg.recurso("votacao_secao").get("arquivo_presidente", "BR")
         alvos = [("votacao_secao", arq, None), ("detalhe_votacao_secao", None, None)]
+        if extras:
+            alvos += [
+                (nome, None, None)
+                for nome, rec in cfg.sources["recursos"].items()
+                if rec.get("complementar") or rec.get("somente_perfil")
+            ]
         for recurso, u, escopo_uf in alvos:
             m = pipeline.ingerir(cfg, ctx, recurso, u, escopo_uf=escopo_uf)
             m.salvar(pasta)
@@ -108,18 +117,29 @@ def ingest(
                 f"{recurso} {u or escopo_uf or ''}: {m.status} · turnos {m.turnos_presentes} · "
                 f"linhas {m.linhas}"
             )
-            if m.status != "disponivel":
+            if m.status not in ("disponivel", "perfilado"):
                 ctx.pendencias.extend(m.limitacoes or [f"{m.recurso}: {m.status}"])
 
 
 @app.command()
-def validate() -> None:
-    """Mostra o status dos manifestos mais recentes e bloqueia se houver incompatibilidade."""
+def validate(year: Ano = 2026) -> None:
+    """Mostra o status dos manifestos do ano e bloqueia se o mais recente de cada recurso for
+    incompatível ou indisponível."""
     from eleicoes.ingestion.manifest import carregar_manifestos
 
-    cfg = load_config()
+    cfg = _cfg(year)
     with RunContext("validate", cfg) as ctx:
-        ms = carregar_manifestos(cfg.paths["manifests"])
+        todos = [
+            m
+            for m in carregar_manifestos(cfg.paths["manifests"])
+            if int(m.get("ano") or 2026) == year
+        ]
+        recentes: dict[tuple, dict] = {}
+        for m in todos:
+            k = (m["recurso"], m["uf"])
+            if k not in recentes or m["coletado_em"] > recentes[k]["coletado_em"]:
+                recentes[k] = m
+        ms = sorted(recentes.values(), key=lambda m: m["recurso"])
         if not ms:
             ctx.pendencias.append("Nenhum manifesto encontrado; rode `make ingest`.")
         t = Table("run", "recurso", "uf", "status", "turnos", "colunas ausentes")
@@ -141,12 +161,13 @@ def validate() -> None:
 
 @app.command()
 def transform(
+    year: Ano = 2026,
     uf: Annotated[str, typer.Option("--uf", help="MG (piloto) | ALL (nacional)")] = "MG",
 ) -> None:
     """Monta Silver e Gold e grava o relatório de qualidade."""
     from eleicoes import pipeline
 
-    cfg = load_config()
+    cfg = _cfg(year)
     escopo = _ufs(uf)
     uf_votos = cfg.recurso("votacao_secao").get("arquivo_presidente", "BR")
     with RunContext("transform", cfg, {"uf": uf}) as ctx:
@@ -156,14 +177,41 @@ def transform(
 
 
 @app.command()
-def analyze() -> None:
-    """Gera os quadros descritivos a partir das tabelas Gold (somente se a base não estiver bloqueada)."""
+def analyze(year: Ano = 2026) -> None:
+    """Gera os quadros descritivos a partir das tabelas Gold (marcados se a base estiver bloqueada)."""
     from eleicoes.analytics import report
 
-    cfg = load_config()
+    cfg = _cfg(year)
     with RunContext("analyze", cfg) as ctx:
         saida = report.quadro_resumo(cfg, ctx)
         console.print(f"Quadros em {saida}")
+
+
+@app.command()
+def verificar(year: Ano = 2026) -> None:
+    """HEAD nos arquivos do MVP; sai com 0 se algo mudou e 10 se nada mudou.
+
+    Escreve `mudou=true|false` em $GITHUB_OUTPUT quando rodando no Actions.
+    """
+    from eleicoes.discovery import verificar as ver
+
+    cfg = _cfg(year)
+    with RunContext("verificar", cfg) as ctx:
+        estado = cfg.paths["reports"] / "verificacao" / f"estado_{year}.json"
+        res = ver.verificar(cfg, estado)
+        destino = cfg.paths["reports"] / "verificacao" / f"{ctx.run_id}.json"
+        destino.write_text(json.dumps(res, ensure_ascii=False, indent=2), encoding="utf-8")
+        for i in res["itens"]:
+            console.print(
+                f"{i['recurso']}: {'MUDOU' if i['mudou'] else 'sem mudança'} · "
+                f"{i['atual'].get('last_modified_http')} · {i['atual'].get('bytes')} bytes"
+            )
+    saida = os.environ.get("GITHUB_OUTPUT")
+    if saida:
+        with open(saida, "a", encoding="utf-8") as f:
+            f.write(f"mudou={'true' if res['mudou'] else 'false'}\n")
+    if not res["mudou"]:
+        raise typer.Exit(code=SEM_MUDANCA)
 
 
 if __name__ == "__main__":

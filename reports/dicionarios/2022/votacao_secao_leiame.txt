@@ -1,0 +1,175 @@
+Página 1 
+ 
+ 
+LEIAME 
+ 
+Este arquivo cont ém o leiaute das tabelas existentes no reposit ório de dados eleitorais. Antes de 
+trabalhar os dados é importante ler as seguintes considerações: 
+ 
+- A codificação de caracteres dos arquivos é "Latin 1"; 
+- Os campos estão entre aspas e separados por ponto e vírgula, inclusive os campos numéricos; 
+- Campos preenchidos com #NULO significam que a informa ção está em branco no banco de dados. 
+O correspondente para #NULO nos campos numéricos é -1; 
+- Campos preenchidos com #NE significam que naquele ano a informa ção n ão era registrada em 
+banco de dados pelos sistemas eleitorais. O correspondente para #NE nos campos numéricos é -3; 
+- O campo UF, além das unidades da federação, pode conter alguma das seguintes situações: 
+    o BR: quando se tratar de informação a nível nacional; 
+    o VT: quando se tratar de voto em trânsito; 
+    o ZZ: quando se tratar de Exterior. 
+- Os arquivos estão em constante processo de atualização e aperfeiçoamento. Alguns arquivos podem 
+estar em branco ou com mensagem de erro devido a indisponibilidade tempor ária na base de algum 
+estado ou à inexistência daquele arquivo para a época pretendida. 
+ 
+Agradecemos to das as cr íticas e sugest ões recebidas de pesquisadores e usu ários que est ão 
+colaborando para a melhoria na qualidade da presta ção das informa ções. Em especial à Associação 
+Brasileira de Ciência Política (ABCP)que, por meio de acordo de cooperação técnica firmado com o 
+TSE, est á auxiliando na verifica ção dos arquivos gerados e informando o TSE quanto às 
+necessidades de dados dos pesquisadores. 
+ 
+Qualquer sugestão ou dúvida deve ser encaminhada ao e-mail estatistica@tse.jus.br. 
+  
+
+Página 2 
+I VOTACAO_SECAO 
+NOTAÇÃO: VOTACAO_SECAO_<ANO>_<SIGLA UF> 
+ 
+Variável Descrição 
+DT_GERACAO Data da extração dos dados para geração do arquivo. 
+HH_GERACAO Hora da extração dos dados para geração do arquivo 
+com base no horário de Brasília. 
+ANO_ELEICAO Ano de referência da eleição para geração do arquivo. 
+Observação: para eleições suplementares o ano de 
+referência da eleição é o da eleição ordinária 
+correspondente. Por exemplo: em 2016 houve 
+eleições ordinárias. Após a data desta eleição ordinária 
+e antes da próxima, houve eleições suplementares em 
+2017, 2018 e 2019. As informações destas eleições 
+suplementares estarão divulgadas no arquivo gerado 
+para as Eleições 2016. 
+CD_TIPO_ELEICAO Código do tipo de eleição. Pode assumir os valores: 1 - 
+Eleição Suplementar, 2 - Eleição Ordinária e 3 - 
+Consulta Popular. 
+NM_TIPO_ELEICAO Nome do tipo de eleição. Observação: as eleições 
+ordinárias são previstas em Lei, possuem data certa 
+para serem realizadas, ocorrem em anos pares e 
+possuem a periodicidade de 04 em 04 anos. Nas 
+eleições gerais ordinárias são eleitos os cargos de 
+Presidente, Governador, Deputado (Federal e 
+Estadual) e Senador. Nas eleições ordinárias 
+municipais são eleitos os cargos de Prefeito e 
+Vereador. 
+As eleições suplementares são aquelas que não têm 
+periodicidade pré-determinada ou definida e ocorrem 
+quando, eventualmente, se fizerem necessárias. 
+As consultas populares ocorrem sempre que a 
+população é convocada a opinar diretamente sobre um 
+assunto específico e importante. Ela pode ser 
+realizada de duas formas:  plebiscito (quando o 
+Página 3 
+cidadão opina previamente sobre a possível criação de 
+uma lei) e referendo (quando uma lei aprovada por 
+um órgão legislativo é submetida à aceitação ou não 
+das eleitoras e dos eleitores). 
+NR_TURNO Número do turno da eleição. Observação: no Brasil, as 
+eleições realizam-se por meio de dois sistemas: o 
+sistema majoritário (aplicado aos cargos de 
+Presidente, Vice-Presidente, Governador, Vice-
+Governador, Prefeito, Vice-Prefeito e Senador) e o 
+sistema proporcional (aplicado aos cargos de 
+Deputado Federal, Deputado Estadual, Deputado 
+Distrital e Vereador). O sistema majoritário consiste 
+em declarar eleita a candidata ou o candidato que 
+tenha recebido a maioria dos votos a concorrentes 
+(votos válidos, votos anulados e votos anulados sub 
+judice). Caso a candidata ou o candidato ao cargo 
+indicado no sistema majoritário, com exceção do cargo 
+de Senador, não alcance maioria absoluta destes 
+votos a concorrentes no primeiro turno (mínimo de 
+50% + 1), haverá segundo turno em que concorrerão 
+apenas os dois candidatos mais votados. O segundo 
+turno das eleições no Brasil ocorre para os cargos de 
+Presidente, Vice-Presidente da República, Governador 
+e Vice-Governador dos Estados e do Distrito Federal e 
+para Prefeito e Vice-Prefeito de Municípios com mais 
+de 200 mil eleitores. Nos municípios cujo eleitorado é 
+igual ou menor que 200 mil e para o cargo de Senador 
+elege-se a candidata ou o candidato que tenha 
+alcançado a maioria simples dos votos. 
+CD_ELEICAO Código único da eleição no âmbito da Justiça Eleitoral. 
+Observação: este código é único por eleição e por 
+turno, ou seja, cada turno possui seu código de 
+eleição. 
+DS_ELEICAO Descrição da eleição. 
+DT_ELEICAO Data em que ocorreu a eleição. 
+Página 4 
+TP_ABRANGENCIA Abrangência da eleição. Pode assumir os valores: 
+Municipal, Estadual e Federal. Observação: A 
+abrangência territorial da eleição está diretamente 
+relacionada aos cargos eletivos e suas circunscrições 
+eleitorais. As eleições realizadas na circunscrição 
+Municipal são as eleições para os cargos de Prefeito, 
+Vice-Prefeito e Vereador; as realizadas na 
+circunscrição Estadual são para os cargos de 
+Governador, Vice-Governador, Senador, Deputado 
+Estadual, Deputado Federal e Deputado Distrital e; as 
+realizadas na circunscrição Federal são para os cargos 
+de Presidente e Vice-Presidente da República. 
+SG_UF Sigla da Unidade da Federação em que ocorreu a 
+eleição  
+SG_UE Sigla da Unidade Eleitoral em que a candidata ou o 
+candidato concorre na eleição. A Unidade Eleitoral 
+representa a Unidade da Federação ou o Município em 
+que a candidata ou o candidato concorre na eleição e 
+é relacionada à abrangência territorial desta 
+candidatura. Em caso de abrangência Federal (cargo 
+de Presidente e Vice-Presidente) a sigla é BR. Em 
+caso de abrangência Estadual (cargos de 
+Governador, Vice-Governador, Senador, Deputado 
+Federal, Deputado Estadual e Deputado Distrital) a 
+sigla é a UF da candidatura. Em caso de abrangência 
+Municipal (cargos de Prefeito, Vice-Prefeito e 
+Vereador) é o código TSE de identificação do 
+município da candidatura. 
+NM_UE Nome de Unidade Eleitoral da candidata ou candidato 
+(em caso de eleição majoritária é o nome da UF que 
+o candidato concorre e em caso de eleição municipal é 
+o nome do município). 
+CD_MUNICIPIO Código TSE do município onde ocorreu a eleição  
+NM_MUNICIPIO Nome do município onde ocorreu a eleição  
+NR_ZONA Número da zona onde ocorreu a eleição. 
+Página 5 
+NR_SECAO Número da seção em que ocorreu a eleição. 
+CD_CARGO Código do cargo da candidata ou candidato. 
+DS_CARGO Descrição do cargo da candidata ou candidato. 
+NR_VOTAVEL Número do votável. Pode assumir os valores: 
+- número da candidata ou candidato, quando voto 
+nominal; 
+- número do partido, quando voto em legenda; 
+- número 95, quando voto em branco; 
+- número 96, quando voto nulo; 
+- número 97, quando voto anulado e apurado em 
+separado. 
+NM_VOTAVEL Nome do votável. Pode assumir os valores: 
+- nome do candidato, quando voto nominal ou voto 
+anulado; 
+- nome do partido, quando voto em legenda; 
+- "Voto em branco", quando voto em branco; 
+- "Voto nulo", quando voto nulo;  
+- "Voto anulado e apurado em separado", quando voto 
+anulado e apurado em separado. 
+QT_VOTOS Quantidade de votos recebidos pelo votável naquele 
+município, zona e seção. 
+NR_LOCAL_VOTACAO Número do local de votação da eleitora ou eleitor. 
+SQ_CANDIDATO Número sequencial da candidata ou candidato, gerado 
+internamente pelos sistemas eleitorais para cada 
+eleição.  
+Observações:  
+1) Este sequencial pode ser utilizado como chave 
+para o cruzamento de dados.  
+2) Não é o número de campanha da candidata ou 
+candidato. 
+NM_LOCAL_VOTACAO Nome do local de votação da eleitora ou eleitor. 
+DS_LOCAL_VOTACAO_ENDERECO Descrição do endereço do local de votação da eleitora 
+ou eleitor. 
+ 
+ 

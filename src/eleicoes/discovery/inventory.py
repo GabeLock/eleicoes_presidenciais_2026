@@ -36,7 +36,8 @@ def montar_inventario(cfg: Config) -> dict[str, Any]:
     api = cfg.sources["catalogo"]["api"]
     itens = []
     with httpx.Client(timeout=60, follow_redirects=True) as cli:
-        for apelido, conjunto in cfg.sources["catalogo"]["datasets"].items():
+        for apelido in cfg.sources["catalogo"]["datasets"]:
+            conjunto = cfg.conjunto(apelido)
             for r in descobrir(api, conjunto, permitidos):
                 item = r.como_dict() | {"apelido_conjunto": apelido, "consultado_em": utc_now()}
                 item |= head(r.url, cli)
@@ -44,9 +45,11 @@ def montar_inventario(cfg: Config) -> dict[str, Any]:
     urls_config = set()
     for rec in cfg.sources["recursos"].values():
         if rec.get("particionado_por_uf"):
-            urls_config |= {rec["url_modelo"].format(uf=u) for u in rec.get("ufs_publicadas", [])}
+            urls_config |= {
+                rec["url_modelo"].format(uf=u, ano=cfg.ano) for u in rec.get("ufs_publicadas", [])
+            }
         else:
-            urls_config.add(rec["url"])
+            urls_config.add(rec["url"].format(ano=cfg.ano))
     urls_catalogo = {i["url"] for i in itens}
     return {
         "gerado_em": utc_now(),

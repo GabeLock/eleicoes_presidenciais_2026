@@ -1,0 +1,293 @@
+{
+  "run_id": "20261026T122644Z-8ae167",
+  "recurso": "votacao_candidato_munzona",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "resultados-2022",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2022.zip",
+  "sha256": "56265a50afc3765efeabc3d88b1e8ef35796ac38572fb1344496f3d3c8543369",
+  "bytes": 642592078,
+  "coletado_em": "2026-10-26T12:27:28+00:00",
+  "last_modified_http": "Sat, 24 Oct 2026 07:24:58 GMT",
+  "etag": "\"264d2d4e-65e90fe80037a\"",
+  "membros_zip": [
+    {
+      "nome": "votacao_candidato_munzona_2022_DF.csv",
+      "bytes_compactado": 351590,
+      "bytes_descompactado": 6965770,
+      "crc": 2892358093
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_CE.csv",
+      "bytes_compactado": 4404573,
+      "bytes_descompactado": 81059463,
+      "crc": 591923038
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_AM.csv",
+      "bytes_compactado": 961584,
+      "bytes_descompactado": 19531855,
+      "crc": 2576135143
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_AP.csv",
+      "bytes_compactado": 166983,
+      "bytes_descompactado": 3707097,
+      "crc": 1351803713
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_BA.csv",
+      "bytes_compactado": 20522138,
+      "bytes_descompactado": 310544699,
+      "crc": 2988927732
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_AC.csv",
+      "bytes_compactado": 206808,
+      "bytes_descompactado": 4963464,
+      "crc": 4104799430
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_AL.csv",
+      "bytes_compactado": 969222,
+      "bytes_descompactado": 20155726,
+      "crc": 2088292415
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_GO.csv",
+      "bytes_compactado": 7456933,
+      "bytes_descompactado": 128456941,
+      "crc": 2612187668
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_ES.csv",
+      "bytes_compactado": 1362729,
+      "bytes_descompactado": 27843196,
+      "crc": 2974509107
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_MA.csv",
+      "bytes_compactado": 4841210,
+      "bytes_descompactado": 88081235,
+      "crc": 4294104842
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_MG.csv",
+      "bytes_compactado": 73580171,
+      "bytes_descompactado": 996391532,
+      "crc": 1709110415
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_MS.csv",
+      "bytes_compactado": 1032999,
+      "bytes_descompactado": 22115170,
+      "crc": 572310461
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_MT.csv",
+      "bytes_compactado": 1374167,
+      "bytes_descompactado": 29366914,
+      "crc": 1296218342
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_PA.csv",
+      "bytes_compactado": 3642945,
+      "bytes_descompactado": 66099063,
+      "crc": 2331408533
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_BR.csv",
+      "bytes_compactado": 2044812,
+      "bytes_descompactado": 38081808,
+      "crc": 912939279
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_BRASIL.csv",
+      "bytes_compactado": 351170182,
+      "bytes_descompactado": 4298078527,
+      "crc": 2796027678
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_PB.csv",
+      "bytes_compactado": 3532778,
+      "bytes_descompactado": 66601016,
+      "crc": 651638755
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_PE.csv",
+      "bytes_compactado": 5416284,
+      "bytes_descompactado": 94807078,
+      "crc": 1595284825
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_PI.csv",
+      "bytes_compactado": 1871909,
+      "bytes_descompactado": 39121981,
+      "crc": 1982854944
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_PR.csv",
+      "bytes_compactado": 17472642,
+      "bytes_descompactado": 282343297,
+      "crc": 1563713658
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_RJ.csv",
+      "bytes_compactado": 14008729,
+      "bytes_descompactado": 220342184,
+      "crc": 2706401030
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_RN.csv",
+      "bytes_compactado": 1959718,
+      "bytes_descompactado": 40287975,
+      "crc": 1250811776
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_RR.csv",
+      "bytes_compactado": 179340,
+      "bytes_descompactado": 3925920,
+      "crc": 3521018199
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_RO.csv",
+      "bytes_compactado": 663087,
+      "bytes_descompactado": 14173500,
+      "crc": 598521704
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_RS.csv",
+      "bytes_compactado": 20262938,
+      "bytes_descompactado": 320245507,
+      "crc": 4242630547
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_SC.csv",
+      "bytes_compactado": 7362016,
+      "bytes_descompactado": 128977617,
+      "crc": 3818767718
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_SE.csv",
+      "bytes_compactado": 760208,
+      "bytes_descompactado": 16672258,
+      "crc": 3776719640
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_SP.csv",
+      "bytes_compactado": 93614264,
+      "bytes_descompactado": 1198675687,
+      "crc": 456153369
+    },
+    {
+      "nome": "votacao_candidato_munzona_2022_TO.csv",
+      "bytes_compactado": 1282870,
+      "bytes_descompactado": 28564712,
+      "crc": 696040400
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 111733,
+      "bytes_descompactado": 125558,
+      "crc": 805655249
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2022/votacao_candidato_munzona_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "CD_CARGO",
+      "DS_CARGO",
+      "SQ_CANDIDATO",
+      "NR_CANDIDATO",
+      "NM_CANDIDATO",
+      "NM_URNA_CANDIDATO",
+      "NM_SOCIAL_CANDIDATO",
+      "CD_SITUACAO_CANDIDATURA",
+      "DS_SITUACAO_CANDIDATURA",
+      "CD_DETALHE_SITUACAO_CAND",
+      "DS_DETALHE_SITUACAO_CAND",
+      "CD_SITUACAO_JULGAMENTO",
+      "DS_SITUACAO_JULGAMENTO",
+      "CD_SITUACAO_CASSACAO",
+      "DS_SITUACAO_CASSACAO",
+      "CD_SITUACAO_DCONST_DIPLOMA",
+      "DS_SITUACAO_DCONST_DIPLOMA",
+      "TP_AGREMIACAO",
+      "NR_PARTIDO",
+      "SG_PARTIDO",
+      "NM_PARTIDO",
+      "NR_FEDERACAO",
+      "NM_FEDERACAO",
+      "SG_FEDERACAO",
+      "DS_COMPOSICAO_FEDERACAO",
+      "SQ_COLIGACAO",
+      "NM_COLIGACAO",
+      "DS_COMPOSICAO_COLIGACAO",
+      "ST_VOTO_EM_TRANSITO",
+      "QT_VOTOS_NOMINAIS",
+      "NM_TIPO_DESTINACAO_VOTOS",
+      "QT_VOTOS_NOMINAIS_VALIDOS",
+      "CD_SIT_TOT_TURNO",
+      "DS_SIT_TOT_TURNO"
+    ],
+    "linhas_amostra": 587,
+    "sentinelas_amostra": {
+      "#NULO": 2348,
+      "-1": 587,
+      "-3": 1761
+    },
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "1",
+        "Presidente",
+        "1",
+        69113
+      ],
+      [
+        "1",
+        "Presidente",
+        "2",
+        12566
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/56265a50afc3/votacao_candidato_munzona_2022_BR.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "24/10/2026 03:16:41"
+  ],
+  "turnos_presentes": [
+    "1",
+    "2"
+  ],
+  "linhas": 81679,
+  "status": "disponivel",
+  "limitacoes": [],
+  "ano": 2022
+}
