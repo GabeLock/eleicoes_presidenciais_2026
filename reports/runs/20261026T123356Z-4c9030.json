@@ -1,0 +1,49 @@
+{
+  "comando": "transform",
+  "parametros": {
+    "uf": "ALL"
+  },
+  "run_id": "20261026T123356Z-4c9030",
+  "commit": "73108bfadbaa99fd766bf7528ce31b69cf7aadd2",
+  "inicio": "2026-10-26T12:33:56+00:00",
+  "fim": "2026-10-26T12:34:06+00:00",
+  "duracao_s": 10.728,
+  "status": "bloqueado",
+  "volumes": {},
+  "insumos": [
+    {
+      "recurso": "votacao_secao",
+      "uf": "BR",
+      "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_BR.zip",
+      "sha256": "2d42006d0f6c6e00bad83f5c23cd3d78cd3e3182dbc1ad6718222b6b132c23e1",
+      "coletado_em": "2026-10-26T12:32:54+00:00",
+      "gerado_em_fonte": [
+        "06/10/2026 14:03:43"
+      ],
+      "turnos_presentes": [
+        "1"
+      ],
+      "status": "parcial"
+    },
+    {
+      "recurso": "detalhe_votacao_secao",
+      "uf": null,
+      "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2026.zip",
+      "sha256": "11a62c3a604e8b73fc328617b7688d2c635de1c76df02ba63b8f77879512f573",
+      "coletado_em": "2026-10-26T12:33:19+00:00",
+      "gerado_em_fonte": [
+        "05/10/2026 14:03:30"
+      ],
+      "turnos_presentes": [
+        "1"
+      ],
+      "status": "parcial"
+    }
+  ],
+  "pendencias": [
+    "votacao_secao: turnos ['1'] — conclusões bloqueadas",
+    "detalhe_votacao_secao: turnos ['1'] — conclusões bloqueadas"
+  ],
+  "config_version": "0.1.0",
+  "config_hash": "46e24db914a3da40"
+}
