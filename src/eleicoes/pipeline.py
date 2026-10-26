@@ -283,6 +283,21 @@ def transformar(
         ),
         ck.identidade_aptos(con, "silver_participacao_secao"),
     ]
+    if not checks[-1].ok:
+        diag = cfg.paths["reports"] / "quality" / f"{ctx.run_id}_diag"
+        diag.mkdir(parents=True, exist_ok=True)
+        cols_p = _colunas(con, "silver_participacao_secao")
+        extra = ", ".join(c for c in ("st_secao_instalada", "st_secao_anulada", "ds_origem_voto")
+                          if c in cols_p)  # fmt: skip
+        con.execute(
+            f"""COPY (SELECT turno, uf, cd_municipio_tse, nm_municipio, zona, secao, qt_aptos,
+                             qt_comparecimento, qt_abstencoes,
+                             qt_aptos - qt_comparecimento - qt_abstencoes AS diferenca
+                             {", " + extra if extra else ""}
+                      FROM silver_participacao_secao
+                      WHERE qt_aptos <> qt_comparecimento + qt_abstencoes ORDER BY ALL)
+                TO '{diag / "aptos_divergentes.csv"}' (HEADER)"""
+        )
     turnos = {r[0] for r in con.execute("SELECT DISTINCT turno FROM silver_votos_secao").fetchall()}
     faltam = set(cfg.project["eleicao"]["turnos"]) - turnos
     checks.append(
@@ -440,6 +455,28 @@ def complementares(
                      z AS (SELECT {k}, {sel_z} FROM silver_detalhe_munzona GROUP BY {k})
                 SELECT count(*), {cond} FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona)"""
         ).fetchone()
+        diag = cfg.paths["reports"] / "quality" / f"{ctx.run_id}_diag"
+        diag.mkdir(parents=True, exist_ok=True)
+        con.execute(
+            f"""COPY (
+                WITH s AS (SELECT {k}, {sel_s} FROM silver_participacao_secao GROUP BY {k}),
+                     z AS (SELECT {k}, {sel_z} FROM silver_detalhe_munzona GROUP BY {k}),
+                     j AS (SELECT turno, uf, cd_municipio_tse, zona,
+                                  s.qt_aptos AS aptos_secao, z.qt_aptos AS aptos_zona,
+                                  s.qt_votos_nominais AS nom_secao, z.qt_votos_nominais AS nom_zona
+                           FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona))
+                SELECT turno, uf,
+                       count(*) FILTER (WHERE aptos_zona IS NULL) AS zonas_so_secao,
+                       count(*) FILTER (WHERE aptos_secao IS NULL) AS zonas_so_zona,
+                       count(*) FILTER (WHERE aptos_secao <> aptos_zona) AS zonas_aptos_diferentes,
+                       count(*) FILTER (WHERE nom_secao <> nom_zona) AS zonas_nominais_diferentes,
+                       sum(aptos_secao) AS aptos_secao, sum(aptos_zona) AS aptos_zona,
+                       sum(nom_secao) AS nominais_secao, sum(nom_zona) AS nominais_zona,
+                       min(zona) FILTER (WHERE aptos_zona IS NULL) AS ex_zona_so_secao,
+                       min(zona) FILTER (WHERE aptos_secao IS NULL) AS ex_zona_so_zona
+                FROM j GROUP BY turno, uf ORDER BY turno, uf
+            ) TO '{diag / "secao_zona_por_uf.csv"}' (HEADER)"""
+        )
         for j, a in enumerate(medidas):
             n, dif = res[1 + 2 * j], res[2 + 2 * j]
             checks.append(
