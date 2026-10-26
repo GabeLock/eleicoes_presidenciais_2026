@@ -1,0 +1,10 @@
+{
+  "ano": 2026,
+  "run_id": "20261026T123845Z-46cd8e",
+  "commit": "dadbd1529bb5c22a4c2d01e368701993f54a67bc",
+  "status_base": {
+    "status": "bloqueado",
+    "relatorio": "20261026T123838Z-11583a.md"
+  },
+  "aviso": "Contagens observadas; decomposições são contábeis, não causais."
+}

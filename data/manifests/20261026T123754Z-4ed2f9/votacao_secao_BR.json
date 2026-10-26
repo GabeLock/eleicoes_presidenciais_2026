@@ -1,0 +1,94 @@
+{
+  "run_id": "20261026T123754Z-4ed2f9",
+  "recurso": "votacao_secao",
+  "uf": "BR",
+  "instituicao": "TSE",
+  "conjunto": "resultados-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_BR.zip",
+  "sha256": "2d42006d0f6c6e00bad83f5c23cd3d78cd3e3182dbc1ad6718222b6b132c23e1",
+  "bytes": 161616519,
+  "coletado_em": "2026-10-26T12:37:55+00:00",
+  "last_modified_http": "Tue, 06 Oct 2026 19:22:49 GMT",
+  "etag": "\"9a21287-65d30ec9f3a44\"",
+  "membros_zip": [
+    {
+      "nome": "votacao_secao_2026_BR.csv",
+      "bytes_compactado": 161435644,
+      "bytes_descompactado": 1052510851,
+      "crc": 3325118330
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 180631,
+      "bytes_descompactado": 192420,
+      "crc": 2105426969
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2026/votacao_secao_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "NR_SECAO",
+      "CD_CARGO",
+      "DS_CARGO",
+      "NR_VOTAVEL",
+      "NM_VOTAVEL",
+      "QT_VOTOS",
+      "NR_LOCAL_VOTACAO",
+      "SQ_CANDIDATO",
+      "NM_LOCAL_VOTACAO",
+      "DS_LOCAL_VOTACAO_ENDERECO"
+    ],
+    "linhas_amostra": 909,
+    "sentinelas_amostra": {
+      "-1": 134
+    },
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "1",
+        "Presidente",
+        "1",
+        3800511
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/2d42006d0f6c/votacao_secao_2026_BR.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "06/10/2026 14:03:43"
+  ],
+  "turnos_presentes": [
+    "1"
+  ],
+  "linhas": 3800511,
+  "status": "parcial",
+  "limitacoes": [
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ],
+  "ano": 2026
+}
