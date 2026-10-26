@@ -132,9 +132,12 @@ def ingerir(
     )
     extraido = cfg.paths["bronze"] / "_extraido" / res.sha256[:12]
     man.dicionarios = _extrair_dicionarios(res.caminho, nomes, extraido, cfg.paths["reports"])
-    csvs = _escolher_csvs(nomes, uf or escopo_uf)
-    if escopo_uf and not rec.get("particionado_por_uf"):
-        man.limitacoes.append(f"Extraídos apenas os CSVs do escopo {escopo_uf}: {csvs}")
+    sufixo = rec.get("membro_csv_sufixo")
+    csvs = _escolher_csvs(nomes, sufixo or uf or escopo_uf)
+    if sufixo and not any(c.upper().endswith(f"_{sufixo.upper()}.CSV") for c in csvs):
+        man.status = "incompativel"
+        man.limitacoes.append(f"Membro CSV com sufixo _{sufixo} não encontrado no ZIP")
+        return man
     if not csvs:
         man.status = "incompativel"
         man.limitacoes.append("Nenhum CSV encontrado no ZIP")
@@ -232,12 +235,6 @@ def transformar(
         sqls.append(q)
         con.execute(q)
     arquivos_p = mp["perfil_csv"]["arquivos_csv"]
-    if escopo_ufs and len(arquivos_p) > 1:  # arquivo nacional particionado em CSVs por UF
-        arquivos_p = [
-            c
-            for c in arquivos_p
-            if any(c.upper().endswith(f"_{u.upper()}.CSV") for u in escopo_ufs)
-        ]
     for i, csv in enumerate(arquivos_p):
         q = sv.sql_silver_participacao(
             REPO_ROOT / csv,
