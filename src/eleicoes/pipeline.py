@@ -46,8 +46,10 @@ def _escolher_csvs(membros: list[str], uf: str | None) -> list[str]:
 
 
 def _extrair_dicionarios(
-    zip_path: Path, membros: list[str], destino: Path, reports: Path
+    zip_path: Path, membros: list[str], destino: Path, reports: Path, prefixo: str
 ) -> list[str]:
+    """Extrai o leiame e grava o texto em reports/dicionarios/<prefixo>_<nome>.txt
+    (prefixo = <ano>/<recurso>, pois todo ZIP do TSE chama o arquivo de `leiame.pdf`)."""
     pdfs = [m for m in membros if m.lower().endswith((".pdf", ".txt")) and "leia" in m.lower()]
     if not pdfs:
         return []
@@ -59,7 +61,7 @@ def _extrair_dicionarios(
         for p in saida:
             if p.suffix.lower() == ".pdf":
                 txt = "\n".join(page.extract_text() or "" for page in PdfReader(p).pages)
-                alvo = reports / "dicionarios" / f"{p.stem}.txt"
+                alvo = reports / "dicionarios" / f"{prefixo}_{p.stem}.txt"
                 alvo.parent.mkdir(parents=True, exist_ok=True)
                 alvo.write_text(txt, encoding="utf-8")
                 textos.append(_rel(alvo))
@@ -132,7 +134,9 @@ def ingerir(
         ano=cfg.ano,
     )
     extraido = cfg.paths["bronze"] / "_extraido" / res.sha256[:12]
-    man.dicionarios = _extrair_dicionarios(res.caminho, nomes, extraido, cfg.paths["reports"])
+    man.dicionarios = _extrair_dicionarios(
+        res.caminho, nomes, extraido / "_dic", cfg.paths["reports"], f"{cfg.ano}/{recurso}"
+    )
     sufixo = rec.get("membro_csv_sufixo")
     csvs = _escolher_csvs(nomes, sufixo or uf or escopo_uf)
     if sufixo and not any(c.upper().endswith(f"_{sufixo.upper()}.CSV") for c in csvs):
@@ -322,6 +326,7 @@ def transformar(
         sv.exportar_parquet(con, t, cfg.dir_ano("silver") / f"{t}.parquet")
     for t in ("gold_votos_municipio", "gold_participacao_municipio"):
         sv.exportar_parquet(con, t, gold / f"{t}.parquet")
+    checks.extend(complementares(cfg, ctx, con, escopo_ufs))
 
     if not faltam:
         nac = pl.from_arrow(
@@ -371,6 +376,137 @@ def transformar(
             json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8"
         )
     con.close()
+    return checks
+
+
+COMPLEMENTARES = {
+    "detalhe_votacao_munzona": "silver_detalhe_munzona",
+    "votacao_candidato_munzona": "silver_candidato_munzona",
+}
+
+
+def _colunas(con: duckdb.DuckDBPyConnection, tabela: str) -> set[str]:
+    return {r[0] for r in con.execute(f"DESCRIBE {tabela}").fetchall()}
+
+
+def complementares(
+    cfg: Config, ctx: RunContext, con: duckdb.DuckDBPyConnection, escopo_ufs: list[str] | None
+) -> list[ck.Checagem]:
+    """Carrega os arquivos por município/zona e reconcilia com a camada por seção.
+
+    Recursos complementares nunca bloqueiam o MVP: ausência ou incompatibilidade vira pendência,
+    e as divergências são reportadas como checagens não críticas (universos podem diferir, p.ex.
+    eleitores de seções não instaladas e voto em trânsito).
+    """
+    cargo = cfg.project["eleicao"]["cargo_alvo"]
+    checks: list[ck.Checagem] = []
+    carregadas = set()
+    for recurso, tabela in COMPLEMENTARES.items():
+        m = ultimo_manifesto(cfg, recurso, None)
+        if m is None or m["status"] not in ("disponivel", "parcial"):
+            st = "sem manifesto" if m is None else m["status"]
+            ctx.pendencias.append(f"{recurso} (complementar): {st} — reconciliação por zona pulada")
+            continue
+        for i, csv in enumerate(m["perfil_csv"]["arquivos_csv"]):
+            q = sv.sql_silver_generico(
+                tabela, REPO_ROOT / csv, m["perfil_csv"], cfg.recurso(recurso), cargo, m["sha256"]
+            )
+            if i:
+                q = q.replace(f"CREATE OR REPLACE TABLE {tabela} AS", f"INSERT INTO {tabela}")
+            con.execute(q)
+        sv.filtrar_ufs(con, tabela, escopo_ufs)
+        sv.exportar_parquet(con, tabela, cfg.dir_ano("silver") / f"{tabela}.parquet")
+        carregadas.add(tabela)
+
+    if "silver_detalhe_munzona" in carregadas:
+        medidas = {
+            "qt_aptos": "qt_aptos",
+            "qt_comparecimento": "qt_comparecimento",
+            "qt_abstencoes": "qt_abstencoes",
+            "qt_votos_brancos": "qt_votos_brancos",
+            "qt_votos_nulos": "qt_votos_nulos",
+            "qt_votos_nominais": "qt_votos_nominais_validos",
+        }
+        sel_s = ", ".join(f"sum({a}) AS {a}" for a in medidas)
+        sel_z = ", ".join(f"sum({b}) AS {a}" for a, b in medidas.items())
+        cond = ", ".join(
+            f"count(*) FILTER (WHERE s.{a} IS DISTINCT FROM z.{a}), "
+            f"coalesce(sum(abs(coalesce(s.{a},0) - coalesce(z.{a},0))), 0)"
+            for a in medidas
+        )
+        k = "turno, uf, cd_municipio_tse, zona"
+        res = con.execute(
+            f"""WITH s AS (SELECT {k}, {sel_s} FROM silver_participacao_secao GROUP BY {k}),
+                     z AS (SELECT {k}, {sel_z} FROM silver_detalhe_munzona GROUP BY {k})
+                SELECT count(*), {cond} FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona)"""
+        ).fetchone()
+        for j, a in enumerate(medidas):
+            n, dif = res[1 + 2 * j], res[2 + 2 * j]
+            checks.append(
+                ck.Checagem(
+                    f"secao→zona:{a}",
+                    n == 0,
+                    False,
+                    f"{n} de {res[0]} zona-turnos divergentes; |dif| total = {dif}",
+                )
+            )
+
+    if "silver_candidato_munzona" in carregadas:
+        n, tot, dif = con.execute(
+            """WITH s AS (SELECT turno, uf, cd_municipio_tse, zona, nr_votavel AS nr,
+                                 sum(qt_votos) v FROM silver_votos_secao
+                          WHERE tipo_votavel = 'candidato' GROUP BY ALL),
+                    z AS (SELECT turno, uf, cd_municipio_tse, zona, nr_candidato AS nr,
+                                 sum(qt_votos_nominais) v FROM silver_candidato_munzona GROUP BY ALL)
+               SELECT count(*) FILTER (WHERE s.v IS DISTINCT FROM z.v), count(*),
+                      coalesce(sum(abs(coalesce(s.v,0) - coalesce(z.v,0))), 0)
+               FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona, nr)"""
+        ).fetchone()
+        checks.append(
+            ck.Checagem(
+                "secao→zona:votos_por_candidato",
+                n == 0,
+                False,
+                f"{n} de {tot} zona-turno-candidatos divergentes; |dif| total = {dif}",
+            )
+        )
+        disp = _colunas(con, "silver_candidato_munzona")
+        attrs = [
+            c
+            for c in (
+                "nm_urna_candidato",
+                "sg_partido",
+                "ds_situacao_candidatura",
+                "ds_detalhe_situacao_cand",
+                "ds_situacao_julgamento",
+                "nm_tipo_destinacao_votos",
+                "ds_sit_tot_turno",
+            )
+            if c in disp
+        ]
+        sel = "".join(f", any_value({c}) AS {c}, count(DISTINCT {c}) AS n_{c}" for c in attrs)
+        con.execute(
+            f"""CREATE OR REPLACE TABLE gold_dim_candidatura AS
+                SELECT ano, turno, sq_candidato, nr_candidato{sel},
+                       sum(qt_votos_nominais)::BIGINT AS qt_votos_nominais,
+                       sum(qt_votos_nominais_validos)::BIGINT AS qt_votos_nominais_validos
+                FROM silver_candidato_munzona GROUP BY ano, turno, sq_candidato, nr_candidato"""
+        )
+        n_var = sum(
+            con.execute(f"SELECT count(*) FROM gold_dim_candidatura WHERE n_{c} > 1").fetchone()[0]
+            for c in attrs
+        )
+        checks.append(
+            ck.Checagem(
+                "dim_candidatura:atributos_unicos",
+                n_var == 0,
+                False,
+                f"{n_var} atributos com mais de um valor por candidatura-turno no recorte",
+            )
+        )
+        sv.exportar_parquet(
+            con, "gold_dim_candidatura", cfg.dir_ano("gold") / "gold_dim_candidatura.parquet"
+        )
     return checks
 
 

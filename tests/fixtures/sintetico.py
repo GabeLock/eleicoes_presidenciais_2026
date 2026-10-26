@@ -91,6 +91,58 @@ def linhas_governador() -> list[list[str]]:
              "N"]]  # fmt: skip
 
 
+CAB_MUNZONA = [
+    "DT_GERACAO", "HH_GERACAO", "ANO_ELEICAO", "NR_TURNO", "SG_UF", "CD_MUNICIPIO",
+    "NM_MUNICIPIO", "NR_ZONA", "CD_CARGO", "DS_CARGO", "QT_APTOS", "QT_COMPARECIMENTO",
+    "QT_ABSTENCOES", "ST_VOTO_EM_TRANSITO", "QT_VOTOS_NOMINAIS_VALIDOS", "QT_VOTOS_BRANCOS",
+    "QT_VOTOS_NULOS",
+]  # fmt: skip
+CAB_CAND_MUNZONA = [
+    "DT_GERACAO", "HH_GERACAO", "ANO_ELEICAO", "NR_TURNO", "SG_UF", "CD_MUNICIPIO",
+    "NM_MUNICIPIO", "NR_ZONA", "CD_CARGO", "DS_CARGO", "SQ_CANDIDATO", "NR_CANDIDATO",
+    "NM_URNA_CANDIDATO", "SG_PARTIDO", "DS_SITUACAO_CANDIDATURA", "NM_TIPO_DESTINACAO_VOTOS",
+    "DS_SIT_TOT_TURNO", "ST_VOTO_EM_TRANSITO", "QT_VOTOS_NOMINAIS", "QT_VOTOS_NOMINAIS_VALIDOS",
+]  # fmt: skip
+
+
+def _por_zona(turnos):
+    agg: dict = {}
+    for uf, mun, nome, zona, _secao, votos, aptos in SECOES:
+        for t in turnos:
+            k = (t, uf, mun, nome, zona)
+            a = agg.setdefault(k, {"aptos": 0, "votos": {}})
+            a["aptos"] += aptos
+            for nr, q in votos[t].items():
+                a["votos"][nr] = a["votos"].get(nr, 0) + q
+    return agg
+
+
+def linhas_munzona(turnos=(1, 2)) -> list[list[str]]:
+    out = []
+    for (t, uf, mun, nome, zona), a in _por_zona(turnos).items():
+        v = a["votos"]
+        br, nu = v.get("95", 0), v.get("96", 0)
+        nom = sum(q for k, q in v.items() if k not in ("95", "96"))
+        comp = nom + br + nu
+        out.append(["26/10/2026", "10:00:00", "2026", str(t), uf, mun, nome, zona, "1",
+                    "Presidente", str(a["aptos"]), str(comp), str(a["aptos"] - comp), "N",
+                    str(nom), str(br), str(nu)])  # fmt: skip
+    return out
+
+
+def linhas_cand_munzona(turnos=(1, 2)) -> list[list[str]]:
+    out = []
+    for (t, uf, mun, nome, zona), a in _por_zona(turnos).items():
+        for nr, q in a["votos"].items():
+            if nr in ("95", "96"):
+                continue
+            out.append(["26/10/2026", "10:00:00", "2026", str(t), uf, mun, nome, zona, "1",
+                        "Presidente", f"9{nr}", nr, NOMES[nr], "PF", "APTO", "Válido",
+                        "2º TURNO" if t == 1 and nr in ("11", "22") else "#NULO", "N", str(q),
+                        str(q)])  # fmt: skip
+    return out
+
+
 def escrever_zip(destino: Path, membros: dict[str, bytes]) -> Path:
     destino.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(destino, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -114,6 +166,18 @@ def zips_sinteticos(pasta: Path, turnos=(1, 2)) -> dict[str, Path]:
                 "detalhe_votacao_secao_2026_MG.csv": _csv(CAB_DETALHE, linhas_governador()),
                 "detalhe_votacao_secao_2026_BR.csv": _csv(CAB_DETALHE, linhas_detalhe(turnos)),
                 "detalhe_votacao_secao_2026_ZZ.csv": _csv(CAB_DETALHE, []),
+            },
+        ),
+        "detalhe_votacao_munzona_2026.zip": escrever_zip(
+            pasta / "detalhe_votacao_munzona_2026.zip",
+            {"detalhe_votacao_munzona_2026_BR.csv": _csv(CAB_MUNZONA, linhas_munzona(turnos))},
+        ),
+        "votacao_candidato_munzona_2026.zip": escrever_zip(
+            pasta / "votacao_candidato_munzona_2026.zip",
+            {
+                "votacao_candidato_munzona_2026_BR.csv": _csv(
+                    CAB_CAND_MUNZONA, linhas_cand_munzona(turnos)
+                )
             },
         ),
     }

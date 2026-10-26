@@ -58,6 +58,8 @@ def _ingest(cfg):
         mv.salvar(pasta)
         mp = pipeline.ingerir(cfg, ctx, "detalhe_votacao_secao", None)
         mp.salvar(pasta)
+        for extra in ("detalhe_votacao_munzona", "votacao_candidato_munzona"):
+            pipeline.ingerir(cfg, ctx, extra, None).salvar(pasta)
     return mv, mp
 
 
@@ -74,6 +76,10 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
         checks = pipeline.transformar(cfg, ctx, ["MG"], "BR")
     falhas = [c for c in checks if c.critica and not c.ok]
     assert not falhas, falhas
+    por_nome = {c.nome: c for c in checks}
+    zona = [c for n, c in por_nome.items() if n.startswith("secao→zona:")]
+    assert len(zona) == 7 and all(c.ok for c in zona), zona
+    assert por_nome["dim_candidatura:atributos_unicos"].ok
     gold = cfg.dir_ano("gold")
     part = pl.read_parquet(gold / "gold_participacao_municipio.parquet")
     assert part.height == 3 * 2
@@ -85,6 +91,8 @@ def test_piloto_sintetico_reconcilia_e_e_idempotente(ambiente):
     # governador filtrado
     votos = pl.read_parquet(gold / "gold_votos_municipio.parquet")
     assert set(votos["nr_votavel"]) == {"11", "22", "33", "95", "96"}
+    dim = pl.read_parquet(gold / "gold_dim_candidatura.parquet")
+    assert dim.filter(pl.col("turno") == 2).height == 2  # recorte MG: só finalistas
     # código de município preservado como texto
     assert votos["cd_municipio_tse"].dtype == pl.String
 

@@ -105,7 +105,7 @@ def ingest(
             alvos += [
                 (nome, None, None)
                 for nome, rec in cfg.sources["recursos"].items()
-                if rec.get("somente_perfil")
+                if rec.get("complementar") or rec.get("somente_perfil")
             ]
         for recurso, u, escopo_uf in alvos:
             m = pipeline.ingerir(cfg, ctx, recurso, u, escopo_uf=escopo_uf)

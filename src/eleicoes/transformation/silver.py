@@ -98,6 +98,24 @@ WHERE upper(trim({ds})) = {_lit(cargo)};
 """
 
 
+def sql_silver_generico(
+    tabela: str, csv: Path, perfil: dict, rec: dict, cargo: str, sha: str
+) -> str:
+    """Projeção tipada a partir do mapeamento: `qt_*` → BIGINT, ano/turno → INTEGER, resto texto."""
+    if not IDENT.match(tabela):
+        raise ValueError(f"Nome de tabela inválido: {tabela!r}")
+    mapa = {**rec["colunas_obrigatorias"], **rec.get("colunas_opcionais", {})}
+    contagens = [k for k in mapa if k.startswith("qt_")]
+    cols = _projecao(mapa, perfil["cabecalho"], contagens)
+    ds = _id(rec["colunas_obrigatorias"]["ds_cargo"])
+    return f"""
+CREATE OR REPLACE TABLE {tabela} AS
+SELECT {", ".join(cols)}, {_lit(sha)} AS fonte_sha256
+FROM {fonte_csv(csv, perfil)}
+WHERE upper(trim({ds})) = {_lit(cargo)};
+"""
+
+
 def filtrar_ufs(con: duckdb.DuckDBPyConnection, tabela: str, ufs: list[str] | None) -> int:
     if not ufs:
         return 0
