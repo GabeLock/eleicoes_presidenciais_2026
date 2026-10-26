@@ -1,0 +1,281 @@
+Página 1 
+ 
+ 
+ 
+ 
+ 
+LEIAME 
+ 
+Este arquivo contém o leiaute das tabelas existentes no repositório de dados eleitorais. Antes 
+de trabalhar os dados é importante ler as seguintes considerações: 
+ 
+- A codificação de caracteres dos arquivos é "Latin 1"; 
+- Os campos estão entre aspas e separados por ponto e vírgula, inclusive os campos 
+numéricos; 
+- Campos preenchidos com #NULO significam que a informação está em branco no banco de 
+dados. O correspondente para #NULO nos campos numéricos é -1; 
+- Campos preenchidos com #NE significam que naquele ano a informação não era registrada 
+em banco de dados pelos sistemas eleitorais. O correspondente para #NE nos campos 
+numéricos é -3; 
+- O campo UF, além das unidades da federação, pode conter alguma das seguintes 
+situações: 
+    o BR: quando se tratar de informação a nível nacional; 
+    o VT: quando se tratar de voto em trânsito; 
+    o ZZ: quando se tratar de Exterior. 
+- Os arquivos estão em constante processo de atualização e aperfeiçoamento. Alguns 
+arquivos podem estar em branco ou com mensagem de erro devido à indisponibilidade 
+temporária na base de algum estado ou à inexistência daquele arquivo para a época 
+pretendida. 
+ 
+Agradecemos todas as críticas e sugestões recebidas de pesquisadores e usuários que 
+estão colaborando para a melhoria na qualidade da prestação das informaçõ es. Em especial 
+à Associação Brasileira de Ciência Política (ABCP)que, por meio de acordo de cooperação 
+técnica firmado com o TSE, está auxiliando na verificação dos arquivos gerados e 
+informando o TSE quanto às necessidades de dados dos pesquisadores. 
+ 
+Qualquer sugestão ou dúvida deve ser encaminhada ao e-mail estatistica@tse.jus.br. 
+
+Página 2 
+ 
+RSLT_DETALHE_VOTACAO_MUNZONA 
+NOTAÇÃO: 
+DETALHE_VOTACAO_MUNZONA_<ANO>_<UF>  
+DETALHE_VOTACAO_MUNZONA_<ANO>_BR 
+DETALHE_VOTACAO_MUNZONA_<ANO>_BRASIL 
+ 
+Variável Descrição 
+DT_GERACAO Data da extração dos dados para geração do 
+arquivo. 
+HH_GERACAO Hora da extração dos dados para geração do 
+arquivo com base no horário de Brasília. 
+ANO_ELEICAO Ano de referência da eleição para geração do 
+arquivo. Observação: para eleições 
+suplementares, o ano de referência da eleição 
+é o ano da eleição ordinária correspondente. 
+Por exemplo: em 2016 houve eleições 
+ordinárias. Após a data desta eleição ordinária 
+e antes da próxima, houve eleições 
+suplementares em 2017, 2018 e 2019. As 
+informações destas eleições suplementares 
+estarão divulgadas no arquivo gerado para as 
+eleições 2016. 
+CD_TIPO_ELEICAO Código do tipo de eleição. Pode assumir os 
+valores: 
+. 1: Eleição Suplementar; 
+. 2: Eleição Ordinária; e 
+. 3: Consulta Popular. 
+NM_TIPO_ELEICAO Nome do tipo de eleição. Observação: as 
+eleições ordinárias são previstas em Lei, 
+possuem data certa para serem realizadas, 
+ocorrem em anos pares e possuem a 
+periodicidade de 04 em 04 anos. Nas eleições 
+gerais ordinárias sã o eleitos os cargos de 
+Presidente, Governador, Deputado (Federal e 
+Estadual) e Senador. Nas eleições ordinárias 
+municipais são eleitos os cargos de Prefeito e 
+Vereador. As eleições suplementares são 
+aquelas que não têm periodicidade pré -
+determinada ou definida e ocorrem quando, 
+eventualmente, se fizerem necessárias. As 
+consultas populares ocorrem sempre que a 
+população é convocada a opinar diretamente 
+sobre um assunto específico e importante. Ela 
+pode ser realizada de duas formas: plebiscito 
+(quando o cidadão opina previamente sobre a 
+possível criação de uma lei) e referendo 
+(quando uma lei aprovada por um órgão 
+Página 3 
+legislativo é submetida à aceitação ou não 
+das eleitoras e dos eleitores. 
+NR_TURNO Número do turno da eleição. Observação: no 
+Brasil, as eleições realizam -se por meio de 
+dois sistemas: o sistema majoritário (aplicado 
+aos cargos de Presidente, Vice -Presidente, 
+Governador, Vice-Governador, Prefeito, Vice -
+Prefeito e Senador) e o sistema proporcional 
+(aplicado aos cargos de Deputado Federal, 
+Deputado E stadual, Deputado Distrital e 
+Vereador). O sistema majoritário consiste em 
+declarar eleita a candidata ou o candidato que 
+tenha recebido a maioria dos votos a 
+concorrentes (votos válidos, votos anulados e 
+votos anulados sub judice). Caso a candidata 
+ou o candidato ao cargo indicado no sistema 
+majoritário, com exceção do cargo de 
+Senador, não alcance maioria absoluta destes 
+votos a concorrentes no primeiro turno 
+(mínimo de 50% + 1), haverá segundo turno 
+em que concorrerão apenas os  dois 
+candidatos mais votados. O segundo turno 
+das eleições no Brasil ocorre para os cargos 
+de Presidente, Vice -Presidente da República, 
+Governador e Vice-Governador dos Estados e 
+do Distrito Federal e para Prefeito e Vice -
+Prefeito de Municípios com mais de 200 mil 
+eleitores. Nos municípios cujo eleitorado é 
+igual ou menor que 200 mil e para o cargo de 
+Senador elege-se a candidata ou o candidato 
+que tenha alcançado a maioria simples dos 
+votos. 
+CD_ELEICAO Código único da eleição no âmbito da Justiça 
+Eleitoral. Observação: este código é único por 
+eleição e por turno, ou seja, cada turno possui 
+seu código de eleição. 
+DS_ELEICAO Descrição da eleição. 
+DT_ELEICAO Data da ocorrência da eleição. 
+TP_ABRANGENCIA Abrangência da eleição. Pode assumir os 
+valores: 
+. M: Municipal;  
+. E: Estadual; e 
+. F: Federal. 
+Observação: a abrangência territorial da 
+eleição está diretamente relacionada aos 
+cargos eletivos e suas circunscrições 
+eleitorais. As eleições realizadas na 
+circunscrição Municipal são as eleiçõ es para 
+os cargos de Prefeito, Vice -Prefeito e 
+Vereador; as realizadas na circunscrição 
+Estadual são para os cargos de Governador, 
+Página 4 
+Vice-Governador, Senador, Deputado 
+Estadual, Deputado Federal e Deputado 
+Distrital e; as realizadas na circunscrição 
+Federal são para os cargos de Presidente e 
+Vice-Presidente da República. 
+SG_UF Sigla da unidade da federação de ocorrência 
+da eleição. 
+SG_UE Sigla da unidade eleitoral na qual a candidata 
+ou candidato concorre na eleiçã o. A unidade 
+eleitoral representa a unidade da federação 
+ou o município em que a candidata ou o 
+candidato concorre na eleição e é relacionada 
+à abrangência territorial desta candidatura. 
+Em caso de abrangência federal (cargo de 
+Presidente e Vice -Presidente) a sigla é BR. 
+Em caso de abrangência estadual (cargos de 
+Governador, Vice -Governador, Senador, 
+Deputado Federal, Deputado Estadual e 
+Deputado Distrital) a sigla é a UF da 
+candidatura. Em caso de abrangê ncia 
+municipal (cargos de Prefeito, Vice -Prefeito e 
+Vereador) é o código TSE de identificação do 
+município da candidatura 
+NM_UE Nome da unidade eleitoral da candidata ou 
+candidato. Em caso de abrangência nacional, 
+é igual a "Brasil". Em caso de abrangência 
+estadual, é o nome da UF em que a candidata 
+ou candidato concorre. Em caso de 
+abrangência municipal é o nome do município 
+em que a candidata ou candidato concorre. 
+CD_MUNICIPIO Código TSE do município de ocorrência da 
+eleição. 
+NM_MUNICIPIO Nome do município de ocorrência da eleição. 
+NR_ZONA Número da zona eleitoral de ocorrência da 
+eleição. 
+CD_CARGO Código do cargo ao qual os votos foram 
+totalizados. 
+DS_CARGO Descrição do cargo ao qual os votos foram 
+totalizados. 
+QT_APTOS Quantidade de eleitoras e eleitores aptos a 
+votar. 
+QT_SECOES_PRINCIPAIS Quantidade de seções eleitorais principais. 
+QT_SECOES_AGREGADAS Quantidade de seções eleitorais que foram 
+agregadas para votação em uma mesma 
+urna. Agregar seções significa unir seçõ es 
+eleitorais em uma única mesa receptora de 
+votos com a finalidade de atender ao Código 
+Eleitoral que estabelece, como regra, o 
+mínimo de 50 eleitores em uma seção 
+eleitoral e também de otimizar a utilização de 
+Página 5 
+recursos relativos às urnas eletrônicas e a 
+mesários. 
+QT_SECOES_NAO_INSTALADAS Quantidade de eleitoras ou eleitores nas 
+seções eleitorais não instaladas. 
+QT_TOTAL_SECOES Quantidade total de seções eleitorais. É 
+somatório da quantidade de seçõ es eleitorais 
+principais somadas com com a quantidade de 
+seções eleitorais agregadas. 
+QT_COMPARECIMENTO Quantidade de eleitoras e eleitores que 
+compareceram às eleições. 
+QT_ELEITORES_SECOES_NAO_INSTALADAS Quantidade de eleitoras ou eleitores nas 
+seções eleitorais não instaladas. 
+QT_ABSTENCOES Quantidade de eleitoras e eleitores aptos que 
+não compareceram às eleições. 
+ST_VOTO_EM_TRANSITO Informa se o quantitativo de votos se refere a 
+voto em trânsito. Pode assumir os valores: 
+. S: Sim; e 
+. N: Não. 
+QT_VOTOS Quantidade de votos totalizados. 
+QT_VOTOS_CONCORRENTES Quantidade de votos nominais e em legenda 
+válidos, anulados sub judice e anulados 
+totalizados. 
+QT_TOTAL_VOTOS_VALIDOS Quantidade total de votos nominais e em 
+legenda válidos totalizados. 
+QT_VOTOS_NOMINAIS_VALIDOS Quantidade de votos nominais válidos 
+totalizados. 
+QT_TOTAL_VOTOS_LEG_VALIDOS Quantidade total de votos válidos em legenda 
+e convertidos em legenda totalizados. 
+QT_VOTOS_LEG_VALIDOS Quantidade de votos vá lidos em legenda 
+totalizados. 
+QT_VOTOS_NOM_CONVR_LEG_VALIDOS Quantidade de votos nominais válidos e 
+totalizados que, por decisão judicial, se 
+tornaram votos para a legenda ao qual 
+concorriam. 
+QT_TOTAL_VOTOS_ANULADOS Quantidade total de votos nominais e em 
+legenda anulados em razão da situação 
+jurídica totalizados. 
+QT_VOTOS_NOMINAIS_ANULADOS Quantidade de votos nominais totalizados 
+mas que tiveram a votação anulada em razão 
+da sua situação jurídica. 
+QT_VOTOS_LEGENDA_ANULADOS Quantidade de votos em legenda totalizados 
+mas que tiveram a votação anulada em razão 
+da sua situação jurídica. 
+QT_TOTAL_VOTOS_ANUL_SUBJUD Quantidade total de votos nominais e em 
+legenda anulados sub judice (indeferido com 
+recurso) totalizados. 
+QT_VOTOS_NOMINAIS_ANUL_SUBJUD Quantidade de votos nominais anulados em 
+razão da sua situação jurídica mas que há 
+recurso pendente no momento da totalização. 
+QT_VOTOS_LEGENDA_ANUL_SUBJUD Quantidade de votos em legenda anulados 
+Página 6 
+em razão da sua situação jurídica mas que há 
+recurso pendente no momento da totalização. 
+QT_VOTOS_BRANCOS Quantidade de votos brancos totalizados 
+referente ao cargo. 
+QT_TOTAL_VOTOS_NULOS Quantidade total de votos dados à candidata 
+ou candidato excluído do pleito (que não 
+consta na urna eletrônica) totalizados. É 
+também a quantidade total de votos dados à 
+candidatura ou partido inexistentes na 
+totalização, podendo representar a expressão 
+apolítica da eleitora ou eleitor. É também a 
+quantidade total de votos de urnas anuladas 
+(seção eleitoral onde ocorreu irregularidade, 
+por exemplo) totalizados. 
+QT_VOTOS_NULOS Quantidade de votos nulos totalizados. 
+QT_VOTOS_NULOS_TECNICOS Quantidade de votos nulos técnicos. Votos 
+nulos técnicos são votos dados à candidata, 
+ao candidato ou em legenda que estavam 
+inaptos no dia da eleição mas que constava 
+na urna por não ter sido possível, por motivo 
+técnico, removê -los. Esses candidatos e 
+legenda não deveriam ir para a urna porém, 
+não houve tempo hábil para retirá -los pois o 
+julgamento ocorreu apó s a carga dos dados 
+na urna. Esses candidatos não são 
+divulgados, nem mesmo com votação zerada. 
+QT_VOTOS_ANULADOS_APU_SEP Quantidade de votos anulados e apurados em 
+separado referente ao cargo. Esse 
+quantitativo reflete os votos oriundos de 
+alguma urna que está sub judice. Ainda não 
+são votos válidos e nem nulos até a decisão 
+do juiz eleitoral. 
+HH_ULTIMA_TOTALIZACAO Hora da última totalização. 
+DT_ULTIMA_TOTALIZACAO Data da última totalização. 
+ST_PENDENTE_TOT_FINAL Informa se o municí pio e zona possuem 
+alguma seção eleitoral com a totalização final 
+pendente. Pode assumir os valores: 
+. S: Sim; e 
+. N: Não. 
+ 

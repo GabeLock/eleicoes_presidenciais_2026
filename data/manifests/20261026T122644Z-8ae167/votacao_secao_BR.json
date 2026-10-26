@@ -1,0 +1,97 @@
+{
+  "run_id": "20261026T122644Z-8ae167",
+  "recurso": "votacao_secao",
+  "uf": "BR",
+  "instituicao": "TSE",
+  "conjunto": "resultados-2022",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2022_BR.zip",
+  "sha256": "9353993de5cf03778aef44e01d4925e7ee105f5262491d344a2f0dbc956b0139",
+  "bytes": 271292455,
+  "coletado_em": "2026-10-26T12:26:47+00:00",
+  "last_modified_http": "Thu, 24 Nov 2022 14:26:58 GMT",
+  "etag": "\"102b9827-5ee383298b080\"",
+  "membros_zip": [
+    {
+      "nome": "votacao_secao_2022_BR.csv",
+      "bytes_compactado": 271111528,
+      "bytes_descompactado": 1591148802,
+      "crc": 1945338348
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 180631,
+      "bytes_descompactado": 192420,
+      "crc": 2105426969
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2022/votacao_secao_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "NR_SECAO",
+      "CD_CARGO",
+      "DS_CARGO",
+      "NR_VOTAVEL",
+      "NM_VOTAVEL",
+      "QT_VOTOS",
+      "NR_LOCAL_VOTACAO",
+      "SQ_CANDIDATO",
+      "NM_LOCAL_VOTACAO",
+      "DS_LOCAL_VOTACAO_ENDERECO"
+    ],
+    "linhas_amostra": 835,
+    "sentinelas_amostra": {},
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "1",
+        "PRESIDENTE",
+        "1",
+        3529844
+      ],
+      [
+        "1",
+        "PRESIDENTE",
+        "2",
+        1850892
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/9353993de5cf/votacao_secao_2022_BR.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "01/11/2022 16:05:25"
+  ],
+  "turnos_presentes": [
+    "1",
+    "2"
+  ],
+  "linhas": 5380736,
+  "status": "disponivel",
+  "limitacoes": [],
+  "ano": 2022
+}

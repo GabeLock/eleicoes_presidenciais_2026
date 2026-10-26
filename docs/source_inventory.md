@@ -27,6 +27,18 @@ Achados da primeira coleta:
   negativas, aptos = comparecimento + abstenção, seção → município, válidos entre os dois
   arquivos) — `reports/quality/20261026T105750Z-a590e2.md`.
 
+## Achados da coleta nacional (1º turno 2026) e do teste 2022
+
+- O arquivo `votacao_secao_2026_BR.zip` inclui o **exterior** (`ZZ`, 916.534 aptos no 1º turno);
+  não há linhas com `SG_UF = VT`.
+- `detalhe_votacao_munzona_2026` e `votacao_candidato_munzona_2026` foram **regerados em
+  25/10/2026** (ainda só com o 1º turno); os arquivos por seção são de 05–06/10/2026.
+- Códigos de município sem zero inicial no arquivo por zona (7 UFs) — ver ADR 0004.
+- **2022 (teste com dois turnos reais):** layout idêntico ao de 2026; piloto MG com todas as
+  checagens críticas aprovadas, decomposição territorial fechando exatamente e reconciliação
+  seção → zona exata (relatório `reports/quality/20261026T122749Z-7dd437.md`).
+- Relatório nacional 2026: `reports/quality/20261026T124109Z-1588ed.md` (+ pasta `_diag`).
+
 ## Legenda de status
 
 | Status | Significado |

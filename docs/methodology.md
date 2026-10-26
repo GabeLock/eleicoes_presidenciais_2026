@@ -70,3 +70,8 @@ Contagens inteiras reconciliam **exatamente** quando universo e versão são igu
 que não fecha, decomposição que não fecha) marcam a base como **BLOQUEADA** e impedem a
 publicação de conclusões. Checagens não críticas (ex.: aptos ≠ comparecimento + abstenção em
 universos diferentes) são reportadas e investigadas, não forçadas.
+
+A identidade aptos = comparecimento + abstenção só vale para seções instaladas. A camada por
+seção é reconciliada com os arquivos por zona e por município; quando as versões diferem
+(datas de geração distintas), as diferenças são reportadas com diagnóstico por UF
+(`reports/quality/<run_id>_diag/`). Ver ADR 0004.
