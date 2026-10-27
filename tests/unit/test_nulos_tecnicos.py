@@ -64,3 +64,17 @@ def test_config_declara_nulo_tecnico_2026():
     cfg = load_config().com_ano(2026)
     assert pipeline.nulos_tecnicos_do_ano(cfg) == {1: ["28"]}
     assert pipeline.nulos_tecnicos_do_ano(load_config().com_ano(2022)) == {}
+
+
+def test_cobertura_turnos_separa_turno_ausente_de_divergencia():
+    from eleicoes import pipeline
+
+    con = duckdb.connect()
+    con.execute("CREATE TABLE ref AS SELECT * FROM (VALUES (1),(2)) t(turno)")
+    con.execute("CREATE TABLE comp AS SELECT * FROM (VALUES (1)) t(turno)")
+    filtro, chk = pipeline._cobertura_turnos(con, "comp", "ref")
+    assert filtro == "turno IN (1)"
+    assert not chk.ok and not chk.critica and "ausentes no arquivo complementar=[2]" in chk.detalhe
+    con.execute("INSERT INTO comp VALUES (2)")
+    filtro, chk = pipeline._cobertura_turnos(con, "comp", "ref")
+    assert filtro == "turno IN (1, 2)" and chk.ok

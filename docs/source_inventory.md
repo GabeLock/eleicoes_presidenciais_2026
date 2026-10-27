@@ -110,8 +110,8 @@ Inventário de 27/10/2026 (`reports/inventory/20261027T133953Z-44e95a.json`): 92
 
 | Recurso | URL oficial | Bytes (HEAD) | Last-Modified (CDN) | Uso | Status |
 |---|---|---|---|---|---|
-| Candidatos | `…/consulta_cand/consulta_cand_2026.zip` | 3.240.701 | Sun, 25 Oct 2026 15:37:01 GMT | `dim_candidatura`, situação jurídica | somente perfil (cabeçalho + leiame) |
-| Candidatos — informações complementares | `…/consulta_cand_complementar/consulta_cand_complementar_2026.zip` | 1.359.797 | Sun, 25 Oct 2026 15:37:01 GMT | a avaliar | nao_coletado |
+| Candidatos | `…/consulta_cand/consulta_cand_2026.zip` | 3.240.701 | Sun, 25 Oct 2026 15:37:01 GMT | `dim_candidatura`, `DS_SIT_TOT_TURNO` | **perfilado** 27/10 (sha256 `c017f3200d33…`): 29 membros (UFs, `_BR`, `_BRASIL`), 50 colunas; leiame: `CD/DS_SITUACAO_CANDIDATURA` só valem até 2022 |
+| Candidatos — informações complementares | `…/consulta_cand_complementar/consulta_cand_complementar_2026.zip` | 1.359.797 | Sun, 25 Oct 2026 15:37:01 GMT | candidata a fonte da situação jurídica em 2026 | nao_coletado |
 | Histórico de candidaturas | `…/historico_candidatura/historico_candidatura_2026.zip` | 4.413.409 | Sun, 25 Oct 2026 15:37:08 GMT | identidade histórica (série) | nao_coletado |
 | Coligações · Vagas · Motivo da cassação · Bens · Redes sociais | `…/consulta_coligacao/…`, `…/consulta_vagas/…`, `…/motivo_cassacao/…`, `…/bem_candidato/…`, `…/consulta_cand/rede_social_candidato_2026.zip` | 0,1–3,8 MB | 25/10/2026 | fora do MVP | nao_coletado |
 | Fotos, propostas de governo e certidões criminais (por UF e BR) | `…/eleicoes2026/fotos/…`, `…/proposta_governo/…`, `…/certidao_criminal/…` | até 2,4 GB | 24–27/10/2026 | fora do escopo (dados pessoais, sem uso analítico) | não coletar |
@@ -122,7 +122,7 @@ Descoberto no grupo CKAN `comparecimento-e-abstencao` em 27/10/2026.
 
 | Recurso | URL oficial | Bytes (HEAD) | Last-Modified (CDN) | Status |
 |---|---|---|---|---|
-| Comparecimento e Abstenção | `…/perfil_comparecimento_abstencao/perfil_comparecimento_abstencao_2026.zip` | 229.213.668 | Wed, 21 Oct 2026 16:40:26 GMT | somente perfil; **gerado antes do 2º turno** (cobre só o 1º, a confirmar no arquivo) |
+| Comparecimento e Abstenção | `…/perfil_comparecimento_abstencao/perfil_comparecimento_abstencao_2026.zip` | 229.213.668 | Wed, 21 Oct 2026 16:40:26 GMT | **perfilado** 27/10 (sha256 `abd1af8ff28a…`): 29 membros (UFs, ZZ, `_BRASIL`), granularidade município × zona × categorias, sem seção; arquivo de 21/10, anterior ao 2º turno |
 | Pessoas com deficiência | `…/perfil_comparecimento_abstencao_eleitor_deficiente/…_2026.zip` | 80.189.391 | Wed, 21 Oct 2026 16:19:45 GMT | nao_coletado |
 | Transferência temporária de eleitor | `…/perfil_comparecimento_abstencao_eleitor_tte/…_2026.zip` | 10.647.875 | Wed, 21 Oct 2026 16:18:31 GMT | nao_coletado |
 

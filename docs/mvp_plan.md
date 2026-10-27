@@ -35,7 +35,8 @@ publica um branch `resultados/<run_id>`; a tarefa confere `NR_TURNO = 2` no mani
 - `DT_RECEBIMENTO_BU_HOR_TSE` e `DT_PRIM_TOT_PARCIAL_HOR_TSE` dão horários por seção, mas não
   reconstituem sozinhos a sequência da divulgação (liderança durante a apuração segue indisponível).
 - ~~Explicar os 5.246 votos nominais~~ — nulos técnicos da candidatura 28 (ADR 0005, 27/10).
-- Mapear `consulta_cand_2026` (cabeçalho + leiame coletados) e confirmar a situação da candidatura 28.
+- Confirmar a situação jurídica da candidatura 28: em 2026 `DS_SITUACAO_CANDIDATURA` do `consulta_cand`
+  não se aplica (leiame); avaliar `consulta_cand_complementar` e a consulta oficial (A-03).
 - Grupo de comparecimento/abstenção inventariado (27/10); arquivo de 21/10, anterior ao 2º turno — fase v2.
 - Definir a fonte da correspondência TSE–IBGE de municípios.
 - Série histórica 2018/2022 (expansão inicial) e depois 1989–2014.

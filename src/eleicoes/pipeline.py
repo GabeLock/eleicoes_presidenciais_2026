@@ -418,6 +418,24 @@ def _colunas(con: duckdb.DuckDBPyConnection, tabela: str) -> set[str]:
     return {r[0] for r in con.execute(f"DESCRIBE {tabela}").fetchall()}
 
 
+def _cobertura_turnos(
+    con: duckdb.DuckDBPyConnection, tabela: str, referencia: str
+) -> tuple[str, ck.Checagem]:
+    """Turnos comuns às duas tabelas (filtro SQL) e checagem não crítica de cobertura: um turno
+    ainda não publicado no arquivo complementar vira pendência explícita, não divergência."""
+    t_ref = {r[0] for r in con.execute(f"SELECT DISTINCT turno FROM {referencia}").fetchall()}
+    t_comp = {r[0] for r in con.execute(f"SELECT DISTINCT turno FROM {tabela}").fetchall()}
+    comuns = sorted(t_ref & t_comp) or [-1]
+    faltam = sorted(t_ref - t_comp)
+    chk = ck.Checagem(
+        f"cobertura_turnos:{tabela}",
+        not faltam,
+        False,
+        f"turnos comparados={sorted(t_ref & t_comp)}; ausentes no arquivo complementar={faltam}",
+    )
+    return f"turno IN ({', '.join(str(int(t)) for t in comuns)})", chk
+
+
 def complementares(
     cfg: Config, ctx: RunContext, con: duckdb.DuckDBPyConnection, escopo_ufs: list[str] | None
 ) -> list[ck.Checagem]:
@@ -448,6 +466,10 @@ def complementares(
         carregadas.add(tabela)
 
     if "silver_detalhe_munzona" in carregadas:
+        filtro_t, chk_cob = _cobertura_turnos(
+            con, "silver_detalhe_munzona", "silver_participacao_secao"
+        )
+        checks.append(chk_cob)
         medidas = {
             "qt_aptos": "qt_aptos",
             "qt_comparecimento": "qt_comparecimento",
@@ -468,7 +490,8 @@ def complementares(
         )
         k = "turno, uf, cd_municipio_tse, zona"
         res = con.execute(
-            f"""WITH s AS (SELECT {k}, {sel_s} FROM silver_participacao_secao GROUP BY {k}),
+            f"""WITH s AS (SELECT {k}, {sel_s} FROM silver_participacao_secao
+                           WHERE {filtro_t} GROUP BY {k}),
                      z AS (SELECT {k}, {sel_z} FROM silver_detalhe_munzona GROUP BY {k})
                 SELECT count(*), {cond} FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona)"""
         ).fetchone()
@@ -508,7 +531,8 @@ def complementares(
         # nível município: neutraliza reetiquetagem de zonas entre versões dos arquivos
         km = "turno, uf, cd_municipio_tse"
         res_m = con.execute(
-            f"""WITH s AS (SELECT {km}, {sel_s} FROM silver_participacao_secao GROUP BY {km}),
+            f"""WITH s AS (SELECT {km}, {sel_s} FROM silver_participacao_secao
+                           WHERE {filtro_t} GROUP BY {km}),
                      z AS (SELECT {km}, {sel_z} FROM silver_detalhe_munzona GROUP BY {km})
                 SELECT count(*), {cond} FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse)"""
         ).fetchone()
@@ -524,10 +548,12 @@ def complementares(
             )
 
     if "silver_candidato_munzona" in carregadas:
+        filtro_c, chk_cob = _cobertura_turnos(con, "silver_candidato_munzona", "silver_votos_secao")
+        checks.append(chk_cob)
         n, tot, dif = con.execute(
-            """WITH s AS (SELECT turno, uf, cd_municipio_tse, zona, nr_votavel AS nr,
+            f"""WITH s AS (SELECT turno, uf, cd_municipio_tse, zona, nr_votavel AS nr,
                                  sum(qt_votos) v FROM silver_votos_secao
-                          WHERE tipo_votavel = 'candidato' GROUP BY ALL),
+                          WHERE tipo_votavel = 'candidato' AND {filtro_c} GROUP BY ALL),
                     z AS (SELECT turno, uf, cd_municipio_tse, zona, nr_candidato AS nr,
                                  sum(qt_votos_nominais) v FROM silver_candidato_munzona GROUP BY ALL)
                SELECT count(*) FILTER (WHERE coalesce(s.v, 0) <> coalesce(z.v, 0)), count(*),
