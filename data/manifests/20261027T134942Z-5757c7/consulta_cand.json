@@ -1,0 +1,304 @@
+{
+  "run_id": "20261027T134942Z-5757c7",
+  "recurso": "consulta_cand",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "candidatos-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/consulta_cand/consulta_cand_2026.zip",
+  "sha256": "c017f3200d33c23b43a8e7ba32af5b3f642903e53718bdf9e84bfd939084bc8c",
+  "bytes": 3240701,
+  "coletado_em": "2026-10-27T13:50:44+00:00",
+  "last_modified_http": "Sun, 25 Oct 2026 15:37:01 GMT",
+  "etag": "\"3172fd-65eabfc0ba87c\"",
+  "membros_zip": [
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 192143,
+      "bytes_descompactado": 208302,
+      "crc": 2130301731
+    },
+    {
+      "nome": "consulta_cand_2026_AM.csv",
+      "bytes_compactado": 34002,
+      "bytes_descompactado": 260341,
+      "crc": 2009550801
+    },
+    {
+      "nome": "consulta_cand_2026_TO.csv",
+      "bytes_compactado": 26331,
+      "bytes_descompactado": 210458,
+      "crc": 2674213375
+    },
+    {
+      "nome": "consulta_cand_2026_PR.csv",
+      "bytes_compactado": 76999,
+      "bytes_descompactado": 602167,
+      "crc": 1519345879
+    },
+    {
+      "nome": "consulta_cand_2026_BA.csv",
+      "bytes_compactado": 86154,
+      "bytes_descompactado": 675779,
+      "crc": 436086165
+    },
+    {
+      "nome": "consulta_cand_2026_CE.csv",
+      "bytes_compactado": 50902,
+      "bytes_descompactado": 401794,
+      "crc": 1191490201
+    },
+    {
+      "nome": "consulta_cand_2026_RR.csv",
+      "bytes_compactado": 29482,
+      "bytes_descompactado": 230960,
+      "crc": 2242104302
+    },
+    {
+      "nome": "consulta_cand_2026_RS.csv",
+      "bytes_compactado": 74045,
+      "bytes_descompactado": 589768,
+      "crc": 4148441788
+    },
+    {
+      "nome": "consulta_cand_2026_BR.csv",
+      "bytes_compactado": 2976,
+      "bytes_descompactado": 17658,
+      "crc": 3310653728
+    },
+    {
+      "nome": "consulta_cand_2026_BRASIL.csv",
+      "bytes_compactado": 1558391,
+      "bytes_descompactado": 11667560,
+      "crc": 3618998788
+    },
+    {
+      "nome": "consulta_cand_2026_DF.csv",
+      "bytes_compactado": 49704,
+      "bytes_descompactado": 377141,
+      "crc": 2964329487
+    },
+    {
+      "nome": "consulta_cand_2026_ES.csv",
+      "bytes_compactado": 42991,
+      "bytes_descompactado": 330209,
+      "crc": 3182918107
+    },
+    {
+      "nome": "consulta_cand_2026_GO.csv",
+      "bytes_compactado": 64765,
+      "bytes_descompactado": 500817,
+      "crc": 930040092
+    },
+    {
+      "nome": "consulta_cand_2026_AC.csv",
+      "bytes_compactado": 27300,
+      "bytes_descompactado": 219061,
+      "crc": 3826266539
+    },
+    {
+      "nome": "consulta_cand_2026_AL.csv",
+      "bytes_compactado": 21420,
+      "bytes_descompactado": 175099,
+      "crc": 3559250960
+    },
+    {
+      "nome": "consulta_cand_2026_AP.csv",
+      "bytes_compactado": 22503,
+      "bytes_descompactado": 175393,
+      "crc": 2617946928
+    },
+    {
+      "nome": "consulta_cand_2026_MA.csv",
+      "bytes_compactado": 44727,
+      "bytes_descompactado": 346321,
+      "crc": 3607502304
+    },
+    {
+      "nome": "consulta_cand_2026_MG.csv",
+      "bytes_compactado": 129144,
+      "bytes_descompactado": 1020648,
+      "crc": 3474644070
+    },
+    {
+      "nome": "consulta_cand_2026_PB.csv",
+      "bytes_compactado": 31731,
+      "bytes_descompactado": 250948,
+      "crc": 3756286768
+    },
+    {
+      "nome": "consulta_cand_2026_MT.csv",
+      "bytes_compactado": 32794,
+      "bytes_descompactado": 254032,
+      "crc": 3751412104
+    },
+    {
+      "nome": "consulta_cand_2026_MS.csv",
+      "bytes_compactado": 30399,
+      "bytes_descompactado": 244237,
+      "crc": 2806722787
+    },
+    {
+      "nome": "consulta_cand_2026_PA.csv",
+      "bytes_compactado": 53048,
+      "bytes_descompactado": 408215,
+      "crc": 494158284
+    },
+    {
+      "nome": "consulta_cand_2026_PE.csv",
+      "bytes_compactado": 68125,
+      "bytes_descompactado": 530071,
+      "crc": 2897702826
+    },
+    {
+      "nome": "consulta_cand_2026_PI.csv",
+      "bytes_compactado": 28878,
+      "bytes_descompactado": 225398,
+      "crc": 2570194092
+    },
+    {
+      "nome": "consulta_cand_2026_RN.csv",
+      "bytes_compactado": 24482,
+      "bytes_descompactado": 197122,
+      "crc": 2227899798
+    },
+    {
+      "nome": "consulta_cand_2026_RJ.csv",
+      "bytes_compactado": 143394,
+      "bytes_descompactado": 1143736,
+      "crc": 1122083958
+    },
+    {
+      "nome": "consulta_cand_2026_SE.csv",
+      "bytes_compactado": 29094,
+      "bytes_descompactado": 226946,
+      "crc": 3989622580
+    },
+    {
+      "nome": "consulta_cand_2026_SC.csv",
+      "bytes_compactado": 50054,
+      "bytes_descompactado": 391255,
+      "crc": 1837920017
+    },
+    {
+      "nome": "consulta_cand_2026_RO.csv",
+      "bytes_compactado": 31339,
+      "bytes_descompactado": 242558,
+      "crc": 3960933040
+    },
+    {
+      "nome": "consulta_cand_2026_SP.csv",
+      "bytes_compactado": 179604,
+      "bytes_descompactado": 1441082,
+      "crc": 960769843
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2026/consulta_cand_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_CARGO",
+      "DS_CARGO",
+      "SQ_CANDIDATO",
+      "NR_CANDIDATO",
+      "NM_CANDIDATO",
+      "NM_URNA_CANDIDATO",
+      "NM_SOCIAL_CANDIDATO",
+      "NR_CPF_CANDIDATO",
+      "DS_EMAIL",
+      "CD_SITUACAO_CANDIDATURA",
+      "DS_SITUACAO_CANDIDATURA",
+      "TP_AGREMIACAO",
+      "NR_PARTIDO",
+      "SG_PARTIDO",
+      "NM_PARTIDO",
+      "NR_FEDERACAO",
+      "NM_FEDERACAO",
+      "SG_FEDERACAO",
+      "DS_COMPOSICAO_FEDERACAO",
+      "SQ_COLIGACAO",
+      "NM_COLIGACAO",
+      "DS_COMPOSICAO_COLIGACAO",
+      "SG_UF_NASCIMENTO",
+      "DT_NASCIMENTO",
+      "NR_TITULO_ELEITORAL_CANDIDATO",
+      "CD_GENERO",
+      "DS_GENERO",
+      "CD_GRAU_INSTRUCAO",
+      "DS_GRAU_INSTRUCAO",
+      "CD_ESTADO_CIVIL",
+      "DS_ESTADO_CIVIL",
+      "CD_COR_RACA",
+      "DS_COR_RACA",
+      "CD_OCUPACAO",
+      "DS_OCUPACAO",
+      "CD_SIT_TOT_TURNO",
+      "DS_SIT_TOT_TURNO"
+    ],
+    "linhas_amostra": 470,
+    "sentinelas_amostra": {
+      "#NULO": 1568,
+      "-1": 382,
+      "-3": 470
+    },
+    "alertas": [],
+    "membros_csv": [
+      "consulta_cand_2026_AM.csv",
+      "consulta_cand_2026_TO.csv",
+      "consulta_cand_2026_PR.csv",
+      "consulta_cand_2026_BA.csv",
+      "consulta_cand_2026_CE.csv",
+      "consulta_cand_2026_RR.csv",
+      "consulta_cand_2026_RS.csv",
+      "consulta_cand_2026_BR.csv",
+      "consulta_cand_2026_BRASIL.csv",
+      "consulta_cand_2026_DF.csv",
+      "consulta_cand_2026_ES.csv",
+      "consulta_cand_2026_GO.csv",
+      "consulta_cand_2026_AC.csv",
+      "consulta_cand_2026_AL.csv",
+      "consulta_cand_2026_AP.csv",
+      "consulta_cand_2026_MA.csv",
+      "consulta_cand_2026_MG.csv",
+      "consulta_cand_2026_PB.csv",
+      "consulta_cand_2026_MT.csv",
+      "consulta_cand_2026_MS.csv",
+      "consulta_cand_2026_PA.csv",
+      "consulta_cand_2026_PE.csv",
+      "consulta_cand_2026_PI.csv",
+      "consulta_cand_2026_RN.csv",
+      "consulta_cand_2026_RJ.csv",
+      "consulta_cand_2026_SE.csv",
+      "consulta_cand_2026_SC.csv",
+      "consulta_cand_2026_RO.csv",
+      "consulta_cand_2026_SP.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [],
+  "turnos_presentes": [],
+  "linhas": null,
+  "status": "perfilado",
+  "limitacoes": [
+    "Somente cabeçalho/membros coletados (mapeamento a confirmar)"
+  ],
+  "ano": 2026
+}
