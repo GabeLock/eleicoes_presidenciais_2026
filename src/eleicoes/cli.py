@@ -110,7 +110,14 @@ def ingest(
                 if rec.get("complementar") or rec.get("somente_perfil")
             ]
         for recurso, u, escopo_uf in alvos:
-            m = pipeline.ingerir(cfg, ctx, recurso, u, escopo_uf=escopo_uf)
+            try:
+                m = pipeline.ingerir(cfg, ctx, recurso, u, escopo_uf=escopo_uf)
+            except Exception as exc:  # noqa: BLE001 — perfil auxiliar não derruba a ingestão
+                if not cfg.recurso(recurso).get("somente_perfil"):
+                    raise
+                ctx.pendencias.append(f"{recurso} (somente perfil): falha na coleta — {exc}")
+                console.print(f"{recurso}: falha na coleta (somente perfil) — {exc}")
+                continue
             m.salvar(pasta)
             ctx.insumos.append(
                 {"recurso": m.recurso, "uf": u or escopo_uf, "sha256": m.sha256, "status": m.status}

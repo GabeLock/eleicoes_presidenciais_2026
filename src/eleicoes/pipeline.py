@@ -186,6 +186,13 @@ def ingerir(
     return man
 
 
+def nulos_tecnicos_do_ano(cfg: Config) -> dict[int, list[str]]:
+    """turno → NR_VOTAVEL reclassificados como nulos técnicos (configs/sources.yml; ADR 0005)."""
+    por_ano = cfg.recurso("votacao_secao").get("nulos_tecnicos") or {}
+    do_ano = por_ano.get(cfg.ano) or por_ano.get(str(cfg.ano)) or {}
+    return {int(t): [str(n) for n in nrs] for t, nrs in do_ano.items()}
+
+
 def pasta_manifestos(cfg: Config, run_id: str) -> Path:
     return cfg.paths["manifests"] / run_id
 
@@ -236,9 +243,15 @@ def transformar(
     wh.parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(str(wh))
     sqls = []
+    nulos_tecnicos = nulos_tecnicos_do_ano(cfg)
     for i, csv in enumerate(mv["perfil_csv"]["arquivos_csv"]):
         q = sv.sql_silver_votos(
-            REPO_ROOT / csv, mv["perfil_csv"], cfg.recurso("votacao_secao"), cargo, mv["sha256"]
+            REPO_ROOT / csv,
+            mv["perfil_csv"],
+            cfg.recurso("votacao_secao"),
+            cargo,
+            mv["sha256"],
+            nulos_tecnicos,
         )
         if i:
             q = q.replace(
@@ -264,6 +277,7 @@ def transformar(
         con.execute(q)
     sv.filtrar_ufs(con, "silver_votos_secao", escopo_ufs)
     sv.filtrar_ufs(con, "silver_participacao_secao", escopo_ufs)
+    sv.harmonizar_validos(con)
     runs = cfg.paths["reports"] / "runs"
     runs.mkdir(parents=True, exist_ok=True)
     (runs / f"{ctx.run_id}_silver.sql").write_text("\n".join(sqls), encoding="utf-8")
@@ -440,8 +454,11 @@ def complementares(
             "qt_abstencoes": "qt_abstencoes",
             "qt_votos_brancos": "qt_votos_brancos",
             "qt_votos_nulos": "qt_votos_nulos",
-            "qt_votos_nominais": "qt_votos_nominais_validos",
+            # válidos harmonizados (nominais − nulos técnicos) × válidos do arquivo por zona
+            "qt_votos_validos": "qt_votos_nominais_validos",
         }
+        if "qt_votos_nulos_tecnicos" in _colunas(con, "silver_detalhe_munzona"):
+            medidas["qt_votos_nulos_tecnicos"] = "qt_votos_nulos_tecnicos"
         sel_s = ", ".join(f"sum({a}) AS {a}" for a in medidas)
         sel_z = ", ".join(f"sum({b}) AS {a}" for a, b in medidas.items())
         cond = ", ".join(
@@ -463,7 +480,7 @@ def complementares(
                      z AS (SELECT {k}, {sel_z} FROM silver_detalhe_munzona GROUP BY {k}),
                      j AS (SELECT turno, uf, cd_municipio_tse, zona,
                                   s.qt_aptos AS aptos_secao, z.qt_aptos AS aptos_zona,
-                                  s.qt_votos_nominais AS nom_secao, z.qt_votos_nominais AS nom_zona
+                                  s.qt_votos_validos AS nom_secao, z.qt_votos_validos AS nom_zona
                            FROM s FULL OUTER JOIN z USING (turno, uf, cd_municipio_tse, zona))
                 SELECT turno, uf,
                        count(*) FILTER (WHERE aptos_zona IS NULL) AS zonas_so_secao,

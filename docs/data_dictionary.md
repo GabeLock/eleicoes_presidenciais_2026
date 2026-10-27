@@ -19,7 +19,7 @@ Chave única verificada: (turno, uf, cd_municipio_tse, zona, secao, nr_votavel).
 | zona, secao | VARCHAR | NR_ZONA, NR_SECAO | texto canônico de 4 dígitos; brutos em `*_original` |
 | cd_cargo / ds_cargo | VARCHAR | CD_CARGO / DS_CARGO | filtro `upper(trim(DS_CARGO)) = 'PRESIDENTE'` |
 | nr_votavel / nm_votavel | VARCHAR | NR_VOTAVEL / NM_VOTAVEL | texto |
-| tipo_votavel | VARCHAR | derivado | 95 → branco, 96 → nulo, demais → candidato (códigos a confirmar) |
+| tipo_votavel | VARCHAR | derivado | 95 → branco, 96 → nulo (confirmados em 27/10/2026: `VOTO BRANCO`/`VOTO NULO`, iguais ao detalhe em todas as seções), códigos em `nulos_tecnicos` → nulo_tecnico (ADR 0005), demais → candidato |
 | qt_votos | BIGINT | QT_VOTOS | CAST estrito |
 | fonte_sha256 | VARCHAR | manifesto | rastreia o snapshot de origem |
 
@@ -34,6 +34,8 @@ Granularidade: ano × turno × UF × município × zona × seção (Presidência
 | qt_votos_brancos, qt_votos_nulos | QT_VOTOS_BRANCOS, QT_VOTOS_NULOS | nulos **digitados** |
 | qt_votos_legenda | QT_VOTOS_LEGENDA (opcional) | nulo se ausente |
 | qt_votos_anulados_apu_sep | QT_VOTOS_ANULADOS_APU_SEP (opcional) | sub judice: nem válidos nem nulos (leiame); nunca somado |
+| qt_votos_nulos_tecnicos | derivado (votacao_secao, `tipo_votavel = 'nulo_tecnico'`) | votos em candidatura inapta no dia da eleição; separados dos nulos digitados (ADR 0005) |
+| qt_votos_validos | derivado | QT_VOTOS_NOMINAIS + QT_VOTOS_LEGENDA − nulos técnicos; em `gold_participacao_municipio` o bruto fica em `qt_votos_nominais_detalhe` |
 
 ## Gold
 
