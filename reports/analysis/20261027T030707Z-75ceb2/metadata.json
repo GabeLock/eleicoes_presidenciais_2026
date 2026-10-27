@@ -1,0 +1,10 @@
+{
+  "ano": 2026,
+  "run_id": "20261027T030707Z-75ceb2",
+  "commit": "8468bab6273ef81d22c39f27ad3ddf51f41e19c0",
+  "status_base": {
+    "status": "liberado",
+    "relatorio": "20261027T030648Z-130719.md"
+  },
+  "aviso": "Contagens observadas; decomposições são contábeis, não causais."
+}
