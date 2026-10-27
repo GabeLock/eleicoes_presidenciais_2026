@@ -1,0 +1,18 @@
+{
+  "tabelas": [
+    "gold_dim_candidatura",
+    "gold_margem_municipio",
+    "gold_participacao_municipio",
+    "gold_votos_municipio",
+    "silver_candidato_munzona",
+    "silver_detalhe_munzona",
+    "silver_participacao_secao",
+    "silver_votos_secao"
+  ],
+  "votaveis": 19,
+  "especiais_secao": 2,
+  "candidatos": 14,
+  "candidatos_uf_divergentes": 56,
+  "totais_colunas": 36,
+  "zonas_nominais_divergentes": 2148
+}

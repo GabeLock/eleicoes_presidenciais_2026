@@ -1,0 +1,263 @@
+Página 1 
+ 
+ 
+ 
+LEIAME 
+ 
+Este arquivo contém o leiaute das tabelas existentes no repositório de dados eleitorais. Antes de trabalhar os 
+dados é importante ler as seguintes considerações: 
+ 
+- A codificação de caracteres dos arquivos é "Latin 1"; 
+- Os campos estão entre aspas e separados por ponto e vírgula, inclusive os campos numéricos; 
+- Campos preenchidos com #NULO significam que a informa ção est á em branco no banco de dados. O 
+correspondente para #NULO nos campos numéricos é -1; 
+- Campos preenchidos com #NE significam que naquele ano a informa ção não era registrada em banco de 
+dados pelos sistemas eleitorais. O correspondente para #NE nos campos numéricos é -3; 
+- O campo UF, além das unidades da federação, pode conter alguma das seguintes situações: 
+    o BR: quando se tratar de informação a nível nacional; 
+    o VT: quando se tratar de voto em trânsito; 
+    o ZZ: quando se tratar de Exterior. 
+- Os arquivos estão em constante processo de atualização e aperfeiçoamento. Alguns arquivos podem estar 
+em branco ou com mensagem de erro devido à indisponibilidade temporária na base de algum estado ou à 
+inexistência daquele arquivo para a época pretendida. 
+ 
+O § 2º do art. 33 da Resolução TSE nº 23.609/2019 estabelece que: 
+“Os endereços informados para atribui ção de CNPJ, comunica ções processuais e do Comit ê Central de 
+Campanha, telefone pessoal, e -mail pessoal, número do CPF e o documento pessoal de identifica ção não 
+serão divulgados no DivulgaCandContas e serão juntados como documento sigiloso no processo de registro 
+de candidatura no PJe. (incluído pela Resolução nº 23.729/2024)
+” 
+ 
+Portanto, s ão considerados como n ão divulgáveis, para as Elei ções 2024, as informa ções registradas na 
+variável NR_CPF_CANDIDATO dos arquivos de candidaturas do Portal de Dados Abertos. 
+ 
+Agradecemos todas as críticas e sugestões recebidas de pesquisadores e usuários que estão colaborando 
+para a melhoria na qualidade da prestação das informações. 
+ 
+Qualquer sugestão ou dúvida deve ser encaminhada ao e-mail estatistica@tse.jus.br. 
+  
+
+Página 2 
+I CONSULTA_CAND 
+NOTAÇÃO: 
+CONSULTA_CAND_<ANO>_<UF>  
+CONSULTA_CAND_<ANO>_BRASIL 
+ 
+Para o caso de candidatos não divulgáveis, seus dados pessoais são preenchidos com: 
+· -4, em caso de campos numéricos, exceto campo de idade; 
+· "NÃO DIVULGÁVEL", em caso de campos textuais; 
+· "", no caso de campos relativos à idade do candidato e sua data de nascimento. 
+ 
+Variável Descrição 
+DT_GERACAO Data da extração dos dados para geração do arquivo. 
+HH_GERACAO Hora da extração dos dados para geração do arquivo com 
+base no horário de Brasília. 
+ANO_ELEICAO Ano de refer ência da elei ção para gera ção do arquivo. 
+Observação: para elei ções suplementares, o ano de 
+referência da elei ção é o ano da elei ção ordin ária 
+correspondente. Por exemplo: em 2016 houve elei ções 
+ordinárias. Após a data desta eleição ordinária e antes da 
+próxima, houve eleições suplementares em 2017, 2018 e 
+2019. As informa ções destas elei ções suplementares 
+estarão divulgadas no arquivo gerado para as  eleições 
+2016. 
+CD_TIPO_ELEICAO Código do tipo de eleição. Pode assumir os valores: 
+. 1: Eleição Suplementar; 
+. 2: Eleição Ordinária; e 
+. 3: Consulta Popular. 
+NM_TIPO_ELEICAO Nome do tipo de elei ção. Observa ção: as elei ções 
+ordinárias são previstas em Lei, possuem data certa para 
+serem realizadas, ocorrem em anos pares e possuem a 
+periodicidade de 04 em 04 anos. Nas elei ções gerais 
+ordinárias s ão eleitos os cargos de Presidente, 
+Governador, Deputado (Federal e Estadual) e 
+Senador. Nas elei ções ordin árias municipais s ão eleitos 
+os cargos de Prefeito e Vereador. As elei ções 
+suplementares s ão aquelas que n ão t êm periodicidade 
+pré-determinada ou definida e ocorrem quando, 
+eventualmente, se fizerem necess árias. As consultas 
+populares ocorrem sempre que a população é convocada 
+Página 3 
+a opinar diretamente sobre um assunto espec ífico e 
+importante. Ela pode ser realizada de duas formas: 
+plebiscito (quando o cidadão opina previamente sobre a 
+possível criação de uma lei) e referendo (quando uma 
+lei aprovada por um órgão legi slativo é submetida à 
+aceitação ou não das eleitoras e dos eleitores). 
+NR_TURNO Número do turno da elei ção. Observa ção: no Brasil, as 
+eleições realizam -se por meio de dois sistemas: o 
+sistema majoritário (aplicado aos cargos de Presidente, 
+Vice-Presidente, Governador, Vice-Governador, Prefeito, 
+Vice-Prefeito e Senador) e o sistema proporcional 
+(aplicado aos cargos de Deputado Federal, Deputado 
+Estadual, Deputado Distrital e Vereador). O sistema 
+majoritário consiste em declarar eleita a candidata ou o 
+candidato que tenha recebido a maioria dos votos a 
+concorrentes (votos v álidos, votos anulados e votos 
+anulados sub judice). Caso a candidata ou o candidato 
+ao cargo indicado no sistema majoritário, com exceção do 
+cargo de Senador, n ão alcance maioria absoluta destes 
+votos a concorrentes no primeiro turno (mínimo de 50% 
++ 1), haverá segundo turno em que concorrerão apenas 
+os dois candidatos mais votados. O segundo turno das 
+eleições no Brasil ocorre para os cargos de Presidente, 
+Vice-Presidente da Rep ública, Gov ernador e 
+Vice-Governador dos Estados e do Distrito Federal e 
+para Prefeito e Vice-Prefeito de Municípios com mais de 
+200 mil eleitores. Nos munic ípios cujo eleitorado é igual 
+ou menor que 200 mil e para o cargo de Senador 
+elege-se a candidata ou o candidato que tenha alcançado 
+a maioria simples dos votos. 
+CD_ELEICAO Código único da elei ção no âmbito da Justi ça Eleitoral. 
+Observação: este c ódigo é único por elei ção e por turno, 
+ou seja, cada turno possui seu código de eleição. 
+DS_ELEICAO Descrição da eleição. 
+DT_ELEICAO Data da ocorrência da eleição. 
+TP_ABRANGENCIA Abrangência da eleição. Pode assumir os valores: 
+. M: Municipal;  
+. E: Estadual; e 
+. F: Federal. 
+Página 4 
+Observação: a abrang ência territorial da elei ção est á 
+diretamente relacionada aos cargos eletiv os e suas 
+circunscrições eleitorais. As elei ções realizadas na 
+circunscrição Municipal são as eleições para os cargos de 
+Prefeito, Vice -Prefeito e Vereador; as realizadas na 
+circunscrição Estadual s ão para os cargos de 
+Governador, Vice -Governador, Senador,  Deputado 
+Estadual, Deputado Federal e Deputado Distrital e; as 
+realizadas na circunscrição Federal são para os cargos de 
+Presidente e Vice-Presidente da República. 
+SG_UF Sigla da unidade da federa ção na qual a candidata ou 
+candidato concorre na eleição. 
+SG_UE Sigla da unidade eleitoral na qual a candidata ou 
+candidato concorre na elei ção. A unidade eleitoral 
+representa a unidade da federa ção ou o munic ípio em 
+que a candidata ou o candidato concorre na elei ção e é 
+relacionada à abrangência territorial des ta candidatura. 
+Em caso de abrangência federal (cargo de Presidente e 
+Vice-Presidente) a sigla é BR. Em caso de abrangência 
+estadual (cargos de Governador, Vice -Governador, 
+Senador, Deputado Federal, Deputado Estadual e 
+Deputado Distrital) a sigla é a UF d a candidatura. Em 
+caso de abrang ência municipal (cargos de Prefeito, 
+Vice-Prefeito e Vereador) é o c ódigo TSE de 
+identificação do município da candidatura. 
+NM_UE Nome da unidade eleitoral da candidata ou candidato. 
+Em caso de abrang ência nacional, é igual a "Brasil". Em 
+caso de abrangência estadual, é o nome da UF em que a 
+candidata ou candidato concorre. Em caso de 
+abrangência municipal, é o nome do município em que a 
+candidata ou candidato concorre. 
+CD_CARGO Código do cargo ao qual a candidata ou candid ato 
+concorre. 
+DS_CARGO Descrição do cargo ao qual a candidata ou candidato 
+concorre. 
+SQ_CANDIDATO Número sequencial da candidata ou candidato, gerado 
+internamente pelos sistemas eleitorais para cada eleição. 
+Observação: não é o número de campanha da cand idata 
+ou candidato. 
+Página 5 
+NR_CANDIDATO Número da candidata ou candidato na urna. 
+NM_CANDIDATO Nome completo da candidata ou candidato. 
+NM_URNA_CANDIDATO Nome da candidata ou candidato que aparece na urna. 
+NM_SOCIAL_CANDIDATO Nome social da candidata ou candidato. Observa ção: 
+nome social é o nome pelo qual pessoas travestis ou 
+transexuais preferem ser chamadas cotidianamente, em 
+contraste com o nome oficialmente registrado, que n ão 
+reflete sua identidade de g ênero. A identidade  do nome 
+social é vinculada com a identidade civil original. Em 
+âmbito federal, o Decreto n º 8.727 de 2016, garante o 
+direito ao uso do nome social e reconhecimento da 
+identidade de gênero de pessoas travestis e transexuais 
+no âmbito da administra ção p ública federal direta, 
+autárquica e fundacional 
+NR_CPF_CANDIDATO Número do CPF da candidata ou candidato. 
+DS_EMAIL Endereço de e-mail da candidata ou candidato. 
+CD_SITUACAO_CANDIDATURA Código da situa ção do registro de candidatura da 
+candidata ou candidato. Aplic ável somente para os 
+registros das eleições até 2022. 
+DS_SITUACAO_CANDIDATURA Descrição da situa ção do registro de candidatura da 
+candidata ou candidato. Aplic ável somente para os 
+registros das eleições até 2022. 
+TP_AGREMIACAO Tipo de agremiação da candidatura, ou seja, forma como 
+a candidata ou o candidato concorrerá nas eleições. Pode 
+assumir os valores: 
+. Coliga ção: quando a candidata ou candidato concorre 
+por coligação; 
+. Federação: quando a  candidata ou candidato concorre 
+por uma federação; e 
+. Partido Isolado: quando a candidata ou candidato 
+concorre somente pelo partido. 
+NR_PARTIDO Número do partido da candidata ou candidato. 
+SG_PARTIDO Sigla do partido da candidata ou candidato. 
+NM_PARTIDO Nome do partido da candidata ou candidato. 
+NR_FEDERACAO Número da federação pela qual o partido da candidata ou 
+candidato concorre na eleição. 
+NM_FEDERACAO Nome da federa ção pela qual o partido da candidata ou 
+candidato concorre na eleição. 
+SG_FEDERACAO Sigla da federa ção pela qual o partido da candidata ou 
+Página 6 
+candidato concorre na eleição. 
+DS_COMPOSICAO_FEDERACAO Composição da federa ção pela qual o partido da 
+candidata ou candidato concorre na eleição. A informação 
+da federa ção é composta pela concatenação das siglas 
+dos partidos federados intercaladas com o símbolo "/". 
+SQ_COLIGACAO Sequencial da coligação pela qual o partido da candidata 
+ou candidato concorre na eleição. 
+NM_COLIGACAO Nome da coliga ção pela qual o partido da candidata ou 
+candidato concorre na eleição. 
+DS_COMPOSICAO_COLIGACAO Composição da coligação pela qual o partido da candidata 
+ou candidato concorre na elei ção. A informa ção da 
+coligação é composta pela concatena ção das siglas dos 
+partidos coligados intercaladas com ",". Observa ção: 
+quando o tipo de agremia ção é por partido isolado ou 
+federação a coluna DS_COMPOSICAO_COLIGACAO é 
+preenchida, respectivamente, com a sigla do partido e a 
+sigla da federação. 
+SG_UF_NASCIMENTO Sigla da uni dade da federa ção de nascimento da 
+candidata ou candidato. 
+DT_NASCIMENTO Data de nascimento da candidata ou candidato. 
+NR_TITULO_ELEITORAL_CANDIDATO Número do título eleitoral da candidata ou candidato. 
+CD_GENERO Código do g ênero da candidata ou candidato. Pode 
+assumir os valores: 
+. 2: Masculino; e 
+. 4: Feminino. 
+DS_GENERO Descrição do gênero da candidata ou candidato. 
+CD_GRAU_INSTRUCAO Código do grau de instru ção da candidata ou candidato. 
+Pode assumir os valores: 
+. 1: Analfabeto; 
+. 2: Lê e escreve; 
+. 3: Ensino fundamental incompleto; 
+. 4: Ensino fundamental completo; 
+. 5: Ensino médio incompleto; 
+. 6: Ensino médio completo; 
+. 7: Superior incompleto; e 
+. 8: Superior completo. 
+DS_GRAU_INSTRUCAO Descrição do grau de instru ção da candidata ou 
+candidato. 
+CD_ESTADO_CIVIL Código do estado civil da candidata ou candidato. Pode 
+Página 7 
+assumir os valores: 
+. 1: Solteiro(a); 
+. 3: Casado(a); 
+. 5: Viúvo(a); 
+. 7: Separado(a) judicialmente; e 
+. 9: Divorciado(a). 
+DS_ESTADO_CIVIL Descrição do estado civil da candidata ou candidato. 
+CD_COR_RACA Código da cor/ra ça da candidata ou candidato. Pode 
+assumir os valores: 
+. 01: Branca; 
+. 02: Preta; 
+. 03: Parda; 
+. 04: Amarela; 
+. 05: Indígena; e 
+. 06: Não Informado. 
+DS_COR_RACA Descrição da cor/raça da candidata ou candidato. 
+CD_OCUPACAO Código da ocupação da candidata ou candidato. 
+DS_OCUPACAO Descrição da ocupação da candidata ou candidato. 
+CD_SIT_TOT_TURNO Código da situa ção de totaliza ção da candidata ou 
+candidato no turno. 
+DS_SIT_TOT_TURNO Descrição da situa ção de totaliza ção da candidata ou 
+candidato no turno. 
+ 

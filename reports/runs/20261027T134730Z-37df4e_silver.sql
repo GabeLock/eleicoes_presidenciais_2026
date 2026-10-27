@@ -1,0 +1,14 @@
+
+CREATE OR REPLACE TABLE silver_votos_secao AS
+WITH base AS (
+    SELECT CAST("ANO_ELEICAO" AS INTEGER) AS ano, CAST("NR_TURNO" AS INTEGER) AS turno, trim("SG_UF") AS uf, lpad(trim("CD_MUNICIPIO"), 5, '0') AS cd_municipio_tse, trim("CD_MUNICIPIO") AS cd_municipio_tse_original, trim("NM_MUNICIPIO") AS nm_municipio, lpad(trim("NR_ZONA"), 4, '0') AS zona, trim("NR_ZONA") AS zona_original, lpad(trim("NR_SECAO"), 4, '0') AS secao, trim("NR_SECAO") AS secao_original, trim("CD_CARGO") AS cd_cargo, upper(trim("DS_CARGO")) AS ds_cargo, trim("NR_VOTAVEL") AS nr_votavel, trim("NM_VOTAVEL") AS nm_votavel, CAST("QT_VOTOS" AS BIGINT) AS qt_votos, trim("DT_GERACAO") AS dt_geracao, trim("HH_GERACAO") AS hh_geracao, trim("SQ_CANDIDATO") AS sq_candidato, trim("NR_LOCAL_VOTACAO") AS nr_local_votacao, 'c928321f63f2d095706fca73d4607c048d2ada23bda6876455d6911aaf1bc9c1' AS fonte_sha256
+    FROM read_csv('/home/runner/work/eleicoes_presidenciais_2026/eleicoes_presidenciais_2026/data/bronze/_extraido/c928321f63f2/votacao_secao_2026_BR.csv', delim=';', header=true, quote='"', all_varchar=true, encoding='latin-1')
+    WHERE upper(trim("DS_CARGO")) = 'PRESIDENTE'
+)
+SELECT *, CASE WHEN nr_votavel = '95' THEN 'branco' WHEN nr_votavel = '96' THEN 'nulo' WHEN turno = 1 AND nr_votavel IN ('28') THEN 'nulo_tecnico' ELSE 'candidato' END AS tipo_votavel FROM base;
+
+
+CREATE OR REPLACE TABLE silver_participacao_secao AS
+SELECT CAST("ANO_ELEICAO" AS INTEGER) AS ano, CAST("NR_TURNO" AS INTEGER) AS turno, trim("SG_UF") AS uf, lpad(trim("CD_MUNICIPIO"), 5, '0') AS cd_municipio_tse, trim("CD_MUNICIPIO") AS cd_municipio_tse_original, trim("NM_MUNICIPIO") AS nm_municipio, lpad(trim("NR_ZONA"), 4, '0') AS zona, trim("NR_ZONA") AS zona_original, lpad(trim("NR_SECAO"), 4, '0') AS secao, trim("NR_SECAO") AS secao_original, trim("CD_CARGO") AS cd_cargo, upper(trim("DS_CARGO")) AS ds_cargo, CAST("QT_APTOS" AS BIGINT) AS qt_aptos, CAST("QT_COMPARECIMENTO" AS BIGINT) AS qt_comparecimento, CAST("QT_ABSTENCOES" AS BIGINT) AS qt_abstencoes, CAST("QT_VOTOS_NOMINAIS" AS BIGINT) AS qt_votos_nominais, CAST("QT_VOTOS_BRANCOS" AS BIGINT) AS qt_votos_brancos, CAST("QT_VOTOS_NULOS" AS BIGINT) AS qt_votos_nulos, trim("DT_GERACAO") AS dt_geracao, trim("HH_GERACAO") AS hh_geracao, CAST("QT_VOTOS_LEGENDA" AS BIGINT) AS qt_votos_legenda, CAST("QT_VOTOS_ANULADOS_APU_SEP" AS BIGINT) AS qt_votos_anulados_apu_sep, trim("DS_ORIGEM_VOTO") AS ds_origem_voto, trim("ST_SECAO_INSTALADA") AS st_secao_instalada, trim("ST_SECAO_ANULADA") AS st_secao_anulada, '8ef9ce3a85cde260471faf7a83a9b4f5ccf3993fdda942aacaa658574344789c' AS fonte_sha256
+FROM read_csv('/home/runner/work/eleicoes_presidenciais_2026/eleicoes_presidenciais_2026/data/bronze/_extraido/8ef9ce3a85cd/detalhe_votacao_secao_2026_BR.csv', delim=';', header=true, quote='"', all_varchar=true, encoding='latin-1')
+WHERE upper(trim("DS_CARGO")) = 'PRESIDENTE';

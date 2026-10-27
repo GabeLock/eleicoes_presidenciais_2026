@@ -1,0 +1,297 @@
+{
+  "run_id": "20261027T134627Z-970763",
+  "recurso": "perfil_comparecimento_abstencao",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "comparecimento-e-abstencao-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_comparecimento_abstencao/perfil_comparecimento_abstencao_2026.zip",
+  "sha256": "abd1af8ff28a80b4e861edafd9f544a8f3f667e1c2e146911d083bf7cc34f023",
+  "bytes": 229213668,
+  "coletado_em": "2026-10-27T13:47:23+00:00",
+  "last_modified_http": "Wed, 21 Oct 2026 16:40:26 GMT",
+  "etag": "\"da985e4-65e5c6781db46\"",
+  "membros_zip": [
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_SC.csv",
+      "bytes_compactado": 4710484,
+      "bytes_descompactado": 130443442,
+      "crc": 1690197631
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_TO.csv",
+      "bytes_compactado": 1623049,
+      "bytes_descompactado": 46745278,
+      "crc": 3377558013
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_PR.csv",
+      "bytes_compactado": 6573694,
+      "bytes_descompactado": 178260634,
+      "crc": 4133065994
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_AL.csv",
+      "bytes_compactado": 1923499,
+      "bytes_descompactado": 51845654,
+      "crc": 621411957
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_SP.csv",
+      "bytes_compactado": 17533036,
+      "bytes_descompactado": 454776470,
+      "crc": 878612260
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_RJ.csv",
+      "bytes_compactado": 6670897,
+      "bytes_descompactado": 174170527,
+      "crc": 3294204607
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_AC.csv",
+      "bytes_compactado": 473113,
+      "bytes_descompactado": 12104843,
+      "crc": 995282529
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_RO.csv",
+      "bytes_compactado": 1170103,
+      "bytes_descompactado": 31157505,
+      "crc": 178844249
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_AP.csv",
+      "bytes_compactado": 408887,
+      "bytes_descompactado": 10705350,
+      "crc": 4074448839
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_DF.csv",
+      "bytes_compactado": 809379,
+      "bytes_descompactado": 19743422,
+      "crc": 3350389733
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_AM.csv",
+      "bytes_compactado": 1771315,
+      "bytes_descompactado": 44298883,
+      "crc": 1839568764
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_SE.csv",
+      "bytes_compactado": 1292301,
+      "bytes_descompactado": 35130979,
+      "crc": 504850080
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_RR.csv",
+      "bytes_compactado": 363865,
+      "bytes_descompactado": 9643612,
+      "crc": 3927103306
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_MG.csv",
+      "bytes_compactado": 14941112,
+      "bytes_descompactado": 409289413,
+      "crc": 3421297236
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_ZZ.csv",
+      "bytes_compactado": 1145554,
+      "bytes_descompactado": 32151786,
+      "crc": 3336903290
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_MA.csv",
+      "bytes_compactado": 4026632,
+      "bytes_descompactado": 106602057,
+      "crc": 2222966899
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_GO.csv",
+      "bytes_compactado": 4393733,
+      "bytes_descompactado": 122035611,
+      "crc": 1655198622
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_MT.csv",
+      "bytes_compactado": 2677345,
+      "bytes_descompactado": 72894728,
+      "crc": 777000535
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_CE.csv",
+      "bytes_compactado": 4389666,
+      "bytes_descompactado": 114924012,
+      "crc": 1792579551
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_ES.csv",
+      "bytes_compactado": 2094325,
+      "bytes_descompactado": 54615286,
+      "crc": 3083539894
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_RN.csv",
+      "bytes_compactado": 2499639,
+      "bytes_descompactado": 68444225,
+      "crc": 3681673780
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_BA.csv",
+      "bytes_compactado": 8272724,
+      "bytes_descompactado": 220810816,
+      "crc": 720865777
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_PA.csv",
+      "bytes_compactado": 3968997,
+      "bytes_descompactado": 101544664,
+      "crc": 4131664104
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_MS.csv",
+      "bytes_compactado": 1835946,
+      "bytes_descompactado": 49114221,
+      "crc": 12489861
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_BRASIL.csv",
+      "bytes_compactado": 115876180,
+      "bytes_descompactado": 3034230075,
+      "crc": 2344278296
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_PB.csv",
+      "bytes_compactado": 3156049,
+      "bytes_descompactado": 87466907,
+      "crc": 1392805286
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_RS.csv",
+      "bytes_compactado": 6784704,
+      "bytes_descompactado": 187812233,
+      "crc": 157362298
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_PI.csv",
+      "bytes_compactado": 2886426,
+      "bytes_descompactado": 80856802,
+      "crc": 1739431737
+    },
+    {
+      "nome": "perfil_comparecimento_abstencao_2026_PE.csv",
+      "bytes_compactado": 4814906,
+      "bytes_descompactado": 126664475,
+      "crc": 3503806855
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 121244,
+      "bytes_descompactado": 135289,
+      "crc": 4184074141
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2026/perfil_comparecimento_abstencao_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "NR_TURNO",
+      "SG_UF",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "CD_GENERO",
+      "DS_GENERO",
+      "CD_ESTADO_CIVIL",
+      "DS_ESTADO_CIVIL",
+      "CD_FAIXA_ETARIA",
+      "DS_FAIXA_ETARIA",
+      "CD_GRAU_INSTRUCAO",
+      "DS_GRAU_INSTRUCAO",
+      "CD_COR_RACA",
+      "DS_COR_RACA",
+      "CD_QUILOMBOLA",
+      "DS_QUILOMBOLA",
+      "CD_INTERPRETE_LIBRAS",
+      "DS_INTERPRETE_LIBRAS",
+      "CD_IDENTIDADE_GENERO",
+      "DS_IDENTIDADE_GENERO",
+      "CD_IDIOMA_INDIGENA",
+      "DS_IDIOMA_INDIGENA",
+      "CD_GRUPO_INDIGENA",
+      "DS_GRUPO_INDIGENA",
+      "CD_IDIOMA_QUILOMBOLA",
+      "DS_IDIOMA_QUILOMBOLA",
+      "QT_APTOS",
+      "QT_COMPARECIMENTO",
+      "QT_ABSTENCAO",
+      "QT_COMPARECIMENTO_DEFICIENCIA",
+      "QT_ABSTENCAO_DEFICIENCIA",
+      "QT_COMPARECIMENTO_TTE",
+      "QT_ABSTENCAO_TTE",
+      "QT_COMPAREC_FACULTATIVO",
+      "QT_ABST_FACULTATIVO",
+      "QT_COMPAREC_OBRIGATORIO",
+      "QT_ABST_OBRIGATORIO",
+      "QT_COMPAREC_DEFIC_FACULTATIVO",
+      "QT_ABST_DEFIC_FACULTATIVO",
+      "QT_COMPAREC_DEFIC_OBRIGATORIO",
+      "QT_ABST_DEFIC_OBRIGATORIO"
+    ],
+    "linhas_amostra": 954,
+    "sentinelas_amostra": {
+      "-1": 3214
+    },
+    "alertas": [],
+    "membros_csv": [
+      "perfil_comparecimento_abstencao_2026_SC.csv",
+      "perfil_comparecimento_abstencao_2026_TO.csv",
+      "perfil_comparecimento_abstencao_2026_PR.csv",
+      "perfil_comparecimento_abstencao_2026_AL.csv",
+      "perfil_comparecimento_abstencao_2026_SP.csv",
+      "perfil_comparecimento_abstencao_2026_RJ.csv",
+      "perfil_comparecimento_abstencao_2026_AC.csv",
+      "perfil_comparecimento_abstencao_2026_RO.csv",
+      "perfil_comparecimento_abstencao_2026_AP.csv",
+      "perfil_comparecimento_abstencao_2026_DF.csv",
+      "perfil_comparecimento_abstencao_2026_AM.csv",
+      "perfil_comparecimento_abstencao_2026_SE.csv",
+      "perfil_comparecimento_abstencao_2026_RR.csv",
+      "perfil_comparecimento_abstencao_2026_MG.csv",
+      "perfil_comparecimento_abstencao_2026_ZZ.csv",
+      "perfil_comparecimento_abstencao_2026_MA.csv",
+      "perfil_comparecimento_abstencao_2026_GO.csv",
+      "perfil_comparecimento_abstencao_2026_MT.csv",
+      "perfil_comparecimento_abstencao_2026_CE.csv",
+      "perfil_comparecimento_abstencao_2026_ES.csv",
+      "perfil_comparecimento_abstencao_2026_RN.csv",
+      "perfil_comparecimento_abstencao_2026_BA.csv",
+      "perfil_comparecimento_abstencao_2026_PA.csv",
+      "perfil_comparecimento_abstencao_2026_MS.csv",
+      "perfil_comparecimento_abstencao_2026_BRASIL.csv",
+      "perfil_comparecimento_abstencao_2026_PB.csv",
+      "perfil_comparecimento_abstencao_2026_RS.csv",
+      "perfil_comparecimento_abstencao_2026_PI.csv",
+      "perfil_comparecimento_abstencao_2026_PE.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [],
+  "turnos_presentes": [],
+  "linhas": null,
+  "status": "perfilado",
+  "limitacoes": [
+    "Somente cabeçalho/membros coletados (mapeamento a confirmar)"
+  ],
+  "ano": 2026
+}
