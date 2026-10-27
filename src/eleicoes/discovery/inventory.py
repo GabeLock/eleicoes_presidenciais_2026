@@ -13,7 +13,7 @@ from typing import Any
 import httpx
 
 from eleicoes.config import Config
-from eleicoes.discovery.catalog import descobrir
+from eleicoes.discovery.catalog import descobrir, descobrir_grupo
 from eleicoes.ingestion.manifest import carregar_manifestos
 from eleicoes.runlog import utc_now
 
@@ -34,11 +34,28 @@ def head(url: str, cli: httpx.Client) -> dict[str, Any]:
 def montar_inventario(cfg: Config) -> dict[str, Any]:
     permitidos = cfg.project["download"]["dominios_permitidos"]
     api = cfg.sources["catalogo"]["api"]
-    itens = []
+    itens: list[dict[str, Any]] = []
+    erros: list[dict[str, Any]] = []
+    # conjuntos fixos da config + conjuntos descobertos em grupos do CKAN (ex.: comparecimento)
+    alvos = [(apelido, cfg.conjunto(apelido)) for apelido in cfg.sources["catalogo"]["datasets"]]
+    for apelido, grupo in (cfg.sources["catalogo"].get("grupos") or {}).items():
+        try:
+            alvos += [(apelido, c) for c in descobrir_grupo(api, grupo, cfg.ano, permitidos)]
+        except (httpx.HTTPError, RuntimeError, ValueError) as exc:
+            erros.append({"apelido": apelido, "grupo": grupo, "erro": str(exc)})
+    vistos: set[str] = set()
     with httpx.Client(timeout=60, follow_redirects=True) as cli:
-        for apelido in cfg.sources["catalogo"]["datasets"]:
-            conjunto = cfg.conjunto(apelido)
-            for r in descobrir(api, conjunto, permitidos):
+        for apelido, conjunto in alvos:
+            if conjunto in vistos:
+                continue
+            vistos.add(conjunto)
+            try:
+                recursos = descobrir(api, conjunto, permitidos)
+            except (httpx.HTTPError, RuntimeError, ValueError) as exc:
+                # conjunto ausente não derruba o inventário: vira registro de indisponibilidade
+                erros.append({"apelido": apelido, "conjunto": conjunto, "erro": str(exc)})
+                continue
+            for r in recursos:
                 item = r.como_dict() | {"apelido_conjunto": apelido, "consultado_em": utc_now()}
                 item |= head(r.url, cli)
                 itens.append(item)
@@ -54,6 +71,7 @@ def montar_inventario(cfg: Config) -> dict[str, Any]:
     return {
         "gerado_em": utc_now(),
         "itens": itens,
+        "conjuntos_com_erro": erros,
         "config_fora_do_catalogo": sorted(urls_config - urls_catalogo),
     }
 

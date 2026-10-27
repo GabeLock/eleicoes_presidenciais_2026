@@ -73,3 +73,26 @@ def descobrir(
     for r in recursos:
         validar_dominio(r.url, permitidos)
     return recursos
+
+
+def parse_busca(payload: dict[str, Any], ano: int | None = None) -> list[str]:
+    """Nomes de conjuntos retornados por `package_search`; com `ano`, só os que o citam no nome."""
+    if not payload.get("success"):
+        raise RuntimeError(f"CKAN respondeu sem sucesso na busca: {payload.get('error')}")
+    nomes = [p.get("name") or "" for p in payload["result"].get("results", [])]
+    return sorted(n for n in nomes if n and (ano is None or str(ano) in n))
+
+
+def descobrir_grupo(
+    api: str, grupo: str, ano: int | None, permitidos: list[str], timeout_s: float = 60
+) -> list[str]:
+    """Lista os conjuntos de um grupo do CKAN (`package_search?fq=groups:<grupo>`).
+
+    `api` é a URL de `package_show` da config; a de busca é derivada dela.
+    """
+    busca = api.rsplit("/", 1)[0] + "/package_search"
+    validar_dominio(busca, permitidos)
+    with httpx.Client(timeout=timeout_s, follow_redirects=False) as cli:
+        resp = cli.get(busca, params={"fq": f"groups:{grupo}", "rows": 1000})
+        resp.raise_for_status()
+        return parse_busca(resp.json(), ano)

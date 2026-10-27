@@ -66,6 +66,8 @@ def inventory(year: Ano = 2026) -> None:
             json.dumps(linhas, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         ctx.volumes["recursos_catalogo"] = len(inv["itens"])
+        for e in inv.get("conjuntos_com_erro", []):
+            ctx.pendencias.append(f"Catálogo: {e.get('conjunto') or e.get('grupo')} — {e['erro']}")
         if inv["config_fora_do_catalogo"]:
             ctx.pendencias.append(
                 f"URLs da config fora do catálogo: {inv['config_fora_do_catalogo']}"
@@ -185,6 +187,20 @@ def analyze(year: Ano = 2026) -> None:
     with RunContext("analyze", cfg) as ctx:
         saida = report.quadro_resumo(cfg, ctx)
         console.print(f"Quadros em {saida}")
+
+
+@app.command()
+def diagnosticar(year: Ano = 2026) -> None:
+    """Diagnósticos sobre a base já transformada (rode `make transform` antes): votos nominais
+    seção × zona por candidatura (I-01) e votáveis especiais 95/96 (A-06)."""
+    from eleicoes.analytics import diagnostico
+
+    cfg = _cfg(year)
+    with RunContext("diagnosticar", cfg) as ctx:
+        destino = cfg.paths["reports"] / "diagnosticos" / ctx.run_id
+        resumo = diagnostico.executar(cfg.warehouse, destino)
+        ctx.volumes |= {k: v for k, v in resumo.items() if isinstance(v, int)}
+        console.print(f"Diagnósticos em {destino}")
 
 
 @app.command()

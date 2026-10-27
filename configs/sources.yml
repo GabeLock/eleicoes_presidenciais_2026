@@ -8,6 +8,10 @@ catalogo:
   datasets:
     resultados: resultados-{ano}
     eleitorado: eleitorado-{ano}
+    candidatos: candidatos-{ano}      # A-05: consulta_cand (situação jurídica, identidade da candidatura)
+  # Grupos do CKAN: os conjuntos do ano são descobertos por package_search (nada é presumido)
+  grupos:
+    comparecimento: comparecimento-e-abstencao   # A-05: perfil de quem compareceu/absteve
 
 recursos:
   votacao_secao:
