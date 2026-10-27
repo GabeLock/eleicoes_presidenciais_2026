@@ -21,5 +21,5 @@ Data: 2026-10-26 · Status: aceita
 
 **Resultado (1º turno 2026, nacional + exterior).** Aptos, comparecimento, abstenção, brancos
 e nulos reconciliam exatamente em 6.292 zonas e 5.757 municípios. Votos nominais diferem em
-5.246 votos (mesmo total nos níveis zona, município e candidato) — pendência a explicar com a
-situação jurídica das candidaturas entre as versões de 06/10 e 25/10.
+5.246 votos (mesmo total nos níveis zona, município e candidato) — **explicado em 27/10/2026**:
+são os votos da candidatura 28, classificados como nulos técnicos na versão de 25/10 (ADR 0005).

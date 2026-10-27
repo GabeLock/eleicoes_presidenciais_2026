@@ -3,7 +3,7 @@ YEAR ?= 2026
 UF   ?= MG
 RUN  := uv run eleicoes
 
-.PHONY: setup inventory verificar ingest validate transform analyze dashboard test lint format pilot national
+.PHONY: setup inventory verificar ingest validate transform analyze diagnosticar dashboard test lint format pilot national
 
 setup:            ## instala o ambiente fixado no uv.lock (inclui dashboard e modelagem)
 	uv sync --all-extras --locked
@@ -25,6 +25,9 @@ transform:        ## Bronze → Silver → Gold + relatório de qualidade
 
 analyze:          ## quadros descritivos a partir da Gold
 	$(RUN) analyze --year $(YEAR)
+
+diagnosticar:     ## seção × zona por candidatura (I-01) e votáveis 95/96 (A-06), sobre a base transformada
+	$(RUN) diagnosticar --year $(YEAR)
 
 dashboard:        ## exploração local em Streamlit
 	uv run streamlit run dashboard/app.py

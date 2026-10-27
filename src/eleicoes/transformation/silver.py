@@ -66,13 +66,30 @@ def _projecao(mapa: dict[str, str], cabecalho: list[str], contagens: list[str]) 
     return cols
 
 
-def sql_silver_votos(csv: Path, perfil: dict, rec: dict, cargo: str, sha: str) -> str:
+def sql_silver_votos(
+    csv: Path,
+    perfil: dict,
+    rec: dict,
+    cargo: str,
+    sha: str,
+    nulos_tecnicos: dict[int, list[str]] | None = None,
+) -> str:
+    """`nulos_tecnicos`: turno → NR_VOTAVEL de candidaturas inaptas no dia da eleição cujos votos
+    a totalização posterior classifica como nulos técnicos (ADR 0005). Viram `nulo_tecnico`,
+    separados dos nulos digitados (96) e fora dos válidos."""
     mapa = {**rec["colunas_obrigatorias"], **rec.get("colunas_opcionais", {})}
     cols = _projecao(mapa, perfil["cabecalho"], [])
     esp = rec.get("votaveis_especiais", {})
+    casos_nt = "".join(
+        f"WHEN turno = {int(t)} AND nr_votavel IN ({', '.join(_lit(str(n)) for n in nrs)}) "
+        "THEN 'nulo_tecnico' "
+        for t, nrs in sorted((nulos_tecnicos or {}).items())
+        if nrs
+    )
     tipo = (
         f"CASE WHEN nr_votavel = {_lit(esp.get('branco', '95'))} THEN 'branco' "
-        f"WHEN nr_votavel = {_lit(esp.get('nulo', '96'))} THEN 'nulo' ELSE 'candidato' END"
+        f"WHEN nr_votavel = {_lit(esp.get('nulo', '96'))} THEN 'nulo' "
+        f"{casos_nt}ELSE 'candidato' END"
     )
     ds = _id(rec["colunas_obrigatorias"]["ds_cargo"])
     return f"""
@@ -141,3 +158,20 @@ def exportar_parquet(con: duckdb.DuckDBPyConnection, tabela: str, destino: Path)
     con.execute(f"COPY (SELECT * FROM {tabela} ORDER BY ALL) TO {_lit(str(tmp))} (FORMAT parquet)")
     tmp.replace(destino)
     return destino
+
+
+def harmonizar_validos(con: duckdb.DuckDBPyConnection) -> None:
+    """Acrescenta à participação por seção os nulos técnicos (lidos da votação por seção) e
+    `qt_votos_validos` = nominais + legenda − nulos técnicos. Junção 1:1 na chave da seção."""
+    con.execute("""
+        ALTER TABLE silver_participacao_secao ADD COLUMN IF NOT EXISTS
+            qt_votos_nulos_tecnicos BIGINT DEFAULT 0;
+        UPDATE silver_participacao_secao p SET qt_votos_nulos_tecnicos = nt.v
+        FROM (SELECT turno, uf, cd_municipio_tse, zona, secao, sum(qt_votos) AS v
+              FROM silver_votos_secao WHERE tipo_votavel = 'nulo_tecnico' GROUP BY ALL) nt
+        WHERE p.turno = nt.turno AND p.uf = nt.uf AND p.cd_municipio_tse = nt.cd_municipio_tse
+          AND p.zona = nt.zona AND p.secao = nt.secao;
+        ALTER TABLE silver_participacao_secao ADD COLUMN IF NOT EXISTS qt_votos_validos BIGINT;
+        UPDATE silver_participacao_secao SET qt_votos_validos =
+            qt_votos_nominais + coalesce(qt_votos_legenda, 0) - qt_votos_nulos_tecnicos;
+    """)

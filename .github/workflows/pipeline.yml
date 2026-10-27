@@ -9,7 +9,7 @@ on:
       etapa:
         description: "Etapa"
         type: choice
-        options: [verificar, inventory, ingest, pilot, national]
+        options: [verificar, inventory, ingest, pilot, national, diagnostico]
         default: inventory
       uf:
         description: "UF (MG | MG,SP | ALL)"
@@ -67,6 +67,7 @@ jobs:
             ingest)    make inventory && make ingest YEAR="$YEAR" UF="$UF" && make validate ;;
             pilot)     make inventory && make pilot UF="$UF" ;;
             national)  make inventory && make national ;;
+            diagnostico) make inventory && make national && make diagnosticar ;;
           esac
       - name: Espaço em disco usado
         if: always()
@@ -108,7 +109,7 @@ jobs:
           git checkout -b "resultados/${RUN_ID}"
           mkdir -p data/manifests reports
           cp -r _artefato/data/manifests/. data/manifests/ 2>/dev/null || true
-          for d in inventory quality dicionarios runs analysis; do
+          for d in inventory quality dicionarios runs analysis diagnosticos; do
             [ -d "_artefato/reports/$d" ] && mkdir -p "reports/$d" && cp -r "_artefato/reports/$d/." "reports/$d/"
           done
           rm -rf _artefato

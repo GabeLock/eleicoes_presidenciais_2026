@@ -8,6 +8,11 @@ catalogo:
   datasets:
     resultados: resultados-{ano}
     eleitorado: eleitorado-{ano}
+    candidatos: candidatos-{ano}      # A-05: consulta_cand (situação jurídica, identidade da candidatura)
+    comparecimento: comparecimento-e-abstencao-{ano}   # nome observado no grupo em 27/10/2026
+  # Grupos do CKAN: os conjuntos do ano são descobertos por package_search (nada é presumido)
+  grupos:
+    comparecimento_grupo: comparecimento-e-abstencao   # A-05: perfil de quem compareceu/absteve
 
 recursos:
   votacao_secao:
@@ -40,9 +45,15 @@ recursos:
       hh_geracao: HH_GERACAO
       sq_candidato: SQ_CANDIDATO
       nr_local_votacao: NR_LOCAL_VOTACAO
-    votaveis_especiais:            # códigos 95/96 ainda a confirmar nos dados de Presidente
-      branco: "95"
+    votaveis_especiais:            # confirmado em 27/10/2026 (A-06): "VOTO BRANCO"/"VOTO NULO",
+      branco: "95"                 # iguais a brancos/nulos do detalhe em todas as seções, 2 turnos
       nulo: "96"
+    # Candidaturas inaptas no dia da eleição cujos votos a totalização posterior classifica como
+    # nulos técnicos (leiame detalhe_votacao_munzona 2026, QT_VOTOS_NULOS_TECNICOS). ano → turno →
+    # NR_VOTAVEL. Evidência e regra em docs/decisions/0005-nulos-tecnicos.md.
+    nulos_tecnicos:
+      2026:
+        1: ["28"]
 
   detalhe_votacao_secao:
     conjunto: resultados
@@ -149,6 +160,28 @@ recursos:
       ds_situacao_julgamento: DS_SITUACAO_JULGAMENTO
       nm_tipo_destinacao_votos: NM_TIPO_DESTINACAO_VOTOS
       ds_sit_tot_turno: DS_SIT_TOT_TURNO
+
+  consulta_cand:
+    conjunto: candidatos
+    descricao: Candidaturas (situação jurídica, totalização, identidade SQ_CANDIDATO). URL do
+      catálogo CKAN candidatos-2026 (inventário de 27/10/2026, A-05). Por ora só cabeçalho,
+      leiame e lista de membros; mapeamento de colunas após leitura do dicionário de 2026.
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/consulta_cand/consulta_cand_{ano}.zip
+    particionado_por_uf: false
+    somente_perfil: true
+    granularidade: eleição × turno × candidatura
+    status_layout: a_confirmar
+
+  perfil_comparecimento_abstencao:
+    conjunto: comparecimento
+    descricao: Perfil de comparecimento e abstenção (descreve participação, não voto). Conjunto
+      descoberto no grupo CKAN comparecimento-e-abstencao (inventário de 27/10/2026, A-05).
+    url: https://cdn.tse.jus.br/estatistica/sead/odsele/perfil_comparecimento_abstencao/perfil_comparecimento_abstencao_{ano}.zip
+    particionado_por_uf: false
+    somente_perfil: true
+    granularidade: a_confirmar (leiame 2026)
+    status_layout: a_confirmar
+    fase: v2
 
   perfil_eleitor_secao:
     conjunto: eleitorado
