@@ -1,0 +1,288 @@
+{
+  "run_id": "20261027T133959Z-3c05ac",
+  "recurso": "votacao_candidato_munzona",
+  "uf": null,
+  "instituicao": "TSE",
+  "conjunto": "resultados-2026",
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2026.zip",
+  "sha256": "cef14bbf848da85cb1462657c9d3c95cd2d76d9b884c4ccd579e0384035be9a6",
+  "bytes": 452159174,
+  "coletado_em": "2026-10-27T13:41:05+00:00",
+  "last_modified_http": "Sun, 25 Oct 2026 16:16:37 GMT",
+  "etag": "\"1af366c6-65eac89a8ef12\"",
+  "membros_zip": [
+    {
+      "nome": "votacao_candidato_munzona_2026_DF.csv",
+      "bytes_compactado": 260238,
+      "bytes_descompactado": 5416708,
+      "crc": 1539890915
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_AM.csv",
+      "bytes_compactado": 695583,
+      "bytes_descompactado": 14542797,
+      "crc": 2836951503
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_AC.csv",
+      "bytes_compactado": 144057,
+      "bytes_descompactado": 3521922,
+      "crc": 4253805868
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_BA.csv",
+      "bytes_compactado": 14516444,
+      "bytes_descompactado": 238540942,
+      "crc": 2524855698
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_AL.csv",
+      "bytes_compactado": 517616,
+      "bytes_descompactado": 12306104,
+      "crc": 4037587148
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_CE.csv",
+      "bytes_compactado": 3182152,
+      "bytes_descompactado": 61627024,
+      "crc": 4133694642
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_AP.csv",
+      "bytes_compactado": 91791,
+      "bytes_descompactado": 2335246,
+      "crc": 378978458
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_ES.csv",
+      "bytes_compactado": 1092259,
+      "bytes_descompactado": 21665904,
+      "crc": 911220684
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_GO.csv",
+      "bytes_compactado": 5760187,
+      "bytes_descompactado": 99795453,
+      "crc": 1071996328
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_MA.csv",
+      "bytes_compactado": 2991987,
+      "bytes_descompactado": 59306874,
+      "crc": 1546367778
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_MG.csv",
+      "bytes_compactado": 50661162,
+      "bytes_descompactado": 716817680,
+      "crc": 1389828504
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_MS.csv",
+      "bytes_compactado": 713752,
+      "bytes_descompactado": 15987476,
+      "crc": 680301572
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_MT.csv",
+      "bytes_compactado": 1333640,
+      "bytes_descompactado": 27940085,
+      "crc": 936124435
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_PA.csv",
+      "bytes_compactado": 2559165,
+      "bytes_descompactado": 49519105,
+      "crc": 3587781423
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_BR.csv",
+      "bytes_compactado": 1798839,
+      "bytes_descompactado": 33579378,
+      "crc": 3337430851
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_BRASIL.csv",
+      "bytes_compactado": 248385506,
+      "bytes_descompactado": 3187665369,
+      "crc": 166425832
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_PB.csv",
+      "bytes_compactado": 1907114,
+      "bytes_descompactado": 40770338,
+      "crc": 669936120
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_PE.csv",
+      "bytes_compactado": 4657800,
+      "bytes_descompactado": 84692763,
+      "crc": 3978381689
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_PI.csv",
+      "bytes_compactado": 1690456,
+      "bytes_descompactado": 35779876,
+      "crc": 1950240502
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_PR.csv",
+      "bytes_compactado": 11882650,
+      "bytes_descompactado": 200829225,
+      "crc": 1911697363
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_RJ.csv",
+      "bytes_compactado": 10469161,
+      "bytes_descompactado": 168119737,
+      "crc": 3998137976
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_RN.csv",
+      "bytes_compactado": 991408,
+      "bytes_descompactado": 22933687,
+      "crc": 2681939341
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_RO.csv",
+      "bytes_compactado": 446938,
+      "bytes_descompactado": 10253845,
+      "crc": 3266023013
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_RR.csv",
+      "bytes_compactado": 116759,
+      "bytes_descompactado": 2585576,
+      "crc": 47678090
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_RS.csv",
+      "bytes_compactado": 14885731,
+      "bytes_descompactado": 245603330,
+      "crc": 469297383
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_SC.csv",
+      "bytes_compactado": 5398810,
+      "bytes_descompactado": 96312205,
+      "crc": 2119415691
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_SE.csv",
+      "bytes_compactado": 575705,
+      "bytes_descompactado": 12540521,
+      "crc": 1370543394
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_SP.csv",
+      "bytes_compactado": 63434577,
+      "bytes_descompactado": 884146513,
+      "crc": 2439215956
+    },
+    {
+      "nome": "votacao_candidato_munzona_2026_TO.csv",
+      "bytes_compactado": 881438,
+      "bytes_descompactado": 20219193,
+      "crc": 661828044
+    },
+    {
+      "nome": "leiame.pdf",
+      "bytes_compactado": 111733,
+      "bytes_descompactado": 125558,
+      "crc": 805655249
+    }
+  ],
+  "dicionarios": [
+    "leiame.pdf",
+    "reports/dicionarios/2026/votacao_candidato_munzona_leiame.txt"
+  ],
+  "perfil_csv": {
+    "encoding": "latin-1",
+    "bom": false,
+    "separador": ";",
+    "aspas": "\"",
+    "cabecalho": [
+      "DT_GERACAO",
+      "HH_GERACAO",
+      "ANO_ELEICAO",
+      "CD_TIPO_ELEICAO",
+      "NM_TIPO_ELEICAO",
+      "NR_TURNO",
+      "CD_ELEICAO",
+      "DS_ELEICAO",
+      "DT_ELEICAO",
+      "TP_ABRANGENCIA",
+      "SG_UF",
+      "SG_UE",
+      "NM_UE",
+      "CD_MUNICIPIO",
+      "NM_MUNICIPIO",
+      "NR_ZONA",
+      "CD_CARGO",
+      "DS_CARGO",
+      "SQ_CANDIDATO",
+      "NR_CANDIDATO",
+      "NM_CANDIDATO",
+      "NM_URNA_CANDIDATO",
+      "NM_SOCIAL_CANDIDATO",
+      "CD_SITUACAO_CANDIDATURA",
+      "DS_SITUACAO_CANDIDATURA",
+      "CD_DETALHE_SITUACAO_CAND",
+      "DS_DETALHE_SITUACAO_CAND",
+      "CD_SITUACAO_JULGAMENTO",
+      "DS_SITUACAO_JULGAMENTO",
+      "CD_SITUACAO_CASSACAO",
+      "DS_SITUACAO_CASSACAO",
+      "CD_SITUACAO_DCONST_DIPLOMA",
+      "DS_SITUACAO_DCONST_DIPLOMA",
+      "TP_AGREMIACAO",
+      "NR_PARTIDO",
+      "SG_PARTIDO",
+      "NM_PARTIDO",
+      "NR_FEDERACAO",
+      "NM_FEDERACAO",
+      "SG_FEDERACAO",
+      "DS_COMPOSICAO_FEDERACAO",
+      "SQ_COLIGACAO",
+      "NM_COLIGACAO",
+      "DS_COMPOSICAO_COLIGACAO",
+      "ST_VOTO_EM_TRANSITO",
+      "QT_VOTOS_NOMINAIS",
+      "NM_TIPO_DESTINACAO_VOTOS",
+      "QT_VOTOS_NOMINAIS_VALIDOS",
+      "CD_SIT_TOT_TURNO",
+      "DS_SIT_TOT_TURNO"
+    ],
+    "linhas_amostra": 534,
+    "sentinelas_amostra": {
+      "#NULO": 2775,
+      "-1": 1459,
+      "-3": 1068
+    },
+    "alertas": [],
+    "cargos_encontrados": [
+      [
+        "1",
+        "Presidente",
+        "1",
+        75504
+      ]
+    ],
+    "arquivos_csv": [
+      "data/bronze/_extraido/cef14bbf848d/votacao_candidato_munzona_2026_BR.csv"
+    ]
+  },
+  "colunas_ausentes": [],
+  "gerado_em_fonte": [
+    "25/10/2026 12:31:43"
+  ],
+  "turnos_presentes": [
+    "1"
+  ],
+  "linhas": 75504,
+  "status": "parcial",
+  "limitacoes": [
+    "Turnos presentes ['1']; esperado [1, 2]."
+  ],
+  "ano": 2026
+}
