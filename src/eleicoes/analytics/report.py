@@ -34,6 +34,29 @@ def _status_base(reports: Path, ano: int) -> dict:
     return {"status": "bloqueado" if bloqueado else "liberado", "relatorio": ultimo.name}
 
 
+def exportar_votos_candidato(gold: Path, saida: Path) -> None:
+    """Votos por candidatura: UF × turno (todos) e município × candidatura no 1º turno.
+
+    Só linhas `tipo_votavel == 'candidato'`; brancos/nulos ficam na tabela de participação.
+    """
+    path = gold / "gold_votos_municipio.parquet"
+    if not path.exists():
+        return
+    votos = pl.read_parquet(path).filter(pl.col("tipo_votavel") == "candidato")
+    (
+        votos.group_by(["uf", "turno", "nr_votavel"])
+        .agg(pl.col("nm_votavel").first(), pl.col("qt_votos").sum())
+        .sort(["uf", "turno", "nr_votavel"])
+        .write_csv(saida / "votos_candidato_uf_turno.csv")
+    )
+    (
+        votos.filter(pl.col("turno") == 1)
+        .select(["uf", "cd_municipio_tse", "nr_votavel", "qt_votos"])
+        .sort(["uf", "cd_municipio_tse", "nr_votavel"])
+        .write_csv(saida / "votos_candidato_municipio_t1.csv")
+    )
+
+
 def quadro_resumo(cfg: Config, ctx: RunContext) -> Path:
     gold = cfg.dir_ano("gold")
     part_path = gold / "gold_participacao_municipio.parquet"
@@ -71,6 +94,14 @@ def quadro_resumo(cfg: Config, ctx: RunContext) -> Path:
         dec.sort("contribuicao").head(25).write_csv(saida / "top_contrib_negativas.csv")
         dec.sort("contribuicao", descending=True).head(25).write_csv(
             saida / "top_contrib_positivas.csv"
+        )
+        # Painel completo (uma linha por município/localidade do exterior): base dos dashboards.
+        dec.sort(["uf", "cd_municipio_tse"]).write_csv(saida / "painel_municipio.csv")
+    exportar_votos_candidato(gold, saida)
+    resumo = gold / "resumo_virada.json"
+    if resumo.exists():
+        (saida / "resumo_virada.json").write_text(
+            resumo.read_text(encoding="utf-8"), encoding="utf-8"
         )
     meta = {
         "ano": cfg.ano,
