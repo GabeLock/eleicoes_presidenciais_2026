@@ -1,0 +1,15 @@
+{
+  "comando": "verificar",
+  "parametros": {},
+  "run_id": "20261027T030230Z-9a3ff6",
+  "commit": "8468bab6273ef81d22c39f27ad3ddf51f41e19c0",
+  "inicio": "2026-10-27T03:02:30+00:00",
+  "fim": "2026-10-27T03:02:30+00:00",
+  "duracao_s": 0.392,
+  "status": "concluido",
+  "volumes": {},
+  "insumos": [],
+  "pendencias": [],
+  "config_version": "0.1.0",
+  "config_hash": "46e24db914a3da40"
+}
