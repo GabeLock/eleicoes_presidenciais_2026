@@ -1,0 +1,213 @@
+ 
+ 
+ 
+                                                                                                                                 
+ 
+ 
+ 
+ 
+LEIAME 
+ 
+Este arquivo cont ém o leiaute das tabelas existentes no reposit ório de dados eleitorais. Antes de 
+trabalhar os dados é importante ler as seguintes considerações: 
+ 
+- A codificação de caracteres dos arquivos é "Latin 1"; 
+- Os campos estão entre aspas e separados por ponto e vírgula, inclusive os campos numéricos; 
+- Campos preenchidos com #NULO significam que a informa ção está em branco no banco de dados. O 
+correspondente para #NULO nos campos numéricos é -1; 
+- Campos preenchidos com #NE significam que naquele ano a informa ção não era registrada em banco 
+de dados pelos sistemas eleitorais. O correspondente para #NE nos campos numéricos é -3; 
+- O campo UF, além das unidades da federação, pode conter alguma das seguintes situações: 
+    o BR: quando se tratar de informação a nível nacional; 
+    o VT: quando se tratar de voto em trânsito; 
+    o ZZ: quando se tratar de Exterior. 
+- Os arquivos est ão em constante processo de atualiza ção e aperfei çoamento. Alguns arquivos podem 
+estar em branco ou com mensagem de erro devido à indisponibilidade temporária na base de algum 
+estado ou à inexistência daquele arquivo para a época pretendida. 
+ 
+Agradecemos todas as críticas e sugestões recebidas de pesquisadores e usuários que estão colaborando 
+para a melhoria na qualidade da presta ção das informa ções. Em especial à Associação Brasileira de 
+Ciência Pol ítica (ABCP)que, por meio de acordo de coopera ção t écnica firmado com o TSE, est á 
+auxiliando na verifica ção dos arquivos gerados e informando o TSE quanto às necessidades de dados 
+dos pesquisadores. 
+ 
+Qualquer sugestão ou dúvida deve ser encaminhada ao e-mail estatistica@tse.jus.br. 
+ 
+ 
+
+I ELTR_PERFIL_COMPAREC_ABSTENCAO 
+NOTAÇÃO: 
+PERFIL_COMPARECIMENTO_ABSTENCAO_<ANO>_<UF> 
+ 
+ 
+Variável Descrição 
+DT_GERACAO Data da extração dos dados para geração do arquivo. 
+HH_GERACAO Hora da extração dos dados para geração do arquivo com base no 
+horário de Brasília. 
+ANO_ELEICAO Ano de referência da eleição para geração do arquivo. Observação: 
+para eleições suplementares, o ano de referência da eleição é o ano da 
+eleição ordinária correspondente. Por exemplo: em 2016 houve 
+eleições ordinárias. Após a data desta eleição ordinária e antes da 
+próxima, houve eleições suplementares em 2017, 2018 e 2019. As 
+informações destas eleições suplementares estarão divulgadas no 
+arquivo gerado para as eleições 2016. 
+NR_TURNO Número do turno da eleição. Observação: no Brasil, as eleições 
+realizam-se por meio de dois sistemas: o sistema majoritário (aplicado 
+aos cargos de Presidente, Vice-Presidente, Governador, 
+Vice-Governador, Prefeito, Vice-Prefeito e Senador) e o sistema 
+proporcional (aplicado aos cargos de Deputado Federal, Deputado 
+Estadual, Deputado Distrital e Vereador). O sistema majoritário 
+consiste em declarar eleita a candidata ou o candidato que tenha 
+recebido a maioria dos votos a concorrentes (votos válidos, votos 
+anulados e votos anulados sub judice). Caso a candidata ou o 
+candidato ao cargo indicado no sistema majoritário, com exceção do 
+cargo de Senador, não alcance maioria absoluta destes votos a 
+concorrentes no primeiro turno (mínimo de 50% + 1), haverá segundo 
+turno em que concorrerão apenas os dois candidatos mais votados. O 
+segundo turno das eleições no Brasil ocorre para os cargos de 
+Presidente, Vice-Presidente da República, Governador e 
+Vice-Governador dos Estados e do Distrito Federal e para Prefeito e 
+Vice-Prefeito de Municípios com mais de 200 mil eleitores. Nos 
+municípios cujo eleitorado é igual ou menor que 200 mil e para o 
+cargo de Senador elege-se a candidata ou o candidato que tenha 
+alcançado a maioria simples dos votos. 
+SG_UF Sigla da unidade da federação de ocorrência da eleição. 
+CD_MUNICIPIO Código TSE do município onde ocorreu a eleição. 
+NM_MUNICIPIO Nome do município de ocorrência da eleição. 
+NR_ZONA Número da zona eleitoral em que ocorreu a eleição. 
+CD_GENERO Código do gênero da eleitora ou eleitor. Pode assumir os valores: 
+. 2: Masculino; e 
+. 4: Feminino. 
+DS_GENERO Descrição do gênero da eleitora ou eleitor. 
+CD_ESTADO_CIVIL Código do estado civil da eleitora ou eleitor. Pode assumir os valores: 
+. 1: Solteiro(a); 
+. 3: Casado(a); 
+. 5: Viúvo(a); 
+. 7: Separado(a) judicialmente; e 
+. 9: Divorciado(a). 
+DS_ESTADO_CIVIL Descrição do estado civil da eleitora ou eleitor. 
+CD_FAIXA_ETARIA Código da faixa etária da eleitora ou eleitor. 
+DS_FAIXA_ETARIA Descrição da faixa etária da eleitora ou eleitor. 
+CD_GRAU_INSTRUCAO Código do grau de instrução da eleitora ou eleitor. Pode assumir os 
+valores: 
+. 1: Analfabeto; 
+. 2: Lê e escreve; 
+. 3: Ensino fundamental incompleto; 
+. 4: Ensino fundamental completo; 
+. 5: Ensino médio incompleto; 
+. 6: Ensino médio completo; 
+. 7: Superior incompleto; e 
+. 8: Superior completo. 
+DS_GRAU_INSTRUCAO Descrição do grau de instrução da eleitora ou eleitor. 
+CD_COR_RACA Código da raça/cor da eleitora ou eleitor. Pode assumir os valores: 
+. 01: Branca; 
+. 02: Preta; 
+. 03: Parda; 
+. 04: Indígena; e 
+. 05: Amarela; 
+DS_COR_RACA Descrição da raça/cor da eleitora ou eleitor. 
+CD_QUILOMBOLA Código que indica se a eleitora ou o eleitor é de origem de grupo 
+quilombola. Pode assumir os valores: 
+. 1: Sim; e 
+. 2: Não. 
+DS_QUILOMBOLA Indica se a eleitora ou o eleitor é de origem de grupo quilombola. 
+CD_INTERPRETE_LIBR
+AS 
+Código que indica se a eleitora ou o eleitor é intérprete de libras. Pode 
+assumir os valores: 
+. 1: Sim; e 
+. 2: Não. 
+DS_INTERPRETE_LIBR
+AS 
+Indica se a eleitora ou o eleitor é intérprete de libras. 
+CD_IDENTIDADE_GEN
+ERO 
+Código do gênero ao qual a eleitora ou eleitor se identifica. 
+Informação autodeclarada pela candidata ou candidato dentre as 
+opções idênticas às do cadastro eleitoral. Pode assumir os valores: 
+. 1: Cisgênero; 
+. 2: Transgênero; e 
+. 3: Prefere não informar; 
+DS_IDENTIDADE_GENE
+RO 
+Descrição do gênero ao qual a eleitora ou eleitor se identifica. 
+Informação autodeclarada pela candidata ou candidato dentre as 
+opções idênticas às do cadastro eleitoral. 
+CD_IDIOMA_INDIGENA Código que indica se a filiada ou filiado domina alguma língua 
+indígena. Pode assumir os valores: 
+. 1: Sim; e 
+. 2: Não. 
+DS_IDIOMA_INDIGENA Indica se a filiada ou filiado domina alguma língua indígena. 
+CD_GRUPO_INDIGENA Código da etnia, povo ou grupo indígena ao qual a filiada ou filiado 
+pertence. 
+DS_GRUPO_INDIGENA Descrição da etnia, povo ou grupo indígena ao qual a filiada ou 
+filiado pertence. 
+CD_IDIOMA_QUILOMB
+OLA 
+Código que indica se a filiada ou filiado domina alguma língua 
+quilombola. Pode assumir os valores: 
+. 1: Sim; e 
+. 2: Não. 
+DS_IDIOMA_QUILOMB
+OLA 
+Indica se a filiada ou filiado domina alguma língua quilombola. 
+QT_APTOS Quantidade de eleitoras ou eleitores aptos a votar. 
+QT_COMPARECIMENT
+O 
+Quantidade de eleitoras ou eleitores aptos que compareceram para 
+votar. 
+QT_ABSTENCAO Quantidade de eleitoras ou eleitores aptos que não compareceram 
+para votar. 
+QT_COMPAREC_DEFICI
+ENTES 
+Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+mobilidade reduzida, que compareceram para votar, conforme o 
+perfil. 
+QT_ABST_DEFICIENTE
+S 
+Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+mobilidade reduzida, que não compareceram para votar, conforme o 
+perfil. 
+QT_COMPAREC_TTE Quantidade de eleitoras ou eleitores aptos que solicitaram 
+transferência temporária de eleitor (TTE) e que compareceram para 
+votar. 
+QT_ABST_TTE Quantidade de eleitoras ou eleitores aptos que solicitaram 
+transferência temporária de eleitor (TTE) e que não compareceram 
+para votar. 
+QT_COMPAREC_FACUL
+TATIVO 
+Quantidade de eleitoras ou eleitores com voto facultativo que 
+compareceram para votar. 
+QT_ABST_FACULTATIV
+O 
+Quantidade de eleitoras ou eleitores com voto facultativo que não 
+compareceram para votar. 
+QT_COMPAREC_OBRIG
+ATORIO 
+Quantidade de eleitoras ou eleitores com voto obrigatório que 
+compareceram para votar. 
+QT_ABST_OBRIGATORI
+O 
+Quantidade de eleitoras ou eleitores com voto obrigatório que não 
+compareceram para votar. 
+QT_COMPAREC_DEFIC
+_FACULTATIVO 
+Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+mobilidade reduzida, com voto facultativo e que compareceram para 
+votar, conforme o perfil. 
+QT_ABST_DEFIC_FACU Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+LTATIVO mobilidade reduzida, com voto facultativo e que não compareceram 
+para votar, conforme o perfil. 
+QT_COMPAREC_DEFIC
+_OBRIGATORIO 
+Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+mobilidade reduzida, com voto obrigatório e que compareceram para 
+votar, conforme o perfil. 
+QT_ABST_DEFIC_OBRI
+GATORIO 
+Quantidade de eleitoras ou eleitores aptos, com deficiência ou 
+mobilidade reduzida, com voto obrigatório e que não compareceram 
+para votar, conforme o perfil. 
+ 
+ 
+ 
